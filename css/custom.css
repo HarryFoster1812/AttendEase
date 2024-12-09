@@ -63,6 +63,18 @@ body{
     font-size:0.85em;
   }
 
+  .accordion-header button{
+    font-size:0.6em;
+    color: #660099
+  }
+  .accordion-bullets{
+    padding-left: 0;
+  }
+  .accordion-button:not(.collapsed){
+    background-color: #660099;
+    color:#ffcc33;
+    border-color:#ffcc33;
+  }
 
   @media (max-width:992px){
     .nav-item:hover{
