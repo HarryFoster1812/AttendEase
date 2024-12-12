@@ -3,3 +3,10 @@ function linker(page){
         window.location.href=page
     }
 }
+
+
+function togglePassword(event, sender){
+
+    console.log(event);
+    console.log(sender);
+}
