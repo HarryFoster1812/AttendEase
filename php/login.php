@@ -10,26 +10,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     //get the salt for the use
-    $query = 'SELECT * FROM User WHERE username = ?';
+    $query = 'SELECT * FROM User WHERE username = :username';
 
-    if ($stmt = $conn->prepare($query)) {
-        $stmt->bind_param('s', $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
+    if ($stmt = $pdo->prepare($query)) {
+        $stmt->execute([":username" => $username]);
+        $result = $stmt->fetch();
+        if ($result) {
             
             $salt = $result["salt"];
             $position = intdiv(strlen($password), 2);
 
             $password = substr_replace( $password, $salt, $position, 0 );
+
             $hashed_password = hash('sha256', $password);
             
-            if (password_verify($password, $result["password"])){
+            if ($hashed_password == $result["password"]){
 
                 $_SESSION["username"] = $username;
                 $_SESSION["userid"] = $result["userid"];
-                echo $result;
+                header("Location:user_dashboard.php");
             }
             
 
