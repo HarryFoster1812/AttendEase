@@ -4,7 +4,7 @@
     
     //$database_host = "***REMOVED***";
     //$database_user = "***REMOVED***";
-    //$database_pass = "***REMOVED***";
+    //$database_pass = "my_super_secret_password";
     //$database_name = "***REMOVED***";
     
     $database_host = "localhost";
