@@ -1,0 +1,49 @@
+.btn-group button{
+    font-size:0.75em;
+}
+.custom-container{
+    padding-left:4rem;
+    padding-right:4rem;
+}
+.calendar-divider{
+    opacity: 1;
+}
+
+.table-custom tbody th, .table-custom tbody td{
+    background-color: rgba(0,0,0,0.5);
+}
+.table-custom tbody{
+    background-image: url("../images/timetable.jpeg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.table-custom th, .table-custom td{
+    border: 4px solid #FFF;
+
+}
+
+.table-custom tbody td{
+    height:100px;
+}
+.table-custom tbody th{
+    color: #FFF;
+}
+.table-header th{
+    background-color: #660099;
+}
+.table-header th{
+    color: #ffcc33;
+    vertical-align: middle;
+}
+@media(max-width:992px){
+    .custom-container{
+        padding-left:3rem;
+        padding-right:3rem;
+    }
+}
+@media(max-width:576px){
+    .custom-container{
+        padding-left:2.5rem;
+        padding-right:2.5rem;
+    }
+}
