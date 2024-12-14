@@ -58,9 +58,9 @@
                 </div>
                 <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end mb-4">
                     <div class="btn-group rounded-pill time-select" role="group">
-                        <button class="btn btn-secondary border-dark px-3">Day</button>
-                        <button class="btn btn-light border-dark px-3">Week</button>
-                        <button class="btn btn-light border-dark px-3">Month</button>
+                        <button class="btn btn-secondary border-dark px-3 time-button" onclick="switchTable('day')" id="button-day">Day</button>
+                        <button class="btn btn-light border-dark px-3 time-button" onclick="switchTable('week')" id="button-week">Week</button>
+                        <button class="btn btn-light border-dark px-3 time-button" onclick="switchTable('month')" id="button-month">Month</button>
                     </div>
                 </div>
             </div>
@@ -70,8 +70,16 @@
     </section>
     <section class="timetable mt-4">
         <div class="custom-container">
-            <div class="table-responsive-lg">
-                <table class="table table-custom align-middle table-fixed">
+            <div class="d-flex justify-content-end my-4">
+                <h2 class="fs-3 me-3 text-primary">Default</h2>
+                <label class="switch">
+                    <input type="checkbox" id="table_slider" onclick="switchBackground()">
+                    <span class="slider"></span>
+                  </label>
+                <h2 class="fs-3 ms-3 text-primary">Dynamic</h2>
+            </div>
+            <div class="table-responsive-lg d-none" id="timetable-week">
+                <table class="table table-default align-middle table-fixed">
 
                     <thead class="table-header">
                         <tr>
@@ -85,7 +93,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row" class="fs-2">08:00</th>
+                            <th scope="row" class="fs-2 px-3">08:00</th>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -93,7 +101,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fs-2">09:00</th>
+                            <th scope="row" class="fs-2 px-3">09:00</th>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -101,7 +109,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fs-2">10:00</th>
+                            <th scope="row" class="fs-2 px-3">10:00</th>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -109,7 +117,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fs-2">11:00</th>
+                            <th scope="row" class="fs-2 px-3">11:00</th>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -117,7 +125,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fs-2">12:00</th>
+                            <th scope="row" class="fs-2 px-3">12:00</th>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -125,7 +133,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fs-2">13:00</th>
+                            <th scope="row" class="fs-2 px-3">13:00</th>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -133,7 +141,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fs-2">14:00</th>
+                            <th scope="row" class="fs-2 px-3">14:00</th>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -141,7 +149,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fs-2">15:00</th>
+                            <th scope="row" class="fs-2 px-3">15:00</th>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -149,7 +157,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fs-2">16:00</th>
+                            <th scope="row" class="fs-2 px-3">16:00</th>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -157,7 +165,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fs-2">17:00</th>
+                            <th scope="row" class="fs-2 px-3">17:00</th>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -165,11 +173,68 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <th scope="row" class="fs-2">18:00</th>
+                            <th scope="row" class="fs-2 px-3">18:00</th>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody> 
+                </table>
+            </div>
+            <div class="table-responsive-lg" id="timetable-day">
+                <table class="table table-default align-middle table-fixed" id="timetable">
+
+                    <thead class="table-header">
+                        <tr>
+                            <th scope="col" class="text-center fs-2 table-title"></th>
+                            <th scope="col" class="text-center fs-2">Mon<br>19</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="fs-2 px-3">08:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="fs-2 px-3">09:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="fs-2 px-3">10:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="fs-2 px-3">11:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="fs-2 px-3">12:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="fs-2 px-3">13:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="fs-2 px-3">14:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="fs-2 px-3">15:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="fs-2 px-3">16:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="fs-2 px-3">17:00</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="fs-2 px-3">18:00</th>
                             <td></td>
                         </tr>
                     </tbody> 
@@ -183,6 +248,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/calendar.js"></script>
 
 </body>
 </html>
