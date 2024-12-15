@@ -1,48 +1,73 @@
-<!DOCTYPE html>
+<?php
+
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    require 'php/db.php';
+    
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    //get the salt for the use
+    $query = 'SELECT * FROM User WHERE username = :username';
+
+    if ($stmt = $pdo->prepare($query)) {
+        $stmt->execute([":username" => $username]);
+        $result = $stmt->fetch();
+        if ($result) {
+            
+            $salt = $result["salt"];
+            $position = intdiv(strlen($password), 2);
+
+            $password = substr_replace( $password, $salt, $position, 0 );
+
+            $hashed_password = hash('sha256', $password);
+            
+            if ($hashed_password == $result["password"]){
+
+                $_SESSION["username"] = $username;
+                $_SESSION["userid"] = $result["userid"];
+                
+                //check if the user is an admin
+                if ($result["role_id"] == 3){
+                    $_SESSION["header"] = "admin_navbar.php";
+                }
+
+                else{
+                    $_SESSION["header"] = "navbar.php";
+                }
+
+                header("Location:php/calendar.php");
+            }
+            
+
+        } else {
+            echo 'The username or password is incorrect.';
+        }
+    } else {
+        echo 'Database query failed.';
+        exit;
+    }
+}
+
+?>
+
 <html lang="en">
 <head>
-    <title>Log In | AttendEase</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/custom.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Convergence&display=swap" rel="stylesheet">
-
+    <title>Log In</title>
+    <link rel="stylesheet" href="/css/signup.css">
+    <?php 
+        include("php/template/header.php");
+        
+    ?>
 </head>
 <body>
-    <nav class="p-3 navbar navbar-expand-lg navbar-dark bg-primary">
-        <a href="#" class="navbar-brand mb-0 text-secondary">AttendEase</a>
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#attendnav">
-            <span class="navbar-toggler-icon text-secondary"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="attendnav">
-            <ul class="navbar-nav ms-auto text-secondary">
-                <li class="nav-item active px-1">
-                    <a href="#" class="nav-link">Admin</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Settings</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Statistics</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Leaderboards</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Calendar</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Dashboard</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <section class="signup-form">
+    <?php 
+        include("php/template/navbar.php");
+    ?>
+
+<section class="signup-form">
         <div class="overlay d-flex align-items-center">
             <div class="container">
                 <div class="row">
@@ -52,7 +77,7 @@
                                 <h1 class="display-6 text-center">Log In To AttendEase</h1>
                             </div>
                             <hr class="my-4 border-3 border-secondary signup-divider">
-                            <form action="php/login.php" method="post">
+                            <form action="index.php" method="post">
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Username</label>
@@ -88,7 +113,7 @@
                                 </div>
                                 <div class="col-xl-6 my-3">
                                     <div class="col-11 mx-auto d-grid">
-                                        <a href="signup.html" class="logup d-grid">
+                                        <a href="php/signup.php" class="logup d-grid">
                                             <button class="btn misc-buttons border-secondary">Sign Up</button>
                                         </a>
                                     </div>
@@ -102,9 +127,6 @@
         </div>
     </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="bootstrap/dist/js/bootstrap.js"></script>
-
 </body>
 </html>
+
