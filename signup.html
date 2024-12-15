@@ -53,29 +53,29 @@
                                 <h1 class="display-6 text-center">Sign Up For AttendEase</h1>
                             </div>
                             <hr class="my-4 border-3 border-secondary signup-divider">
-                            <form action="">
+                            <form action="php/signup.php" method="post">
                                 <div class="row">
-                                <div class="mb-4">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Enter your username...">
+                                    <div class="mb-4">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" placeholder="Enter your username..." name="username">
+                                    </div>
                                 </div>
-                            </div>
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Email Address <span class="email-small">(University Email)</span></label>
-                                        <input type="email" class="form-control" id="username" placeholder="Enter your university email...">
+                                        <input type="email" class="form-control" id="username" placeholder="Enter your university email..." name="email">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="user_pass" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="user_pass" placeholder="Enter your password...">
+                                        <input type="password" class="form-control" id="user_pass" placeholder="Enter your password..." name="password">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="mb-4">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="toggle_pass">
+                                            <input type="checkbox" class="form-check-input" id="toggle_pass" onclick="togglePassword">
                                             <label for="toggle_pass" class="form-label">Show Password</label>
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                             <hr class="my-4 border-3 border-secondary signup-divider">
                             <div class="row my-4">
                                 <div class="col-8 mx-auto d-grid mt-3">
-                                    <a href="login.html" class="logup d-grid">
+                                    <a href="index.html" class="logup d-grid">
                                         <button class="btn misc-buttons border-secondary">Log In</button>
                                     </a>
                                 </div>
@@ -251,7 +251,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="bootstrap/dist/js/bootstrap.js"></script>
-    <script src="js/signup.js"></script>
 
 </body>
 </html>
