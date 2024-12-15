@@ -31,14 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 
                 //check if the user is an admin
                 if ($result["role_id"] == 3){
-                    $_SESSION["header"] = "admin_navbar.php";
+                    $_SESSION["navbar"] = "admin_navbar.php";
                 }
 
                 else{
-                    $_SESSION["header"] = "navbar.php";
+                    $_SESSION["navbar"] = "navbar.php";
                 }
 
-                header("Location:php/calendar.php");
+                header("Location:/calendar");
             }
             
 
@@ -55,12 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <html lang="en">
 <head>
-    <title>Log In</title>
-    <link rel="stylesheet" href="/css/signup.css">
+    <title>Login | AttendEase</title>
     <?php 
         include("php/template/header.php");
         
-    ?>
+        ?>
+    <link rel="stylesheet" href="css/signup.css">
 </head>
 <body>
     <?php 
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <h1 class="display-6 text-center">Log In To AttendEase</h1>
                             </div>
                             <hr class="my-4 border-3 border-secondary signup-divider">
-                            <form action="index.php" method="post">
+                            <form action="" method="post">
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Username</label>
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="col-xl-6 my-3">
                                     <div class="col-11 mx-auto d-grid">
-                                        <a href="php/signup.php" class="logup d-grid">
+                                        <a href="/signup" class="logup d-grid">
                                             <button class="btn misc-buttons border-secondary">Sign Up</button>
                                         </a>
                                     </div>
