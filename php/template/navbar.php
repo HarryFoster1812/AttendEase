@@ -6,19 +6,19 @@
     <div class="collapse navbar-collapse" id="attendnav">
         <ul class="navbar-nav ms-auto text-secondary">
             <li class="nav-item px-1">
-                <a href="#" class="nav-link">Settings</a>
+                <a href="/settings" class="nav-link">Settings</a>
             </li>
             <li class="nav-item px-1">
-                <a href="#" class="nav-link">Statistics</a>
+                <a href="/statistics" class="nav-link">Statistics</a>
             </li>
             <li class="nav-item px-1">
-                <a href="#" class="nav-link">Leaderboards</a>
+                <a href="/leaderboard" class="nav-link">Leaderboards</a>
             </li>
             <li class="nav-item px-1">
-                <a href="#" class="nav-link">Calendar</a>
+                <a href="/calendar" class="nav-link">Calendar</a>
             </li>
             <li class="nav-item px-1">
-                <a href="#" class="nav-link">Dashboard</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
             </li>
         </ul>
     </div>

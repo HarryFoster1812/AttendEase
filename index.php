@@ -5,7 +5,7 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require 'php/db.php';
     
-
+    $error_msg = "";
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -43,10 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
 
         } else {
-            echo 'The username or password is incorrect.';
+            $error_msg = "<div class='alert alert-danger' role='alert'>The username or password is incorrect.</div>";
         }
     } else {
-        echo 'Database query failed.';
+            $error_msg = "<div class='alert alert-danger' role='alert'>Database query failed.</div>";
         exit;
     }
 }
@@ -57,10 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <title>Login | AttendEase</title>
     <?php 
+        echo $error_msg;
         include("php/template/header.php");
-        
         ?>
-    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <?php 
@@ -127,6 +127,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </section>
 
+
+    <?php include("php/template/footer.php"); ?>
 </body>
 </html>
 

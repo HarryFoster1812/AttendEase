@@ -5,63 +5,61 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require '../php/db.php';
 
-    print_r($_POST);
-
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     //  check is the username or email is already taken
-
+    $is_duplicate = False;
+    $error_msg = "";
     $duplicate = 'SELECT * FROM User WHERE username =:username OR email=:email';
-    if ($stmt = $pdo->prepare($query)) {
+    if ($stmt = $pdo->prepare($duplicate)) {
         $stmt->execute([":username" => $username, ":email" => $email]);
-       
-        if ($result->num_rows > 0) {
-            echo "username or email already associated with an account"; 
-            die();
+        if ($stmt->rowCount() > 0) {
+            $error_msg = "<div class='alert alert-danger' role='alert'>Username or email already associated with an account.</div>";
+            $is_duplicate = True;
         }
     }
     else{
 
-        echo "Something went wrong trying to connect to the database";
+        $error_msg = "Something went wrong trying to connect to the database";
+        $is_duplicate = True;
     }
 
+    if(!$is_duplicate){
 
-    // generate the salt
-    $salt = bin2hex(random_bytes(32));
+        // generate the salt
+        $salt = bin2hex(random_bytes(32));
 
-    $half_position = intdiv(strlen($password), 2);
+        $half_position = intdiv(strlen($password), 2);
 
-    $password = substr_replace( $password, $salt, $half_position, 0 );
+        $password = substr_replace( $password, $salt, $half_position, 0 );
 
-    $hashed_password = hash("sha256", $password);
+        $hashed_password = hash("sha256", $password);
 
-    // find the highest userid and add one
+        // find the highest userid and add one
 
-    $userid = get_user_id($pdo)["max_user_id"];
+        $userid = get_user_id($pdo)["max_user_id"];
 
-    print_r($userid);
+        $userid = $userid + 1;
 
-    $userid = $userid + 1;
+        $query = 'INSERT INTO User VALUES (:userid, :username, :password, :salt, :email, 0, 1, 1)';
+        // VALUES for the User table are (UserId, Username, Password, Salt, Email, Role, Location  opt in, leaderboard opt in)
 
-    $query = 'INSERT INTO User VALUES (:userid, :username, :password, :salt, :email, 0, 1, 1)';
-    // VALUES for the User table are (UserId, Username, Password, Salt, Email, Role, Location  opt in, leaderboard opt in)
-
-    if ($stmt = $pdo->prepare($query)) {
-        $stmt->execute([":userid" => $userid, ":username" => $username, ":password" => $hashed_password, ":salt" => $salt,":email" => $email]);
-       
-        echo $result;
-        if ($result->num_rows > 0) {
-            $_SESSION['logged_in'] = TRUE;
-            $_SESSION['username'] = $username;
-           // header('Location: user_dashboard.php'); // redirect the user to the dashboard
-            exit;
+        if ($stmt = $pdo->prepare($query)) {
+            $stmt->execute([":userid" => $userid, ":username" => $username, ":password" => $hashed_password, ":salt" => $salt,":email" => $email]);
+            $result = $stmt->fetch();
+            if ($result->num_rows > 0) {
+                $_SESSION['logged_in'] = TRUE;
+                $_SESSION['username'] = $username;
+            // header('Location: user_dashboard.php'); // redirect the user to the dashboard
+                exit();
+            } else {
+                echo 'Something went wrong.';
+            }
         } else {
-            echo 'Something went wrong.';
+            echo 'Database query failed.';
         }
-    } else {
-        echo 'Database query failed.';
     }
 }
 
@@ -83,6 +81,7 @@ function get_user_id ($pdo){
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,10 +89,11 @@ function get_user_id ($pdo){
     <?php 
         include("../php/template/header.php");
     ?>
-    <link rel="stylesheet" href="../css/signup.css">
+    <link rel="stylesheet" href="/signup/signup.css">
 </head>
 <body>
     <?php 
+        echo $error_msg;
         include("../php/template/navbar.php");
     ?>
 
@@ -112,18 +112,21 @@ function get_user_id ($pdo){
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Username</label>
                                         <input type="text" class="form-control" id="username" placeholder="Enter your username..." name="username">
+                                        <small></small>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Email Address <span class="email-small">(University Email)</span></label>
                                         <input type="email" class="form-control" id="username" placeholder="Enter your university email..." name="email">
+                                        <small></small>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="user_pass" class="form-label">Password</label>
                                         <input type="password" class="form-control" id="user_pass" placeholder="Enter your password..." name="password">
+                                        <small></small>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -134,12 +137,22 @@ function get_user_id ($pdo){
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                            <div class="row align-self-center">
-                                <div class="mb-4 d-grid col-12 mx-auto">
-                                    <button class="btn submit border-secondary" data-bs-target="#privacy" data-bs-toggle="modal">Register</button>
+
+                                <div class="row">
+                                    <div class="mb-4">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="terms_and_conditions">
+                                            <label for="toggle_pass" class="form-label">I have read and agree to our <a href="/terms-and-conditions">Terms and Conditions</a> and <a href="/privacy-notice">Privacy Policy</a></label>
+                                            <small></small>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="row align-self-center">
+                                    <div class="mb-4 d-grid col-12 mx-auto">
+                                        <button class="btn submit border-secondary" type="submit">Register</button>
+                                    </div>
+                                </div>
+                            </form>
                             <hr class="my-4 border-3 border-secondary signup-divider">
                             <div class="row my-4">
                                 <div class="col-8 mx-auto d-grid mt-3">
@@ -147,7 +160,6 @@ function get_user_id ($pdo){
                                         <button class="btn misc-buttons border-secondary">Log In</button>
                                     </a>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -160,7 +172,7 @@ function get_user_id ($pdo){
     include("../php/template/footer.php"); 
     ?>
     
-    <script src="signup.js"></script>
+    <script src="/signup/signup.js"></script>
     
 </body>
 </html>
