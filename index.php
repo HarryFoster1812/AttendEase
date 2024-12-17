@@ -82,12 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Username</label>
                                         <input type="text" class="form-control" id="username" placeholder="Enter your username..." name="username">
+                                        <small></small>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="user_pass" class="form-label">Password</label>
                                         <input type="password" class="form-control" id="user_pass" placeholder="Enter your password..." name="password">
+                                        <small></small>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -101,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="row align-self.center">
                                     <div class="mb-4 d-grid col-12 mx-auto">
                                         <button type="submit" class="btn submit border-secondary">Log In</button>
+                                        <small></small>
                                     </div>
                                 </div>
                             </form>
@@ -127,6 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </section>
 
+    <script src="login.js"></script>
 
     <?php include("php/template/footer.php"); ?>
 </body>

@@ -107,7 +107,7 @@ function get_user_id ($pdo){
                                 <h1 class="display-6 text-center">Sign Up For AttendEase</h1>
                             </div>
                             <hr class="my-4 border-3 border-secondary signup-divider">
-                            <form action="" method="post">
+                            <form action="" method="post" id="signup">
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Username</label>
@@ -118,7 +118,7 @@ function get_user_id ($pdo){
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Email Address <span class="email-small">(University Email)</span></label>
-                                        <input type="email" class="form-control" id="username" placeholder="Enter your university email..." name="email">
+                                        <input type="email" class="form-control" id="email" placeholder="Enter your university email..." name="email">
                                         <small></small>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@ function get_user_id ($pdo){
                                 <div class="row">
                                     <div class="mb-4">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="toggle_pass" onclick="togglePassword">
+                                            <input type="checkbox" class="form-check-input" id="toggle_pass">
                                             <label for="toggle_pass" class="form-label">Show Password</label>
                                         </div>
                                     </div>
@@ -142,14 +142,14 @@ function get_user_id ($pdo){
                                     <div class="mb-4">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="terms_and_conditions">
-                                            <label for="toggle_pass" class="form-label">I have read and agree to our <a href="/terms-and-conditions">Terms and Conditions</a> and <a href="/privacy-notice">Privacy Policy</a></label>
+                                            <label for="terms" id="terms" class="form-label">I have read and agree to our <a href="/terms-and-conditions">Terms and Conditions</a> and <a href="/privacy-notice">Privacy Policy</a></label>
                                             <small></small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row align-self-center">
                                     <div class="mb-4 d-grid col-12 mx-auto">
-                                        <button class="btn submit border-secondary" type="submit">Register</button>
+                                        <button class="btn submit border-secondary" type="submit" id="submit">Register</button>
                                     </div>
                                 </div>
                             </form>

@@ -54,3 +54,17 @@
     color:#ffcc33;
     border-color:#ffcc33;
   }
+
+  small {
+    color: red;
+    font-size: 0.7em;
+  }
+
+  .error {
+    border-color:red;
+    border-width: 5px;
+  }
+
+  .success {
+    border-color:green;
+  }
