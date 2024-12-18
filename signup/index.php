@@ -13,13 +13,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $is_duplicate = False;
     $error_msg = "";
     $duplicate = 'SELECT * FROM User WHERE username =:username OR email=:email';
+    
     if ($stmt = $pdo->prepare($duplicate)) {
+        
         $stmt->execute([":username" => $username, ":email" => $email]);
+        
         if ($stmt->rowCount() > 0) {
             $error_msg = "<div class='alert alert-danger' role='alert'>Username or email already associated with an account.</div>";
             $is_duplicate = True;
         }
     }
+
     else{
 
         $error_msg = "Something went wrong trying to connect to the database";
@@ -48,16 +52,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt = $pdo->prepare($query)) {
             $stmt->execute([":userid" => $userid, ":username" => $username, ":password" => $hashed_password, ":salt" => $salt,":email" => $email]);
-            $result = $stmt->fetch();
-            if ($result->num_rows > 0) {
-                $_SESSION['logged_in'] = TRUE;
-                $_SESSION['username'] = $username;
-            // header('Location: user_dashboard.php'); // redirect the user to the dashboard
+            $_SESSION['logged_in'] = TRUE;
+            $_SESSION["user_id"] = $userid;
+            $_SESSION["user_role"] = 0;
+            $_SESSION["email"] = $email;
+            $_SESSION["location"] = 1;
+            $_SESSION["leaderboard"] = 1;
+
+            header('Location: /calendar'); // redirect the user to the dashboard
                 exit();
-            } else {
+        } 
+            
+        else {
                 echo 'Something went wrong.';
-            }
-        } else {
+        }
+         
+        else {
             echo 'Database query failed.';
         }
     }

@@ -10,8 +10,6 @@ else{
     header("Location:../");
 }
 
-
-
 ?>
 
 
@@ -25,7 +23,10 @@ else{
 </head>
 <body>
     
-    <?php include($nav_path); ?>
+    <?php 
+        echo $error;
+        include($nav_path); 
+    ?>
 
 
     <section id="calendar-header">
@@ -33,13 +34,13 @@ else{
             <div class="row mt-5 pt-4">
                 <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start mb-4">
                     <div class="btn-group rounded-pill time-select" role="group">
-                        <button class="btn btn-secondary border-dark rounded-start-pill px-3">Today</button>
-                        <button class="btn btn-light border-dark px-3"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button class="btn btn-light border-dark rounded-end-circle px-3"><i class="fa-solid fa-chevron-right"></i></button>
+                        <input class="btn btn-secondary border-dark rounded-start-pill px-3" type="date" id="datepicker"/>
+                        <button class="btn btn-light border-dark px-3" id="date_back"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="btn btn-light border-dark rounded-end-circle px-3" id="date_forward"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
                 <div class="col-12 col-lg-4 d-flex justify-content-center mb-4">
-                    <h2 class="fs-2 text-center text-primary">19-25 Sep 2024</h2>
+                    <h2 class="fs-2 text-center text-primary" id="date">19-25 Sep 2024</h2>
                 </div>
                 <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end mb-4">
                     <div class="btn-group rounded-pill time-select" role="group">
@@ -229,6 +230,7 @@ else{
     </section>
 
     <?php include("../php/template/footer.php"); ?>
+    <script src="/js/date.js"></script>
     <script src="/calendar/calendar.js"></script>
 
 </body>

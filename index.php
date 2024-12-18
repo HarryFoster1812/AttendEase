@@ -9,25 +9,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    //get the salt for the use
+    //get the salt for the database
     $query = 'SELECT * FROM User WHERE username = :username';
 
     if ($stmt = $pdo->prepare($query)) {
         $stmt->execute([":username" => $username]);
+        
         $result = $stmt->fetch();
-        if ($result) {
+        
+        // check of there is any result
+        if ($stmt->rowCount() > 0) {
             
+            // get the salt
             $salt = $result["salt"];
             $position = intdiv(strlen($password), 2);
-
+            
+            // insert the salt halfway between the password
             $password = substr_replace( $password, $salt, $position, 0 );
 
+            // hash the salted password
             $hashed_password = hash('sha256', $password);
             
             if ($hashed_password == $result["password"]){
 
-                $_SESSION["username"] = $username;
-                $_SESSION["userid"] = $result["userid"];
+                $_SESSION["user_id"] = $result["user_id"];
+                $_SESSION["user_role"] = $result["user_role"];
+                $_SESSION["email"] = $result["email"];
+                $_SESSION["location"] = $result["location_opt_in"];
+                $_SESSION["leaderboard"] = $result["leaderbaord_opt_in"];
                 
                 //check if the user is an admin
                 if ($result["role_id"] == 3){
@@ -38,16 +47,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $_SESSION["navbar"] = "navbar.php";
                 }
 
-                header("Location:/calendar");
+                header("Location:../calendar");
             }
-            
-
-        } else {
+        } 
+        
+        else {
             $error_msg = "<div class='alert alert-danger' role='alert'>The username or password is incorrect.</div>";
         }
-    } else {
+    } 
+
+    else {
             $error_msg = "<div class='alert alert-danger' role='alert'>Database query failed.</div>";
-        exit;
     }
 }
 
