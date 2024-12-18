@@ -10,6 +10,26 @@ date_header = document.getElementById("date");
 document.getElementById("date_forward").addEventListener("click", nextDate);
 document.getElementById("date_back").addEventListener("click", previousDate);
 
+var months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+function convertDate(date_str) {
+  temp_date = date_str.split("-");
+  return temp_date[2] + " " + months[Number(temp_date[1]) - 1] + " " + temp_date[0];
+}
+
+function convertDate(start_date_string, end_date_string) {
+    return_string = "";
+    temp_date_one = start_date_string.split("-");
+    temp_date_two = end_date_string.split("-");
+
+    // check is the month is the same
+    if (temp_date_one[1] == temp_date_two[1]){
+        return_string = temp_date_one[2] + "-" + temp_date_two[2] + " " + months[Number(temp_date[1]) - 1] + " " + temp_date[0];
+    }
+
+    return temp_date[2] + " " + months[Number(temp_date[1]) - 1] + " " + temp_date[0];
+  }
+
 function isWeekend(date) {
     return !date.is().weekday();
 }
@@ -122,7 +142,7 @@ function dateEvent(event){
     // NEED TO FINISH THIS 
     // NEED TO FINISH
     if (start_date == end_date){
-        
+        date_header.innerText = convertDate(start_date);
     }
 
     else{
