@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <title>Feedback | AttendEase</title>
+    <link rel="stylesheet" href="/feedback/feedback.css">
     <?php 
         include("../php/template/header.php");
         
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../php/template/navbar.php");
     ?>
 
-<div class="container mt-5">
+<div class="container mt-5 formbackground">
         <header class="text-center mb-4">
             <h1>Feedback</h1>
             <p>Thank you for using AttendEase! Your feedback helps us improve the app to better meet your needs.</p>

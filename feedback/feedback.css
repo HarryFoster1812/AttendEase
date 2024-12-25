@@ -1,0 +1,8 @@
+.formbackground{
+    border-radius: 75px;
+    align-items: center;
+    background-color: rgba(102, 0, 153, 0.8);
+    padding-top: 15px;
+    padding-bottom: 5px;
+    margin-bottom: 25px;
+}

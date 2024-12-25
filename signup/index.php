@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $userid = $userid + 1;
 
-        $query = 'INSERT INTO User VALUES (:userid, :username, :password, :salt, :email, 0, 1, 1)';
+        $query = 'INSERT INTO User VALUES (:userid, :username, :password, :salt, :email, 0, 1, 1, "")';
         // VALUES for the User table are (UserId, Username, Password, Salt, Email, Role, Location  opt in, leaderboard opt in)
 
         if ($stmt = $pdo->prepare($query)) {
@@ -63,10 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 exit();
         } 
             
-        else {
-                echo 'Something went wrong.';
-        }
-         
         else {
             echo 'Database query failed.';
         }
