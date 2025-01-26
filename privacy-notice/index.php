@@ -27,7 +27,7 @@ session_start();
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title fs-3 text-primary">Our Privacy Policy</h6>
+                    <h1 class="modal-title fs-3 text-primary">Our Privacy Policy</h1>
                 </div>
                 <div class="modal-body text-primary">
                     <div class="accordion accordion-flush">
