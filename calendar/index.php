@@ -22,7 +22,6 @@ else{
 
 </head>
 <body>
-<<<<<<< HEAD:calendar.html
     <template id="class-ui">
         <div class="class-block">
             <div class="class-head">
@@ -67,15 +66,6 @@ else{
             </ul>
         </div>
     </nav>
-=======
-    
-    <?php 
-        echo $error;
-        include($nav_path); 
-    ?>
-
-
->>>>>>> template_testing:calendar/index.php
     <section id="calendar-header">
         <div class="custom-container">
             <div class="row mt-5 pt-4">

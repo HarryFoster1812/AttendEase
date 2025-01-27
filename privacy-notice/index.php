@@ -16,7 +16,6 @@ session_start();
     
 </head>
 <body>
-<<<<<<< HEAD:signup.html
     <nav class="p-3 navbar navbar-expand-lg navbar-dark bg-primary">
         <a href="#" class="navbar-brand mb-0 text-secondary">AttendEase</a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#attendnav">
@@ -104,16 +103,6 @@ session_start();
         </div>
     </section>
     <div class="modal fade" id="privacy" data-bs-backdrop="static" data-bs-keyboard="false">
-=======
-
-    <?php 
-        include("../php/template/navbar.php");
-    ?>
-
-    <br>
-
-    <div id="privacy" data-bs-backdrop="static" data-bs-keyboard="false">
->>>>>>> template_testing:privacy-notice/index.php
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
