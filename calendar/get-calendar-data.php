@@ -16,6 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // there are two status eg student and GTA/Lecturer
 
     // check if the user is a student or GTA
+    //echo $_SESSION["role_id"];
     if ($_SESSION["role_id"] == 0 || $_SESSION["role_id"] == 1){
         $result = get_student_timeslots($pdo, $start_date, $end_date);
         array_push($data, $result);
