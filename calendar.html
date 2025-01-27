@@ -15,6 +15,22 @@
 
 </head>
 <body>
+    <template id="class-ui">
+        <div class="class-block">
+            <div class="class-head">
+                <div class="class-time-icon">
+                    <i class="fa-regular fa-clock"></i>
+                </div>
+                <div class="class-time">
+                    <h6 class="class-time-text"><b>09:00-10:00</b></h6>
+                </div>
+            </div>
+            <div class="class-body">
+                <h5 class="class-title">COMP10120 Tutorial</h5>
+                <h5 class="class-loc">IT-407 Kilburn</h5>
+            </div>
+        </div>
+    </template>
     <nav class="p-3 navbar navbar-expand-lg navbar-dark bg-primary">
         <a href="#" class="navbar-brand mb-0 text-secondary">AttendEase</a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#attendnav">
@@ -102,7 +118,8 @@
                         </tr>
                         <tr>
                             <th scope="row" class="fs-2 px-3">09:00</th>
-                            <td></td>
+                            <td>
+                            </td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -184,7 +201,7 @@
                 </table>
             </div>
             <div class="table-responsive-lg" id="timetable-day">
-                <table class="table table-default align-middle table-fixed" id="timetable">
+                <table class="table table-default align-middle table-fixed">
 
                     <thead class="table-header">
                         <tr>
