@@ -8,7 +8,7 @@
   }
 
   .overlay{
-    height:850px;
+    height:1050px;
     background-image: url("../images/login.jpeg");
     background-repeat:no-repeat;
     background-size: cover;
@@ -53,4 +53,18 @@
     background-color: #660099;
     color:#ffcc33;
     border-color:#ffcc33;
+  }
+
+  small {
+    color: red;
+    font-size: 0.7em;
+  }
+
+  .error {
+    border-color:red;
+    border-width: 5px;
+  }
+
+  .success {
+    border-color:green;
   }

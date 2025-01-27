@@ -1,20 +1,22 @@
-<!DOCTYPE html>
+<?php
+
+session_start();
+
+?>
+
 <html lang="en">
 <head>
-    <title>Sign Up | AttendEase</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/signup.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Convergence&display=swap" rel="stylesheet">
+    <title>Privacy Policy | AttendEase</title>
+    <?php 
+        include("../php/template/header.php");
+        
+        ?>
 
+    <link rel="stylesheet" href="../css/signup.css">
+    
 </head>
 <body>
+<<<<<<< HEAD:signup.html
     <nav class="p-3 navbar navbar-expand-lg navbar-dark bg-primary">
         <a href="#" class="navbar-brand mb-0 text-secondary">AttendEase</a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#attendnav">
@@ -102,11 +104,20 @@
         </div>
     </section>
     <div class="modal fade" id="privacy" data-bs-backdrop="static" data-bs-keyboard="false">
+=======
+
+    <?php 
+        include("../php/template/navbar.php");
+    ?>
+
+    <br>
+
+    <div id="privacy" data-bs-backdrop="static" data-bs-keyboard="false">
+>>>>>>> template_testing:privacy-notice/index.php
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title fs-3 text-primary">Our Privacy Policy</h6>
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    <h1 class="modal-title fs-3 text-primary">Our Privacy Policy</h1>
                 </div>
                 <div class="modal-body text-primary">
                     <div class="accordion accordion-flush">
@@ -140,7 +151,7 @@
                         <div class="accordion-item text-primary">
                             <h2 class="accordion-header fs-1">
                                 <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accpoint_3">
-                                    3. Purpose of Data Collection
+                                    3. User Eligibility
                                 </button>
                             </h2>
                             <div class="accordion-collapse collapse" id="accpoint_3">
@@ -240,17 +251,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer text-primary">
-                    <button class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Proceed</button>
-                </div>
+
             </div>
         </div>
     </div>
+<<<<<<< HEAD:signup.html
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="bootstrap/dist/js/bootstrap.js"></script>
 
+=======
+    
+    <?php 
+    include("../php/template/footer.php"); 
+    ?>
+>>>>>>> template_testing:privacy-notice/index.php
 </body>
 </html>
+

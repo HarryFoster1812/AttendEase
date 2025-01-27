@@ -1,20 +1,28 @@
+<?php 
+
+session_start();
+
+if(isset($_SESSION["navbar"])){
+    $nav_path = "../php/template/" . $_SESSION["navbar"];
+}
+
+else{
+    header("Location:../");
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>AttendEase | Calendar</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <?php include("../php/template/header.php"); ?>
     <link rel="stylesheet" href="css/calendar.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Convergence&display=swap" rel="stylesheet">
 
 </head>
 <body>
+<<<<<<< HEAD:calendar.html
     <template id="class-ui">
         <div class="class-block">
             <div class="class-head">
@@ -59,18 +67,27 @@
             </ul>
         </div>
     </nav>
+=======
+    
+    <?php 
+        echo $error;
+        include($nav_path); 
+    ?>
+
+
+>>>>>>> template_testing:calendar/index.php
     <section id="calendar-header">
         <div class="custom-container">
             <div class="row mt-5 pt-4">
                 <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start mb-4">
                     <div class="btn-group rounded-pill time-select" role="group">
-                        <button class="btn btn-secondary border-dark rounded-start-pill px-3">Today</button>
-                        <button class="btn btn-light border-dark px-3"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button class="btn btn-light border-dark rounded-end-circle px-3"><i class="fa-solid fa-chevron-right"></i></button>
+                        <input class="btn btn-secondary border-dark rounded-start-pill px-3" type="date" id="datepicker"/>
+                        <button class="btn btn-light border-dark px-3" id="date_back"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="btn btn-light border-dark rounded-end-circle px-3" id="date_forward"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
                 <div class="col-12 col-lg-4 d-flex justify-content-center mb-4">
-                    <h2 class="fs-2 text-center text-primary">19-25 Sep 2024</h2>
+                    <h2 class="fs-2 text-center text-primary" id="date">19-25 Sep 2024</h2>
                 </div>
                 <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end mb-4">
                     <div class="btn-group rounded-pill time-select" role="group">
@@ -260,12 +277,9 @@
         </div>
     </section>
 
-    
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="bootstrap/dist/js/bootstrap.js"></script>
-    <script src="js/calendar.js"></script>
+    <?php include("../php/template/footer.php"); ?>
+    <script src="/js/date.js"></script>
+    <script src="/calendar/calendar.js"></script>
 
 </body>
 </html>
