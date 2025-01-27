@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->execute([":userid" => $userid, ":username" => $username, ":password" => $hashed_password, ":salt" => $salt,":email" => $email]);
             $_SESSION['logged_in'] = TRUE;
             $_SESSION["user_id"] = $userid;
-            $_SESSION["user_role"] = 0;
+            $_SESSION["role_id"] = 0;
             $_SESSION["email"] = $email;
             $_SESSION["location"] = 1;
             $_SESSION["leaderboard"] = 1;

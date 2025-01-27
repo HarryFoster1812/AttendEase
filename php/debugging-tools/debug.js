@@ -1,4 +1,11 @@
-function get_session_data(){
+class DebugFunctions{
+    static get GET_SESSION_DATA() {return "get_session_data"}
+    static get CLEAR_SESSION() {return "clear_session"}
+}  
+
+
+
+function runDebugScript(script_name){
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function() {
@@ -17,7 +24,7 @@ function get_session_data(){
         }
       };
 
-    xmlhttp.open("POST", "/php/debugging-tools/get_session_data.php", true);
+    xmlhttp.open("POST", "/php/debugging-tools/" + script_name + ".php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send();
 
