@@ -4,10 +4,13 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require '../php/db.php';
+    require_once '../autoload.php';
 
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+
+    $pdo = $db->getPdo();
 
     //  check is the username or email is already taken
     $is_duplicate = False;
@@ -52,12 +55,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt = $pdo->prepare($query)) {
             $stmt->execute([":userid" => $userid, ":username" => $username, ":password" => $hashed_password, ":salt" => $salt,":email" => $email]);
-            $_SESSION['logged_in'] = TRUE;
             $_SESSION["user_id"] = $userid;
             $_SESSION["role_id"] = 0;
             $_SESSION["email"] = $email;
             $_SESSION["location"] = 1;
             $_SESSION["leaderboard"] = 1;
+
+            $_SESSION['user'] = serialize(new User($userid, 0, $email, 1, 1));
+
 
             header('Location: /calendar'); // redirect the user to the dashboard
                 exit();

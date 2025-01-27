@@ -3,12 +3,14 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require 'php/db.php';
-    require 'php/classes/User.php';
+    require_once 'php/db.php';
+    require_once __DIR__ . '/autoload.php';
     
     $error_msg = "";
     $username = $_POST['username'];
     $password = $_POST['password'];
+
+    $pdo = $db->getPdo();
 
     //get the salt for the database
     $query = 'SELECT * FROM User WHERE username = :username';
@@ -33,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             if ($hashed_password == $result["password"]){
                 
-                $_SESSION['user'] = new User($result["user_id"], $result["role_id"], $result["email"], $result["location_opt_in"], $result["leaderboard_opt_in"]);
+                $_SESSION['user'] = serialize(new User($result["user_id"], $result["role_id"], $result["email"], $result["location_opt_in"], $result["leaderboard_opt_in"]));
                 
                 //check if the user is an admin
                 if ($result["role_id"] == 3){
