@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($hashed_password == $result["password"]){
 
                 $_SESSION["user_id"] = $result["user_id"];
-                $_SESSION["user_role"] = $result["role_id"];
+                $_SESSION["role_id"] = $result["role_id"];
                 $_SESSION["email"] = $result["email"];
                 $_SESSION["location"] = $result["location_opt_in"];
                 $_SESSION["leaderboard"] = $result["leaderboard_opt_in"];

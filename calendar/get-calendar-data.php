@@ -11,6 +11,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     //echo $end_date;
     //echo $_SESSION["username"];
 
+    echo var_dump($_SESSION);
+
     $data = [];
 
     // there are two status eg student and GTA/Lecturer
