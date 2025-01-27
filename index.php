@@ -4,6 +4,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require 'php/db.php';
+    require 'php/classes/User.php';
     
     $error_msg = "";
     $username = $_POST['username'];
@@ -31,12 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $hashed_password = hash('sha256', $password);
             
             if ($hashed_password == $result["password"]){
-
-                $_SESSION["user_id"] = $result["user_id"];
-                $_SESSION["role_id"] = $result["role_id"];
-                $_SESSION["email"] = $result["email"];
-                $_SESSION["location"] = $result["location_opt_in"];
-                $_SESSION["leaderboard"] = $result["leaderboard_opt_in"];
+                
+                $_SESSION['user'] = new User($result["user_id"], $result["role_id"], $result["email"], $result["location_opt_in"], $result["leaderboard_opt_in"]);
                 
                 //check if the user is an admin
                 if ($result["role_id"] == 3){

@@ -1,6 +1,6 @@
 <?php
 session_start();
 
-echo var_dump($_SESSION);
+print_r($_SESSION);
 
 ?>
