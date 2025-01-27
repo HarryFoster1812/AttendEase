@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <style type="text/css">
+            .modal-opener{
+                background-color:#129cf3;
+                padding:20px;
+                border-radius:5px;
+                color:#fff;
+            }
+            .popup-container{
+                display:none;
+                height:100vh;
+                width:100%;
+                background-color:rgba(0,0,0,0.5);
+                align-items:center;
+                justify-content:center;
+                left:0;
+                top:0;
+                position: fixed;
+            }
+            .popup-content{
+                background-color:#fff;
+                height:75vh;
+                width:50vw;
+                border-radius:20px;
+                box-shadow:2px 2px 2px 2px #aaa;
+                color:#660099;
+                overflow-y: scroll;
+            }
+            .popup-title h2{
+                font-size:1.2rem;
+            }
+            .popup-close h2{
+                font-size:2.5rem;
+                line-height:1;
+
+            }
+            .popup-head{
+                display: flex;
+                justify-content:space-between;
+                align-items:center;
+                height:auto;
+            }
+            .popup-close:hover h2{
+                color:#666;
+                transition: all 1s;
+            }
+            .popup-body{
+                font-size:1.2rem;
+            }
+            .popup-content{
+                padding-left:3rem;
+                padding-right:3rem;
+            }
+        </style>
+    </head>
+    <body>
+        <button class="modal-opener">CLICK ME!</button>
+        <div class="popup-container">
+            <div class="popup">
+                <div class="popup-content">
+                    <div class="popup-head">
+                        <div class="popup-title">
+                            <h2>Our Privacy Policy</h2>
+                        </div>
+                        <div class="popup-close">
+                            <h2>&times;</h2>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="popup-body">
+                        <ul class="popup-list">
+                            <li>1. Yes</li>
+                            <li>1. Yes</li>
+                            <li>1. Yes</li>
+                            <li>1. Yes</li>
+                            <li>1. Yes</li>
+                            <li>1. Yes</li>
+                            <li>1. Yes</li>
+                            <li>1. Yes</li>
+                            <li>1. Yes</li>
+                            <li>1. Yes</li>
+                            <li>1. Yes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const popup = document.querySelector(".popup-container");
+            const closer = document.querySelector(".popup-close");
+            const button = document.querySelector('.modal-opener');
+            closer.addEventListener('click',()=>{
+                popup.style.display = "none";
+            });
+            button.addEventListener('click',()=>{
+                popup.style.display="flex";
+            });
+        </script>
+    </body>
+</html>
