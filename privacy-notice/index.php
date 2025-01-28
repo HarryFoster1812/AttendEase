@@ -16,93 +16,14 @@ session_start();
     
 </head>
 <body>
-    <nav class="p-3 navbar navbar-expand-lg navbar-dark bg-primary">
-        <a href="#" class="navbar-brand mb-0 text-secondary">AttendEase</a>
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#attendnav">
-            <span class="navbar-toggler-icon text-secondary"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="attendnav">
-            <ul class="navbar-nav ms-auto text-secondary">
-                <li class="nav-item active px-1">
-                    <a href="#" class="nav-link">Admin</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Settings</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Statistics</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Leaderboards</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Calendar</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Dashboard</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <section class="signup-form">
-        <div class="overlay d-flex align-items-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-xl-6 mx-auto sign-up-box p-4">
-                        <div class="container">
-                            <div class="row mt-4">
-                                <h1 class="display-6 text-center">Sign Up For AttendEase</h1>
-                            </div>
-                            <hr class="my-4 border-3 border-secondary signup-divider">
-                            <form action="php/signup.php" method="post">
-                                <div class="row">
-                                    <div class="mb-4">
-                                        <label for="username" class="form-label">Username</label>
-                                        <input type="text" class="form-control" id="username" placeholder="Enter your username..." name="username">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-4">
-                                        <label for="username" class="form-label">Email Address <span class="email-small">(University Email)</span></label>
-                                        <input type="email" class="form-control" id="username" placeholder="Enter your university email..." name="email">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-4">
-                                        <label for="user_pass" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="user_pass" placeholder="Enter your password..." name="password">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-4">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="toggle_pass" onclick="togglePassword">
-                                            <label for="toggle_pass" class="form-label">Show Password</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="row align-self-center">
-                                <div class="mb-4 d-grid col-12 mx-auto">
-                                    <button class="btn submit border-secondary" data-bs-target="#privacy" data-bs-toggle="modal">Register</button>
-                                </div>
-                            </div>
-                            <hr class="my-4 border-3 border-secondary signup-divider">
-                            <div class="row my-4">
-                                <div class="col-8 mx-auto d-grid mt-3">
-                                    <a href="index.html" class="logup d-grid">
-                                        <button class="btn misc-buttons border-secondary">Log In</button>
-                                    </a>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="modal fade" id="privacy" data-bs-backdrop="static" data-bs-keyboard="false">
+
+    <?php 
+        include("../php/template/navbar.php");
+    ?>
+
+    <br>
+
+    <div id="privacy" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
