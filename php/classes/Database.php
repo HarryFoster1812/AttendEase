@@ -1,7 +1,5 @@
 <?php
 
-require "User.php";
-
 class Database {
     private $pdo;
 
