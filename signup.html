@@ -57,25 +57,31 @@
                                 <div class="row">
                                 <div class="mb-4">
                                     <label for="username" class="form-label">Username</label>
+                                    <h5 class="form-error-msg">Please enter your username.</h5>
                                     <input type="text" class="form-control" id="username" placeholder="Enter your username...">
+                                    
                                 </div>
                             </div>
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Email Address <span class="email-small">(University Email)</span></label>
+                                        <h5 class="form-error-msg">Please enter your University Of Manchester email.</h5>
                                         <input type="email" class="form-control" id="username" placeholder="Enter your university email...">
+                                        
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="user_pass" class="form-label">Password</label>
+                                        <h5 class="form-error-msg">Please enter a password containing 8-64 cahracters with a number, symbol, lowercase and uppercase character.</h5>
                                         <input type="password" class="form-control" id="user_pass" placeholder="Enter your password...">
+                                       
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="mb-4">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="toggle_pass">
+                                            <input type="checkbox" class="form-check-input" id="pass-toggle">
                                             <label for="toggle_pass" class="form-label">Show Password</label>
                                         </div>
                                     </div>
@@ -83,7 +89,7 @@
                             </form>
                             <div class="row align-self-center">
                                 <div class="mb-4 d-grid col-12 mx-auto">
-                                    <button class="btn submit border-secondary" data-bs-target="#privacy" data-bs-toggle="modal">Register</button>
+                                    <button class="btn submit border-secondary" id="button-toggle">Register</button>
                                 </div>
                             </div>
                             <hr class="my-4 border-3 border-secondary signup-divider">
@@ -101,14 +107,19 @@
             </div>
         </div>
     </section>
-    <div class="modal fade" id="privacy" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title fs-3 text-primary">Our Privacy Policy</h6>
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-hidden="true"></button>
+    <div class="popup-container">
+        <div class="popup">
+            <div class="container p-4">
+                <div class="popup-head">
+                    <div class="popup-title">
+                        <h2>Our Privacy Policy</h2>
+                    </div>
+                    <div class="popup-close">
+                        <h2><i class="fa-solid fa-xmark"></i></h2>
+                    </div>
                 </div>
-                <div class="modal-body text-primary">
+                <hr>
+                <div class="popup-body">
                     <div class="accordion accordion-flush">
                         <div class="accordion-item text-primary">
                             <h2 class="accordion-header fs-1">
@@ -240,9 +251,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer text-primary">
-                    <button class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Proceed</button>
+                <hr>
+                <div class="popup-foot d-flex gap-3 justify-content-end">
+                    <button class="btn btn-lg btn-primary popup-close">Close</button>
+                    <button class="btn btn-lg btn-secondary accept-term">Proceed</button>
+
                 </div>
             </div>
         </div>
