@@ -116,11 +116,27 @@ td{
     display:flex;
     align-items:center;
   }
-
+  .table-title{
+    width:20%;
+  }
+  #timetable-month th{
+    width:20%;
+  }
+  #timetable-week th{
+    width:16.6%;
+  }
+@media(max-width:1200px){
+  .table-title{
+    width:25%;
+  }
+}
 @media(max-width:992px){
     .custom-container{
         padding-left:3rem;
         padding-right:3rem;
+    }
+    .table-title{
+      width:33%;
     }
 }
 @media(max-width:576px){

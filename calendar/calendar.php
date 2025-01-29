@@ -264,6 +264,58 @@ else{
                     </tbody> 
                 </table>
             </div>
+            <div class="table-responsive-lg d-none" id="timetable-month">
+                <table class="table table-default align-middle table-fixed">
+
+                    <thead class="table-header">
+                        <tr>
+                            <th scope="col" class="text-center fs-2">Monday</th>
+                            <th scope="col" class="text-center fs-2">Tuesday</th>
+                            <th scope="col" class="text-center fs-2">Wednesday</th>
+                            <th scope="col" class="text-center fs-2">Thursday</th>
+                            <th scope="col" class="text-center fs-2">Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </tbody> 
+                </table>
+            </div>
         </div>
     </section>
 

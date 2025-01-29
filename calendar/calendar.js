@@ -114,6 +114,10 @@ function calculateStartEndDate(date, timePeriod){
     // convert to datejs object
 
     date =  Date.parse(date);
+    let monthBounds=[31,28,31,30,31,30,31,31,30,31,30,31];
+    if (Date.isLeapYear(20081900+date.getYear())){
+        monthBounds[1]+=1;
+    }
     cloneDate =  structuredClone(date); // we clone is since the datejs is mutable
 
     if(isWeekend(date)){
@@ -128,7 +132,6 @@ function calculateStartEndDate(date, timePeriod){
     }
 
     end_date = "";
-    
     if(timePeriod == "Day"){
 
         start_date = date;
@@ -152,19 +155,20 @@ function calculateStartEndDate(date, timePeriod){
         // i dont know what start date you want from me. 
         // Do i just go for 1st of the month and last of the month?
         // Do i do the first monday closest to the first and friday closest to the end?
-        const firstMonday = structuredClone(date.first().monday());
+        const firstMonday = structuredClone(date).first().monday();
         start_date = firstMonday;
-        const firstMonthDay = structuredClone(date.moveToFirstDayOfMonth());
-        if(firstMonday.toString("yyyy-MM-dd")!=firstMonthDay.toString("yyyy-MM-dd")){
+        console.log(firstMonday);
+        const firstMonthDay = structuredClone(date).moveToFirstDayOfMonth();
+        if(firstMonday.getDate()>3){
             start_date = firstMonday.addDays(-7);
         }
-        const lastFriday = structuredClone(date.last().friday());
+        const lastFriday = structuredClone(date).last().friday();
         end_date = lastFriday;
-        const lastMonthDay = structuredClone(date.moveToLastDayOfMonth());
-        if(lastFriday.toString("yyyy-MM-dd")!=lastMonthDay.toString("yyyy-MM-dd")){
-            end_date = firstMonday.addDays(7);
+        const lastMonthDay = structuredClone(date).moveToLastDayOfMonth();
+        if(lastFriday.getDate()!=lastMonthDay.getDate()){
+            console.log("ehigfejiejfiejeifjeifjdjiefji",lastFriday.getDate(),lastMonthDay.getDate())
+            end_date = lastFriday.addDays(7);
         }
-        end_date = structuredClone(date.final().friday());
     }
     displayTableDates(start_date);
 
@@ -174,7 +178,6 @@ function calculateStartEndDate(date, timePeriod){
 function dateEvent(event){
     // get the date that is picked
     date = event.srcElement.value;
-    console.log(typeof date)
 
     // do some calculation to find the start and end date given the given scope (day, week, month)
     time = getCurrentTimeButton();
@@ -259,6 +262,12 @@ function displayTableDates(start_date){
     const period = getCurrentTimeButton();
     const weekdays = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
     let dateDayOfWeek = weekdays[start_date.getDay()-1];
+    let monthBounds=[31,28,31,30,31,30,31,31,30,31,30,31];
+    if (Date.isLeapYear(20081900+start_date.getYear())){
+        monthBounds[1]+=1;
+    }
+    const monthChosen = start_date.getMonth();
+
     let dateDay =start_date.getDate();
 
     if(period=="Day"){
@@ -277,10 +286,20 @@ function displayTableDates(start_date){
     }
     else{
         const timeTableMonth = document.getElementById('timetable-month');
-        const cells = Array(timeTableMonth.querySelectorAll('th')).slice(1,6);
+        const cells = Array.from((timeTableMonth.querySelectorAll('td')));
         for(let i=0;i<cells.length;i++){
+
             cells[i].innerHTML = `${dateDay}`;
             dateDay+=1;
+            if(dateDay>monthBounds[monthChosen]){
+                dateDay=1;
+            }
+            if(i%5==4){
+                dateDay+=2;
+            }
+            if(dateDay>monthBounds[monthChosen]){
+                dateDay=1;
+            }
         }
     }
 }
