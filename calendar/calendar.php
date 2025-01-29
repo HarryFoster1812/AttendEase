@@ -3,11 +3,11 @@
 session_start();
 
 if(isset($_SESSION["navbar"])){
-    $nav_path = "../php/template/" . $_SESSION["navbar"];
+    //$nav_path = "../php/template/" . $_SESSION["navbar"];
 }
 
 else{
-    header("Location:../");
+    //header("Location:../");
 }
 
 ?>
@@ -18,7 +18,7 @@ else{
 <head>
     <title>AttendEase | Calendar</title>
     <?php include("../php/template/header.php"); ?>
-    <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="../css/calendar.css">
 
 </head>
 <body>
@@ -268,8 +268,8 @@ else{
     </section>
 
     <?php include("../php/template/footer.php"); ?>
-    <script src="/js/date.js"></script>
-    <script src="/calendar/calendar.js"></script>
+    <script src="../js/date.js"></script>
+    <script src="calendar.js"></script>
 
 </body>
 </html>

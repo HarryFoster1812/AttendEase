@@ -61,7 +61,11 @@ function nextDate(event){
     timePeriod = getCurrentTimeButton();
 
     if (timePeriod == "Day"){
+
         selected_date.add(1).day();
+        if(selected_date.getDay()==6){
+            selected_date.add(2).day();
+        }
     }
 
     else if (timePeriod == "Week"){
@@ -82,6 +86,9 @@ function previousDate(event){
 
     if (timePeriod == "Day"){
         selected_date.add(-1).day();
+        if(selected_date.getDay()==0){
+            selected_date.add(-2).day();
+        }
     }
 
     else if (timePeriod == "Week"){
@@ -123,8 +130,17 @@ function calculateStartEndDate(date, timePeriod){
     end_date = "";
     
     if(timePeriod == "Day"){
+
         start_date = date;
         end_date = date;
+        if(date.getDay()==6){
+            date.add(2).day();
+            date_picker.value=date.toString('yyyy-MM-dd');
+        }
+        if(date.getDay()==0){
+            date.add(1).day();
+            date_picker.value=date.toString('yyyy-MM-dd');
+        }
     }
 
     else if (timePeriod == "Week"){
@@ -150,7 +166,7 @@ function calculateStartEndDate(date, timePeriod){
         }
         end_date = structuredClone(date.final().friday());
     }
-
+    displayTableDates(start_date);
 
     return [start_date.toString("yyyy-MM-dd"), end_date.toString("yyyy-MM-dd")];
 }
@@ -158,6 +174,8 @@ function calculateStartEndDate(date, timePeriod){
 function dateEvent(event){
     // get the date that is picked
     date = event.srcElement.value;
+    console.log(typeof date)
+
     // do some calculation to find the start and end date given the given scope (day, week, month)
     time = getCurrentTimeButton();
 
@@ -175,26 +193,7 @@ function dateEvent(event){
         date_header.innerText = convertDate(start_date, end_date);
     }
 
-    // send a request to the server using ajax
-    var xmlhttp = new XMLHttpRequest();
 
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // update the calendar
-            try{
-                console.log(this.responseText);
-                json_data = JSON.parse(this.responseText);
-                console.log(json_data);
-            }
-            catch{
-                // display error message
-            }
-        }
-      };
-
-    xmlhttp.open("POST", "/calendar/get-calendar-data.php", true);
-    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xmlhttp.send("start_date="+start_date+"&end_date="+end_date);
 
 }
 
@@ -258,17 +257,19 @@ function getCurrentTimeButton(){
 
 function displayTableDates(start_date){
     const period = getCurrentTimeButton();
-    let dateDayOfWeek = start_date.toString("dddd");
-    let dateDay = Number(start_date.toString("d"));
+    const weekdays = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
+    let dateDayOfWeek = weekdays[start_date.getDay()-1];
+    let dateDay =start_date.getDate();
+
     if(period=="Day"){
         const timeTableDay = document.getElementById('timetable-day');
-        const cell = Array.from(timeTableDay.querySelectorAll(th))[1];
+        const cell = Array.from(timeTableDay.querySelectorAll('th'))[1];
         cell.innerHTML = `${dateDayOfWeek}<br>${String(dateDay)}`;
     }
-    else if(period=="Day"){
+    else if(period=="Week"){
         const timeTableWeek = document.getElementById('timetable-week');
-        const cells = Array(timeTableWeek.querySelectorAll(th)).slice(1,6);
-        const weekdays = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
+        const cells = Array.from(timeTableWeek.querySelectorAll('th')).slice(1,6);
+        console.log(cells)
         for(let i=0;i<cells.length;i++){
             cells[i].innerHTML = `${weekdays[i]}<br>${dateDay}`;
             dateDay+=1;
@@ -276,7 +277,7 @@ function displayTableDates(start_date){
     }
     else{
         const timeTableMonth = document.getElementById('timetable-month');
-        const cells = Array(timeTableWeek.querySelectorAll(th)).slice(1,6);
+        const cells = Array(timeTableMonth.querySelectorAll('th')).slice(1,6);
         for(let i=0;i<cells.length;i++){
             cells[i].innerHTML = `${dateDay}`;
             dateDay+=1;
