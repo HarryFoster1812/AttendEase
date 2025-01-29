@@ -33,7 +33,7 @@ function convertDate(start_date_string, end_date_string) {
 
     // check is the month is the same and the year
     if (temp_date_one[1] == temp_date_two[1]){
-        return_string += months[Number(temp_date_one[1]) - 1];
+        return_string = return_string + " - " + months[Number(temp_date_one[1]) - 1];
     }
 
     else{
@@ -136,9 +136,21 @@ function calculateStartEndDate(date, timePeriod){
         // i dont know what start date you want from me. 
         // Do i just go for 1st of the month and last of the month?
         // Do i do the first monday closest to the first and friday closest to the end?
-        start_date = date;
-        end_date = date;
+        const firstMonday = structuredClone(date.first().monday());
+        start_date = firstMonday;
+        const firstMonthDay = structuredClone(date.moveToFirstDayOfMonth());
+        if(firstMonday.toString("yyyy-MM-dd")!=firstMonthDay.toString("yyyy-MM-dd")){
+            start_date = firstMonday.addDays(-7);
+        }
+        const lastFriday = structuredClone(date.last().friday());
+        end_date = lastFriday;
+        const lastMonthDay = structuredClone(date.moveToLastDayOfMonth());
+        if(lastFriday.toString("yyyy-MM-dd")!=lastMonthDay.toString("yyyy-MM-dd")){
+            end_date = firstMonday.addDays(7);
+        }
+        end_date = structuredClone(date.final().friday());
     }
+
 
     return [start_date.toString("yyyy-MM-dd"), end_date.toString("yyyy-MM-dd")];
 }
@@ -244,6 +256,32 @@ function getCurrentTimeButton(){
     return time;
 }
 
-
+function displayTableDates(start_date){
+    const period = getCurrentTimeButton();
+    let dateDayOfWeek = start_date.toString("dddd");
+    let dateDay = Number(start_date.toString("d"));
+    if(period=="Day"){
+        const timeTableDay = document.getElementById('timetable-day');
+        const cell = Array.from(timeTableDay.querySelectorAll(th))[1];
+        cell.innerHTML = `${dateDayOfWeek}<br>${String(dateDay)}`;
+    }
+    else if(period=="Day"){
+        const timeTableWeek = document.getElementById('timetable-week');
+        const cells = Array(timeTableWeek.querySelectorAll(th)).slice(1,6);
+        const weekdays = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
+        for(let i=0;i<cells.length;i++){
+            cells[i].innerHTML = `${weekdays[i]}<br>${dateDay}`;
+            dateDay+=1;
+        }
+    }
+    else{
+        const timeTableMonth = document.getElementById('timetable-month');
+        const cells = Array(timeTableWeek.querySelectorAll(th)).slice(1,6);
+        for(let i=0;i<cells.length;i++){
+            cells[i].innerHTML = `${dateDay}`;
+            dateDay+=1;
+        }
+    }
+}
 
 setDateToday();
