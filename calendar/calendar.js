@@ -286,7 +286,7 @@ function displayTableDates(start_date){
     }
     else{
         const timeTableMonth = document.getElementById('timetable-month');
-        const cells = Array.from((timeTableMonth.querySelectorAll('td')));
+        const cells = Array.from((timeTableMonth.querySelectorAll('.calendar-date')));
         for(let i=0;i<cells.length;i++){
 
             cells[i].innerHTML = `${dateDay}`;
