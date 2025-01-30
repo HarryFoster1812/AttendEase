@@ -265,7 +265,7 @@ else{
                 </table>
             </div>
             <div class="table-responsive-lg d-none" id="timetable-month">
-                <table class="table table-default align-middle table-fixed">
+                <table class="table table-default table-fixed">
 
                     <thead class="table-header">
                         <tr>
