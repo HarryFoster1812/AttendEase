@@ -36,9 +36,9 @@ class TimeslotManager {
             SELECT status, start_time, end_time, date, location_name, name 
             FROM Attendance 
             INNER JOIN TimeSlot ON Attendance.timeslot_id = TimeSlot.timeslot_id 
-            INNER JOIN Locations ON TimeSlot.location_id = Locations.location_id 
-            INNER JOIN CourseEnrolement ON TimeSlot.course_id = CourseEnrolement.course_id 
-            INNER JOIN User ON CourseEnrolement.lecturer_id = User.user_id 
+            INNER JOIN Location ON TimeSlot.location_id = Location.location_id 
+            INNER JOIN CourseAssignment ON TimeSlot.course_id = CourseAssignment.course_id 
+            INNER JOIN User ON CourseAssignment.lecturer_id = User.user_id 
             WHERE Attendance.user_id = :user_id 
             AND TimeSlot.Date <= :end_date 
             AND TimeSlot.Date >= :start_date";
@@ -54,10 +54,10 @@ class TimeslotManager {
         $query = "
             SELECT start_time, end_time, date, location_name 
             FROM TimeSlot 
-            INNER JOIN Locations ON TimeSlot.location_id = Locations.location_id 
-            INNER JOIN CourseEnrolement ON TimeSlot.course_id = CourseEnrolement.course_id 
-            INNER JOIN User ON CourseEnrolement.lecturer_id = User.user_id 
-            WHERE CourseEnrolement.lecturer_id = :user_id 
+            INNER JOIN Location ON TimeSlot.location_id = Location.location_id 
+            INNER JOIN CourseAssignment ON TimeSlot.course_id = CourseAssignment.course_id 
+            INNER JOIN User ON CourseAssignment.lecturer_id = User.user_id 
+            WHERE CourseAssignment.lecturer_id = :user_id 
             AND TimeSlot.Date <= :end_date 
             AND TimeSlot.Date >= :start_date";
 
