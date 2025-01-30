@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Convergence&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/attend.css">
+</head>
+<body>
+    <nav class="p-3 navbar navbar-expand-lg navbar-dark bg-primary">
+        <a href="#" class="navbar-brand mb-0 text-secondary">AttendEase</a>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#attendnav">
+            <span class="navbar-toggler-icon text-secondary"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="attendnav">
+            <ul class="navbar-nav ms-auto text-secondary">
+                <li class="nav-item active px-1">
+                    <a href="#" class="nav-link">Admin</a>
+                </li>
+                <li class="nav-item px-1">
+                    <a href="#" class="nav-link">Settings</a>
+                </li>
+                <li class="nav-item px-1">
+                    <a href="#" class="nav-link">Statistics</a>
+                </li>
+                <li class="nav-item px-1">
+                    <a href="#" class="nav-link">Leaderboards</a>
+                </li>
+                <li class="nav-item px-1">
+                    <a href="#" class="nav-link">Calendar</a>
+                </li>
+                <li class="nav-item px-1">
+                    <a href="#" class="nav-link">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="attend-backdrop d-flex justify-content-center align-items-center">
+        <div class="attend-popup">
+            <div class="container px-5 py-4">
+                <div class="d-flex justify-content-end mb-4">
+                    <div class="attend-close-icon">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+                <div class="d-flex mb-4 justify-content-center">
+                    <div class="">
+                        <h2>Mark Your Attendance!</h2>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">
+                    <div class="btn-group rounded-pill">
+                        <button class="btn btn-secondary" id="loc-button">Location</button>
+                        <button class="btn btn-light" id="code-button">Enter Code</button>
+                    </div>
+                </div>      
+                    
+                <div class="row attend-image mb-4">
+                    <!--Image-->
+                </div>
+                <div class="row attend-code-block mb-4">
+                    <form action="">
+                        <input type="text" class="form-control form-control-lg attend-code" placeholder="Enter Class Code..." id="attend-code">
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        <h3 class="attend-details-title">Class</h3>
+                        <h4 class="attend-details-content">COMP10120</h4>
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <h3 class="attend-details-title">Time</h3>
+                        <h4 class="attend-details-content">10:00 - 11:00</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        <h3 class="attend-details-title">Location</h3>
+                        <h4 class="attend-details-content">Kilburn TH 1.1</h4>
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <h3 class="attend-details-title">Instructor</h3>
+                        <h4 class="attend-details-content">Mr. Walter White</h4>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end gap-3">
+                    <button class="btn btn-light">Cancel</button>
+                    <button class="btn btn-success">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
+
+</body>
+</html>
