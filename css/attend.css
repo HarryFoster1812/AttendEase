@@ -29,6 +29,9 @@
   color: #666;
   transition: all 1s;
 }
+.attend-image img{
+    width:30%;
+}
 .attend-details-title, .attend-details-content{
     color: #000;
 }
@@ -46,3 +49,8 @@
       width:90vw;
     }
   }
+@media (max-width:968px){
+    .attend-image img{
+        width:80%;
+    }
+}
