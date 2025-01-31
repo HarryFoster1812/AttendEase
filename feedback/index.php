@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <title>Feedback | AttendEase</title>
-    <link rel="stylesheet" href="./feedback.css">
+    <link rel="stylesheet" href="./feedback/feedback.css">
     <?php 
         include("../php/template/header.php");
         

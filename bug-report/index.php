@@ -11,7 +11,7 @@ session_start();
         include("../php/template/header.php");
         
         ?>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./bug-report/styles.css">
 </head>
 <body>
     <?php 

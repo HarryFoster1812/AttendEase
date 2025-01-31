@@ -1,12 +1,12 @@
 <?php
 
 session_start();
+$error_msg = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once './php/db.php';
-    require_once __DIR__ . '/php/autoload.php';
-    
-    $error_msg = "";
+    require_once '../php/db.php';
+    require_once "../autoload.php";
+
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo $error_msg;
         include("../php/template/header.php");
         ?>
-    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="./login/login.css">
 </head>
 <body>
     <?php 
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <h1 class="display-6 text-center">Log In To AttendEase</h1>
                             </div>
                             <hr class="my-4 border-3 border-secondary signup-divider">
-                            <form action="" method="post">
+                            <form action="./login/index.php" method="post">
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Username</label>
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </section>
 
-    <script src="./login.js"></script>
+    <script src="./login/login.js"></script>
 
     <?php include("../php/template/footer.php"); ?>
 </body>
