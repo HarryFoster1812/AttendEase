@@ -1,6 +1,14 @@
 <?php
-
 session_start();
+
+$URI = $_SERVER["REQUEST_URI"];
+
+if(substr($URI, -1) == "/"){
+    $new_URI = rtrim($URI, "/");
+    header("Location:". $new_URI);
+    exit;
+}
+
 $error_msg = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

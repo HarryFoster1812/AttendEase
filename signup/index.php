@@ -1,6 +1,13 @@
 <?php
+$URI = $_SERVER["REQUEST_URI"];
 
+if(substr($URI, -1) == "/"){
+    $new_URI = rtrim($URI, "/");
+    header("Location:". $new_URI);
+    exit;
+}
 session_start();
+$error_msg = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require '../php/db.php';
@@ -14,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     //  check is the username or email is already taken
     $is_duplicate = False;
-    $error_msg = "";
     $duplicate = 'SELECT * FROM User WHERE username =:username OR email=:email';
     
     if ($stmt = $pdo->prepare($duplicate)) {
