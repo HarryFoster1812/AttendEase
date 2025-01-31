@@ -24,7 +24,7 @@ function runDebugScript(script_name){
         }
       };
 
-    xmlhttp.open("POST", "php/debugging-tools/" + script_name + ".php", true);
+    xmlhttp.open("POST", "../php/debugging-tools/" + script_name + ".php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send();
 

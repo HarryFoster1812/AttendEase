@@ -4,7 +4,7 @@
 
 
 <!-- Remove this for production --> 
-<script src="/php/debugging-tools/debug.js"></script>
+<script src="../php/debugging-tools/debug.js"></script>
 
 
 <footer style="background-color: #333; color: white; padding: 20px; text-align: center; font-size: 14px;">
@@ -12,10 +12,10 @@
         <p>© 2024 AttendEase, University of Manchester. All rights reserved.</p>
     </div>
     <div style="margin-top: 10px;">
-        <a href="/privacy-notice" style="color: #4CAF50; text-decoration: none; margin-right: 15px;">Privacy Notice</a>
-        <a href="/terms-and-conditions" style="color: #4CAF50; text-decoration: none; margin-right: 15px;">Terms and Conditions</a>
-        <a href="/cookie-policy" style="color: #4CAF50; text-decoration: none; margin-right: 15px;">Cookie Policy</a>
-        <a href="/accessibility" style="color: #4CAF50; text-decoration: none;">Accessibility</a>
+        <a href="../privacy-notice" style="color: #4CAF50; text-decoration: none; margin-right: 15px;">Privacy Notice</a>
+        <a href="../terms-and-conditions" style="color: #4CAF50; text-decoration: none; margin-right: 15px;">Terms and Conditions</a>
+        <a href="../cookie-policy" style="color: #4CAF50; text-decoration: none; margin-right: 15px;">Cookie Policy</a>
+        <a href="../accessibility" style="color: #4CAF50; text-decoration: none;">Accessibility</a>
     </div>
     <div style="margin-top: 20px;">
         <p>
@@ -27,8 +27,8 @@
             <a href="mailto:contact@attendease.com" style="color: #4CAF50; text-decoration: none;">contact@attendease.com</a>.
         </p>
         <p>
-            <a href="/feedback" style="color: #4CAF50; text-decoration: none;">Provide Feedback</a> | 
-            <a href="/bug-report" style="color: #4CAF50; text-decoration: none;">Report a Bug</a>
+            <a href="../feedback" style="color: #4CAF50; text-decoration: none;">Provide Feedback</a> | 
+            <a href="../bug-report" style="color: #4CAF50; text-decoration: none;">Report a Bug</a>
         </p>
     </div>
 </footer>

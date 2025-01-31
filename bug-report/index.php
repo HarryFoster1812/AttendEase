@@ -11,7 +11,7 @@ session_start();
         include("../php/template/header.php");
         
         ?>
-    <link rel="stylesheet" href="/bug-report/styles.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <?php 
@@ -21,7 +21,7 @@ session_start();
     <div class="container mt-5 formbackground">
         <header class="text-center mb-4">
             <h1>Bug Report</h1>
-            <p>We’re sorry to hear you encountered a bug! Please provide the details below to help us investigate and resolve the issue.</p>
+            <p>We're sorry to hear you encountered a bug! Please provide the details below to help us investigate and resolve the issue.</p>
         </header>
 
         <main>

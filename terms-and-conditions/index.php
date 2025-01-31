@@ -12,7 +12,7 @@ session_start();
         
         ?>
 
-    <link rel="stylesheet" href="../css/signup.css">
+    <link rel="stylesheet" href="../signup/signup.css">
     
 </head>
 <body>

@@ -3,11 +3,11 @@
 session_start();
 
 if(isset($_SESSION["navbar"])){
-    //$nav_path = "../php/template/" . $_SESSION["navbar"];
+    $nav_path = "../php/template/" . $_SESSION["navbar"];
 }
 
 else{
-    //header("Location:../");
+    header("Location:../");
 }
 
 ?>
@@ -38,34 +38,9 @@ else{
             </div>
         </div>
     </template>
-    <nav class="p-3 navbar navbar-expand-lg navbar-dark bg-primary">
-        <a href="#" class="navbar-brand mb-0 text-secondary">AttendEase</a>
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#attendnav">
-            <span class="navbar-toggler-icon text-secondary"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="attendnav">
-            <ul class="navbar-nav ms-auto text-secondary">
-                <li class="nav-item active px-1">
-                    <a href="#" class="nav-link">Admin</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Settings</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Statistics</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Leaderboards</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Calendar</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Dashboard</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php
+        include($nav_path);
+    ?>
     <section id="calendar-header">
         <div class="custom-container">
             <div class="row mt-5 pt-4">
@@ -321,7 +296,7 @@ else{
 
     <?php include("../php/template/footer.php"); ?>
     <script src="../js/date.js"></script>
-    <script src="calendar.js"></script>
+    <script src="./calendar.js"></script>
 
 </body>
 </html>

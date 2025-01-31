@@ -1,5 +1,5 @@
 <?php
-    require_once 'classes/Database.php';
+    require_once './classes/Database.php';
     // set up local variables to store the host, database name, username
     // and user password.
     

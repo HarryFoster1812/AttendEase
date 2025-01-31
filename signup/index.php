@@ -100,7 +100,7 @@ function get_user_id ($pdo){
     <?php 
         include("../php/template/header.php");
     ?>
-    <link rel="stylesheet" href="/signup/signup.css">
+    <link rel="stylesheet" href="./signup.css">
 </head>
 <body>
     <?php 
@@ -183,7 +183,7 @@ function get_user_id ($pdo){
     include("../php/template/footer.php"); 
     ?>
     
-    <script src="/signup/signup.js"></script>
+    <script src="./signup.js"></script>
     
 </body>
 </html>

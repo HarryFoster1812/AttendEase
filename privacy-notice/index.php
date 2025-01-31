@@ -12,38 +12,13 @@ session_start();
         
         ?>
 
-    <link rel="stylesheet" href="../css/signup.css">
+    <link rel="stylesheet" href="../signup/signup.css">
     
 </head>
 <body>
-    <nav class="p-3 navbar navbar-expand-lg navbar-dark bg-primary">
-        <a href="#" class="navbar-brand mb-0 text-secondary">AttendEase</a>
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#attendnav">
-            <span class="navbar-toggler-icon text-secondary"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="attendnav">
-            <ul class="navbar-nav ms-auto text-secondary">
-                <li class="nav-item active px-1">
-                    <a href="#" class="nav-link">Admin</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Settings</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Statistics</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Leaderboards</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Calendar</a>
-                </li>
-                <li class="nav-item px-1">
-                    <a href="#" class="nav-link">Dashboard</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<?php 
+    include("../php/template/navbar.php"); 
+    ?>
     <section class="signup-form">
         <div class="overlay d-flex align-items-center">
             <div class="container">
@@ -244,18 +219,10 @@ session_start();
             </div>
         </div>
     </div>
-<<<<<<< HEAD:signup.html
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="bootstrap/dist/js/bootstrap.js"></script>
-
-=======
     
     <?php 
     include("../php/template/footer.php"); 
     ?>
->>>>>>> template_testing:privacy-notice/index.php
 </body>
 </html>
 
