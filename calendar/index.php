@@ -16,7 +16,7 @@ else{
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>AttendEase | Calendar</title>
+    <title>Calendar | AttendEase</title>
     <?php include("../php/template/header.php"); ?>
     <link rel="stylesheet" href="./css/calendar.css">
 

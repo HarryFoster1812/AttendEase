@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user'] = serialize(new User($userid, 0, $email, 1, 1));
 
 
-            header('Location: /calendar'); // redirect the user to the dashboard
+            header('Location: ./calendar'); // redirect the user to the dashboard
                 exit();
         } 
             
@@ -100,7 +100,7 @@ function get_user_id ($pdo){
     <?php 
         include("../php/template/header.php");
     ?>
-    <link rel="stylesheet" href="./signup.css">
+    <link rel="stylesheet" href="./signup/signup.css">
 </head>
 <body>
     <?php 
@@ -153,7 +153,7 @@ function get_user_id ($pdo){
                                     <div class="mb-4">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="terms_and_conditions">
-                                            <label for="terms" id="terms" class="form-label">I have read and agree to our <a href="/terms-and-conditions">Terms and Conditions</a> and <a href="/privacy-notice">Privacy Policy</a></label>
+                                            <label for="terms" id="terms" class="form-label">I have read and agree to our <a href="./terms-and-conditions">Terms and Conditions</a> and <a href="./privacy-notice">Privacy Policy</a></label>
                                             <small></small>
                                         </div>
                                     </div>
@@ -167,7 +167,7 @@ function get_user_id ($pdo){
                             <hr class="my-4 border-3 border-secondary signup-divider">
                             <div class="row my-4">
                                 <div class="col-8 mx-auto d-grid mt-3">
-                                    <a href="../index.php" class="logup d-grid">
+                                    <a href="./login" class="logup d-grid">
                                         <button class="btn misc-buttons border-secondary">Log In</button>
                                     </a>
                                 </div>
@@ -183,7 +183,7 @@ function get_user_id ($pdo){
     include("../php/template/footer.php"); 
     ?>
     
-    <script src="./signup.js"></script>
+    <script src="./signup/signup.js"></script>
     
 </body>
 </html>

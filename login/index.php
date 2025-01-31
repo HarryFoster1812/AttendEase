@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="col-xl-6 my-3">
                                     <div class="col-11 mx-auto d-grid">
-                                        <a href="../signup" class="logup d-grid">
+                                        <a href="./signup" class="logup d-grid">
                                             <button class="btn misc-buttons border-secondary">Sign Up</button>
                                         </a>
                                     </div>
