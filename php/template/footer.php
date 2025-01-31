@@ -9,7 +9,7 @@
 
 <footer style="background-color: #333; color: white; padding: 20px; text-align: center; font-size: 14px;">
     <div>
-        <p>© 2024 AttendEase, University of Manchester. All rights reserved.</p>
+        <p>© 2024 - <?php echo date("Y"); ?> AttendEase, University of Manchester. All rights reserved.</p>
     </div>
     <div style="margin-top: 10px;">
         <a href="./privacy-notice" style="color: #4CAF50; text-decoration: none; margin-right: 15px;">Privacy Notice</a>

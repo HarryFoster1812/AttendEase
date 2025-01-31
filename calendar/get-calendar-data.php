@@ -3,7 +3,6 @@
 session_start();
 
 require_once "../php/db.php";
-require_once "../php/classes/User.php";
 require_once '../autoload.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -21,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     try {
         $userData = unserialize($_SESSION["user"]);
-        echo gettype($userData);
+        //echo gettype($userData);
         $timeslotManager = new TimeslotManager($db, $userData);
 
         $data = $timeslotManager->getTimeslots($start_date, $end_date);
