@@ -1,11 +1,8 @@
 <?php
-$URI = $_SERVER["REQUEST_URI"];
+require_once "autoload.php";
 
-if(substr($URI, -1) == "/"){
-    $new_URI = rtrim($URI, "/");
-    header("Location:". $new_URI);
-    exit;
-}
+UrlHelper::enforceTrailingSlash();
+
 session_start();
 
 ?>
@@ -17,7 +14,7 @@ session_start();
         include("../php/template/header.php");
         
         ?>
-    <link rel="stylesheet" href="./bug-report/styles.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <?php 

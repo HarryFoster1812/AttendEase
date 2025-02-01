@@ -1,4 +1,7 @@
 <?php
+require_once "autoload.php";
+
+UrlHelper::enforceTrailingSlash();
 
 session_start();
 

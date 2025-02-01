@@ -1,11 +1,9 @@
 <?php
-$URI = $_SERVER["REQUEST_URI"];
 
-if(substr($URI, -1) == "/"){
-    $new_URI = rtrim($URI, "/");
-    header("Location:". $new_URI);
-    exit;
-}
+require_once "autoload.php";
+
+UrlHelper::enforceTrailingSlash();
+
 
 session_start();
 

@@ -1,19 +1,15 @@
 <?php
+
+require_once "autoload.php";
+
+UrlHelper::enforceTrailingSlash();
+
 session_start();
-
-$URI = $_SERVER["REQUEST_URI"];
-
-if(substr($URI, -1) == "/"){
-    $new_URI = rtrim($URI, "/");
-    header("Location:". $new_URI);
-    exit;
-}
 
 $error_msg = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once '../php/db.php';
-    require_once "../autoload.php";
 
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -77,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo $error_msg;
         include("../php/template/header.php");
         ?>
-    <link rel="stylesheet" href="./login/login.css">
+    <link rel="stylesheet" href="./login.css">
 </head>
 <body>
     <?php 
@@ -94,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <h1 class="display-6 text-center">Log In To AttendEase</h1>
                             </div>
                             <hr class="my-4 border-3 border-secondary signup-divider">
-                            <form action="./login/index.php" method="post">
+                            <form action="./index.php" method="post">
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Username</label>
@@ -133,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="col-xl-6 my-3">
                                     <div class="col-11 mx-auto d-grid">
-                                        <a href="./signup" class="logup d-grid">
+                                        <a href="../signup" class="logup d-grid">
                                             <button class="btn misc-buttons border-secondary">Sign Up</button>
                                         </a>
                                     </div>
@@ -147,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </section>
 
-    <script src="./login/login.js"></script>
+    <script src="./login.js"></script>
 
     <?php include("../php/template/footer.php"); ?>
 </body>

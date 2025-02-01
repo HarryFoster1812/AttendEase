@@ -1,11 +1,8 @@
 <?php
-$URI = $_SERVER["REQUEST_URI"];
+require_once "autoload.php";
 
-if(substr($URI, -1) == "/"){
-    $new_URI = rtrim($URI, "/");
-    header("Location:". $new_URI);
-    exit;
-}
+UrlHelper::enforceTrailingSlash();
+
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -19,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <title>Feedback | AttendEase</title>
-    <link rel="stylesheet" href="./feedback/feedback.css">
+    <link rel="stylesheet" href="./feedback.css">
     <?php 
         include("../php/template/header.php");
         
