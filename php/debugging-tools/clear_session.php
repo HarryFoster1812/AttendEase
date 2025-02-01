@@ -1,6 +1,11 @@
 <?php 
 
 session_start();
-session_destroy();
+try{
+    session_destroy();
+    echo "Sucessfully destroyed the session data";
+} catch {
+    echo "Something went wrong...";
+}
 
 ?>

@@ -3,9 +3,9 @@
 class Database {
     private $pdo;
 
-    public function __construct($host, $dbname, $user, $pass) {
+    public function __construct($host, $port, $dbname, $user, $pass) {
         try {
-            $this->pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+            $this->pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $user, $pass);
         } catch (Exception $e) {
             die("Error: " . $e->getMessage());
         }

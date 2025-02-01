@@ -14,7 +14,7 @@ function runDebugScript(script_name){
             try{
                 console.log(this.responseText);
                 var tab = window.open('about:blank', '_blank');
-                tab.document.write(this.responseText); // where 'html' is a variable containing your HTML
+                tab.document.write(this.responseText);
                 tab.document.close(); // to finish loading the page
             }
             catch{
@@ -24,7 +24,7 @@ function runDebugScript(script_name){
         }
       };
 
-    xmlhttp.open("POST", "./php/debugging-tools/" + script_name + ".php", true);
+    xmlhttp.open("POST", "../php/debugging-tools/" + script_name + ".php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send();
 

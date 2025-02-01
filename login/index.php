@@ -1,6 +1,6 @@
 <?php
 
-require_once "autoload.php";
+require_once "../autoload.php";
 
 UrlHelper::enforceTrailingSlash();
 
@@ -70,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <title>Login | AttendEase</title>
     <?php 
-        echo $error_msg;
         include("../php/template/header.php");
         ?>
     <link rel="stylesheet" href="./login.css">
@@ -90,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <h1 class="display-6 text-center">Log In To AttendEase</h1>
                             </div>
                             <hr class="my-4 border-3 border-secondary signup-divider">
-                            <form action="./index.php" method="post">
+                            <form action="../login/" method="post">
                                 <div class="row">
                                     <div class="mb-4">
                                         <label for="username" class="form-label">Username</label>

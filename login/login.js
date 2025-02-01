@@ -1,7 +1,7 @@
 username = document.getElementById("username");
 password = document.getElementById("user_pass");
 togglePass = document.getElementById("toggle_pass");
-submit = document.querySelector("#signup");
+submit = document.getElementsByClassName("submit")[0];
 
 background = document.getElementsByClassName("overlay")[0];
 background.style.height = "850px"; // i need to hard code this to start because css and js does not mix well

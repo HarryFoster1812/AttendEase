@@ -9,7 +9,7 @@
                 <a href="../settings" class="nav-link">Settings</a>
             </li>
             <li class="nav-item px-1">
-                <a href="./statistics" class="nav-link">Statistics</a>
+                <a href="../statistics" class="nav-link">Statistics</a>
             </li>
             <li class="nav-item px-1">
                 <a href="../leaderboard" class="nav-link">Leaderboards</a>
