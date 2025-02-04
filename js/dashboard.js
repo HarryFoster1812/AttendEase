@@ -1,3 +1,40 @@
+const classBlock = `
+<div class="col-md-6 col-xl-4 class-block-container gap-3">
+                    <div class="class-block bg-primary mb-4">
+                        <div class="p-4">
+                            <div class="row class-block-upper mb-2">
+                                <div class="col-6">
+                                    <h4>COMP16321</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4>09:00 - 10:00</h4>
+                                </div>
+                            </div>
+                            <div class="row class-block-lower">
+                                <div class="col-6">
+                                    <h4>Workshop</h4>
+                                </div>
+                                <div class="col-6">
+                                    <h4>Tuesday</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+`
+const classLists = document.querySelectorAll('.class-block-list');
+console.log(classLists);
+for(let i=0;i<6;i++){
+    for(const list of classLists){
+        console.log(list);
+        list.insertAdjacentHTML('beforeend',classBlock);
+    }
+}
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     // Reusable chart creation function
     function createDoughnutChart(ctx, data, label1, label2) {
@@ -64,3 +101,5 @@ document.addEventListener("DOMContentLoaded", function () {
     createDoughnutChart(timeChart, [80, 20], "80%", "On Time");
     createDoughnutChart(rankChart, [92, 8], "92%", "Ranking");
 });
+
+
