@@ -1,30 +1,36 @@
-const classBlock = `
-<div class="col-md-6 col-xl-4 class-block-container gap-3">
-                    <div class="class-block bg-primary mb-4">
-                        <div class="p-4">
-                            <div class="row class-block-upper mb-2">
-                                <div class="col-6">
-                                    <h4>COMP16321</h4>
-                                </div>
-                                <div class="col-6">
-                                    <h4>09:00 - 10:00</h4>
-                                </div>
-                            </div>
-                            <div class="row class-block-lower">
-                                <div class="col-6">
-                                    <h4>Workshop</h4>
-                                </div>
-                                <div class="col-6">
-                                    <h4>Tuesday</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-`
+
 const classLists = document.querySelectorAll('.class-block-list');
 console.log(classLists);
 for(let i=0;i<6;i++){
+    const classBlock = `
+<div class="col-md-6 col-xl-4 class-block-container gap-3">
+    <div class="class-block bg-primary mb-4">
+        <div class="p-4">
+            <div class="row class-block-upper mb-2">
+                <div class="col-6 class-code">
+                    <h4>COMP16321</h4>
+                </div>
+                <div class="col-6 class-time">
+                    <h4>09:00 - 10:00</h4>
+                </div>
+            </div>
+            <div class="row class-block-mid mb-2">
+                <div class="col-6 class-type">
+                    <h4>Workshop</h4>
+                </div>
+                <div class="col-6 class-day">
+                    <h4>Tuesday</h4>
+                </div>
+            </div>
+            <div class="row class-block-lower">
+                <div class="class-venue">
+                    <h4>Kilburn TH 1.1</h4>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+`
     for(const list of classLists){
         console.log(list);
         list.insertAdjacentHTML('beforeend',classBlock);
