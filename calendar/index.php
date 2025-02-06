@@ -243,7 +243,7 @@ else{
                 </table>
             </div>
             <div class="table-responsive-lg d-none" id="timetable-month">
-                <table class="table table-default align-middle table-fixed">
+                <table class="table table-default table-fixed">
 
                     <thead class="table-header">
                         <tr>
@@ -256,39 +256,114 @@ else{
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
+                            <td>
+                                <div class="calendar-date"></div>
+                                <div class="calendar-content"></div>
+                            </td>
                         </tr>
 
                     </tbody> 

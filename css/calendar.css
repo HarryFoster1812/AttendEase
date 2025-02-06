@@ -125,6 +125,9 @@ td{
   #timetable-week th{
     width:16.6%;
   }
+  .calendar-date{
+    color: #ffcc33;
+  }
 @media(max-width:1200px){
   .table-title{
     width:25%;
