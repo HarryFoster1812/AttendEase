@@ -16,8 +16,13 @@
     box-shadow:2px 2px 2px 2px #aaa;
     color:#660099;
     overflow-y: scroll;
-    transform: translateY(-50px); /* Move it out of view (you can change this direction as needed) */
-    transition: transform 0.5s ease, opacity 0.5s ease; /* Move and fade-in transition */
+    transition: transform 1s ease, opacity 0.5s ease; /* Move and fade-in transition */
+    transform: translateY(10vh);
+    opacity: 0;
+}
+.attend-popup.show{
+    opacity: 1;
+    transform: translateY(0);
 }
 .attend-close i{
     font-size:1.5rem;
