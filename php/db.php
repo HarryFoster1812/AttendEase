@@ -8,16 +8,16 @@
     //$database_pass = "***REMOVED***";
     //$database_name = "***REMOVED***";
     
-    //$database_host = "localhost";
-    //$database_user = "root";
-    //$database_pass = "password";
-    //$database_name = "AttendEase";
+    $database_host = "localhost";
+    $database_user = "root";
+    $database_pass = "password";
+    $database_name = "AttendEase";
     
-    $database_host = "sql213.infinityfree.com";
-    $database_user = "***REMOVED***";
-    $database_pass = "***REMOVED***";
-    $database_name = "***REMOVED***_attend_ease";
-    $port          = "3306";
+   //$database_host = "sql213.infinityfree.com";
+    //$database_user = "***REMOVED***";
+    //$database_pass = "***REMOVED***";
+    //$database_name = "***REMOVED***_attend_ease";
+    //$port          = "3306";
 
     // try to create a mysql database connection using a new PDO object
     // by specifying the database type, host, dbname - then username and pw.

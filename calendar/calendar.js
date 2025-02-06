@@ -7,8 +7,13 @@ date_picker.addEventListener("change", dateEvent);
 
 date_header = document.getElementById("date");
 
+event_template = document.getElementById("class-ui");
+
+
 document.getElementById("date_forward").addEventListener("click", nextDate);
 document.getElementById("date_back").addEventListener("click", previousDate);
+
+
 
 var months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -48,12 +53,42 @@ function isWeekend(date) {
 }
 end_date = "";
 
-function clearCalendar(){
-
+function clearCalendar(period){
+  let timetable = null;
+  if(period=="Day"){
+     timetable = document.getElementById('timetable-day');
+    }
+    else if(period=="Week"){
+      timetable = document.getElementById('timetable-week');
+    }
+    else{
+      timetable = document.getElementById('timetable-month');
+        
+    }
+  let timetableElements = Array.from(timetable.getElementsByTagName("td"));
+  console.log(timetableElements);
+  timetableElements.forEach(element => {
+    element.innerHTML = "";
+  });
 }
 
-function populateCalendar(json_data){
-    
+function populateCalendar(json_data, period){
+   
+  if(period=="Day"){
+        let timeTableDay = Array.from(document.getElementById('timetable-day').getElementsByTagName("td"));
+        const firstClone = event_template.content.cloneNode(true);
+        console.log(firstClone);
+        console.log(timeTableDay);
+        const secondClone = event_template.content.cloneNode(true)
+        timeTableDay[1].appendChild(firstClone);
+        timeTableDay[1].appendChild(secondClone);
+    }
+    else if(period=="Week"){
+        let timeTableWeek = Array.from(document.getElementById('timetable-week').getElementsByTagName("td"));
+    }
+    else{
+        let timeTableMonth = Array.from(document.getElementById('timetable-month').getElementsByTagName("td"));
+     } 
 }
 
 function nextDate(event){
@@ -186,8 +221,6 @@ function dateEvent(event){
 
     [start_date, end_date] = calculateStartEndDate(date, time); 
 
-    // NEED TO FINISH THIS 
-    // NEED TO FINISH
     if (start_date == end_date){
         date_header.innerText = convertSoloDate(start_date);
     }
@@ -195,6 +228,28 @@ function dateEvent(event){
     else{
         date_header.innerText = convertDate(start_date, end_date);
     }
+
+  var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // update the calendar
+            try{
+                json_data = JSON.parse(this.responseText);
+                clearCalendar(time);
+                populateCalendar(json_data, time);
+            }
+            catch(e){
+                // display error message
+                // document.write ?
+                console.error(e, e.stack);
+            }
+        }
+      };
+
+    xmlhttp.open("POST", "/calendar/get-calendar-data.php", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.send("start_date="+start_date+"&end_date="+end_date);
 
 
 
