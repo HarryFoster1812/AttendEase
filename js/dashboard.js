@@ -1,6 +1,40 @@
 
 const classLists = document.querySelectorAll('.class-block-list');
 console.log(classLists);
+
+
+const rows = document.querySelectorAll('.outer');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry,idx) => {
+        if(entry.isIntersecting) {
+            entry.target.style.transform = 'translateX(0)';
+            entry.target.style.transition = 'transform 0.8s ease';
+        }
+        else{
+            entry.target.style.transform = 'translateX(0)';
+            entry.target.style.transition = 'transform 0.8s ease';
+
+
+        }
+    });
+},{
+    root:null, rootMargin: '0px', threshold:0.5
+}
+);
+rows.forEach((row,idx) =>{
+    row.style.transform = 'transform 0.8s ease'
+    if(idx%2){
+        row.style.transform = 'translateX(10vh)';
+    }
+    else{
+        row.style.transform = 'translateX(-10vh)';
+    }
+
+    setTimeout(()=>{
+        observer.observe(row);
+    },50)
+})
 for(let i=0;i<6;i++){
     const classBlock = `
 <div class="col-md-6 col-xl-4 class-block-container gap-3">
