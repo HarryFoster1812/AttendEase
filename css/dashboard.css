@@ -1,6 +1,14 @@
+body{
+    overflow-x: hidden;
+}
 .dash-line{
     opacity: 1;
 }
 .class-block{
     border-radius:2rem;
+    transition: max-height 1.5s ease, background-color 0.7s ease;
+}
+
+.class-attend-block h4{
+    margin:0;
 }

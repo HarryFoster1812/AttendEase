@@ -1,29 +1,23 @@
 
 const classLists = document.querySelectorAll('.class-block-list');
-console.log(classLists);
 
 
 const rows = document.querySelectorAll('.outer');
 
 const observer = new IntersectionObserver(entries => {
-    entries.forEach((entry,idx) => {
+    entries.forEach(entry => {
         if(entry.isIntersecting) {
             entry.target.style.transform = 'translateX(0)';
             entry.target.style.transition = 'transform 0.8s ease';
         }
-        else{
-            entry.target.style.transform = 'translateX(0)';
-            entry.target.style.transition = 'transform 0.8s ease';
 
-
-        }
     });
 },{
-    root:null, rootMargin: '0px', threshold:0.5
+    root:null, rootMargin: '0px', threshold:0.35
 }
 );
 rows.forEach((row,idx) =>{
-    row.style.transform = 'transform 0.8s ease'
+    console.log(row,idx)
     if(idx%2){
         row.style.transform = 'translateX(10vh)';
     }
@@ -35,10 +29,21 @@ rows.forEach((row,idx) =>{
         observer.observe(row);
     },50)
 })
+const toggleClassClick = function(event){
+    console.log(event.target);
+    const buttonBlock = this.querySelector('.class-attend-block');
+    buttonBlock.classList.toggle('d-none');
+    this.classList.toggle('bg-primary');
+    this.classList.toggle('bg-secondary');
+    this.classList.toggle('text-primary');
+    this.classList.toggle('text-secondary');
+    this.classList.toggle('expand');
+
+}
 for(let i=0;i<6;i++){
     const classBlock = `
 <div class="col-md-6 col-xl-4 class-block-container gap-3">
-    <div class="class-block bg-primary mb-4">
+    <div class="class-block bg-primary mb-4 text-secondary shrink">
         <div class="p-4">
             <div class="row class-block-upper mb-2">
                 <div class="col-6 class-code">
@@ -61,13 +66,17 @@ for(let i=0;i<6;i++){
                     <h4>Kilburn TH 1.1</h4>
                 </div>
             </div>
+            <div class='row class-attend-block mt-2 d-none'>
+                <button class="btn btn-primary rounded-pill"><h4 class='text-secondary'>ATTEND</h4></button>
+            </div>
         </div>
     </div> 
 </div>
 `
     for(const list of classLists){
-        console.log(list);
         list.insertAdjacentHTML('beforeend',classBlock);
+        const classElement = list.lastElementChild.querySelector('.class-block');;
+        classElement.addEventListener('click', toggleClassClick);
     }
 }
 
