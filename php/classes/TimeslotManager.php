@@ -33,15 +33,17 @@ class TimeslotManager {
 
     private function getStudentTimeslots($startDate, $endDate) {
         $query = "
-            SELECT status, start_time, end_time, date, location_name, name 
+            SELECT status, start_time, end_time, date, location_name, name, course_title 
             FROM Attendance 
             INNER JOIN TimeSlot ON Attendance.timeslot_id = TimeSlot.timeslot_id 
             INNER JOIN Location ON TimeSlot.location_id = Location.location_id 
             INNER JOIN CourseAssignment ON TimeSlot.course_id = CourseAssignment.course_id 
+            INNER JOIN Course ON CourseAssignment.course_id = Course.course_id
             INNER JOIN User ON CourseAssignment.lecturer_id = User.user_id 
             WHERE Attendance.user_id = :user_id 
             AND TimeSlot.Date <= :end_date 
-            AND TimeSlot.Date >= :start_date";
+            AND TimeSlot.Date >= :start_date
+            ORDER BY TimeSlot.Date, TimeSlot.start_time";
 
         return $this->db->query($query, [
             ":user_id" => $this->user->getUserId(),
@@ -52,15 +54,17 @@ class TimeslotManager {
 
     private function getStaffTimeslots($startDate, $endDate) {
         $query = "
-            SELECT start_time, end_time, date, location_name 
+            SELECT status, start_time, end_time, date, location_name, name, course_title 
             FROM TimeSlot 
             INNER JOIN Location ON TimeSlot.location_id = Location.location_id 
             INNER JOIN CourseAssignment ON TimeSlot.course_id = CourseAssignment.course_id 
             INNER JOIN User ON CourseAssignment.lecturer_id = User.user_id 
+            INNER JOIN Course ON CourseAssignment.course_id = Course.course_id
             WHERE CourseAssignment.lecturer_id = :user_id 
             AND TimeSlot.Date <= :end_date 
-            AND TimeSlot.Date >= :start_date";
-
+            AND TimeSlot.Date >= :start_date
+            ORDER BY TimeSlot.Date, TimeSlot.start_time";
+        
         return $this->db->query($query, [
             ":user_id" => $this->user->getUserId(),
             ":end_date" => $endDate,

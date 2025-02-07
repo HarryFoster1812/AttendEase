@@ -20,13 +20,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     try {
         $userData = unserialize($_SESSION["user"]);
-        //echo gettype($userData);
         $timeslotManager = new TimeslotManager($db, $userData);
 
         $data = $timeslotManager->getTimeslots($start_date, $end_date);
         echo json_encode($data);
 
     } catch (Exception $e) {
+        http_response_code(400);
         echo json_encode(["error" => $e->getMessage()]);
     }
 }

@@ -18,8 +18,8 @@ document.getElementById("date_back").addEventListener("click", previousDate);
 var months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 function convertSoloDate(date_str) {
-  temp_date = date_str.split("-");
-  return temp_date[2] + " " + months[Number(temp_date[1]) - 1] + " " + temp_date[0];
+    temp_date = date_str.split("-");
+    return temp_date[2] + " " + months[Number(temp_date[1]) - 1] + " " + temp_date[0];
 }
 
 function convertDate(start_date_string, end_date_string) {
@@ -46,49 +46,134 @@ function convertDate(start_date_string, end_date_string) {
     }
 
     return return_string;
-  }
+}
 
 function isWeekend(date) {
     return !date.is().weekday();
 }
+
+
 end_date = "";
 
 function clearCalendar(period){
-  let timetable = null;
-  if(period=="Day"){
-     timetable = document.getElementById('timetable-day');
+    let timetable = null;
+    if(period=="Day"){
+        timetable = document.getElementById('timetable-day');
     }
     else if(period=="Week"){
-      timetable = document.getElementById('timetable-week');
+        timetable = document.getElementById('timetable-week');
     }
     else{
-      timetable = document.getElementById('timetable-month');
-        
+        timetable = Array.from(document.getElementsByTagName("calenedar-content"));
+        timetable.forEach(dayOfMonth => {
+            dayOfMonth.innerHTML = "";
+        });
+
+        return;
     }
-  let timetableElements = Array.from(timetable.getElementsByTagName("td"));
-  console.log(timetableElements);
-  timetableElements.forEach(element => {
-    element.innerHTML = "";
-  });
+
+    let timetableElements = Array.from(timetable.getElementsByTagName("td"));
+    timetableElements.forEach(element => {
+        element.innerHTML = "";
+    });
 }
 
-function populateCalendar(json_data, period){
-   
-  if(period=="Day"){
+function populateDay(json_data, tableElements, dateFilter){
+    // create a function which maps the time to an index in the table
+    // starts at 8  (index[0] = 8:00)
+    // last element is 18:00
+
+    // filter the json_data for the given date
+    filtered_json  = []
+    for (let i =0; i<json_data.length;i++){ 
+
+      filtered_json.push(json_data[i].filter((item) => {
+           return item["date"] === dateFilter;
+        }));
+    }
+
+    // loop over each event in the  filtered_json
+    for (let i=0;i<filtered_json.length;i++){
+        for(let j=0;j<filtered_json[i].length;j++){
+            let event_item = event_template.content.cloneNode(true);
+            // change node content
+            // need to add something so that student and lecturer events can be distinct (maybe a class?)
+            event_item.querySelector(".class-time-text").innerText = filtered_json[i][j]["start_time"] + " - " + filtered_json[i][j]["end_time"];
+            event_item.querySelector(".class-title").innerText  = filtered_json[i][j]["course_title"];
+            event_item.querySelector(".class-loc").innerText = filtered_json[i][j]["location_name"];
+
+            time = Number(filtered_json[i][j]["start_time"].substring(0,2));
+            index = time -8;
+            tableElements[index].appendChild(event_item);
+        }
+    }   
+    
+ 
+    // in each template change the time
+    // change the Title  of the 
+}
+
+
+function days_between(date1, date2) {
+    // The number of milliseconds in one day
+    const ONE_DAY = 1000 * 60 * 60 * 24;
+
+    // Calculate the difference in milliseconds
+    const differenceMs = Math.abs(date1 - date2);
+
+    // Convert back to days and return
+    return Math.round(differenceMs / ONE_DAY);
+
+}
+
+function populateMonth(json_data, tableElements, start_date){
+    for (let i=0;i<json_data.length;i++){
+        for(let j=0;j<json_data[i].length;j++){
+            let event_item = event_template.content.cloneNode(true);
+            // change node content
+            // need to add something so that student and lecturer events can be distinct (maybe a class?)
+            event_item.querySelector(".class-time-text").innerText = json_data[i][j]["start_time"] + " - " + json_data[i][j]["end_time"];
+            event_item.querySelector(".class-title").innerText  = json_data[i][j]["course_title"];
+            event_item.querySelector(".class-loc").innerText = json_data[i][j]["location_name"];
+
+            event_date = Date.parse(json_data[i][j]["date"]);
+            index = days_between(event_date, start_date);
+            tableElements[index].appendChild(event_item);
+        }
+    }        
+}
+
+function populateCalendar(json_data, period, start_date){
+
+    if (json_data.length == 0){
+        return;
+    }
+
+    start_date = Date.parse(start_date);
+
+    if(period=="Day"){
         let timeTableDay = Array.from(document.getElementById('timetable-day').getElementsByTagName("td"));
-        const firstClone = event_template.content.cloneNode(true);
-        console.log(firstClone);
-        console.log(timeTableDay);
-        const secondClone = event_template.content.cloneNode(true)
-        timeTableDay[1].appendChild(firstClone);
-        timeTableDay[1].appendChild(secondClone);
+
+        populateDay(json_data, timeTableDay, start_date.toString("yyyy-MM-dd"));
     }
     else if(period=="Week"){
         let timeTableWeek = Array.from(document.getElementById('timetable-week').getElementsByTagName("td"));
+        // split each week into indiviual days
+        var days = [[],[],[],[],[]];
+        for (let i=0;i<timeTableWeek.length;i++){
+            days[i%5].push(timeTableWeek[i]);
+        }
+
+        for(let i=0;i<5;i++){
+            populateDay(json_data, days[i], start_date.toString("yyyy-MM-dd"));
+            start_date.addDays(1);
+        }
+
     }
     else{
         let timeTableMonth = Array.from(document.getElementById('timetable-month').getElementsByTagName("td"));
-     } 
+        populateMonth(json_data, timeTableMonth, start_date)
+    } 
 }
 
 function nextDate(event){
@@ -192,7 +277,6 @@ function calculateStartEndDate(date, timePeriod){
         // Do i do the first monday closest to the first and friday closest to the end?
         const firstMonday = structuredClone(date).first().monday();
         start_date = firstMonday;
-        console.log(firstMonday);
         const firstMonthDay = structuredClone(date).moveToFirstDayOfMonth();
         if(firstMonday.getDate()>3){
             start_date = firstMonday.addDays(-7);
@@ -201,7 +285,6 @@ function calculateStartEndDate(date, timePeriod){
         end_date = lastFriday;
         const lastMonthDay = structuredClone(date).moveToLastDayOfMonth();
         if(lastFriday.getDate()!=lastMonthDay.getDate()){
-            console.log("ehigfejiejfiejeifjeifjdjiefji",lastFriday.getDate(),lastMonthDay.getDate())
             end_date = lastFriday.addDays(7);
         }
     }
@@ -229,7 +312,7 @@ function dateEvent(event){
         date_header.innerText = convertDate(start_date, end_date);
     }
 
-  var xmlhttp = new XMLHttpRequest();
+    var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -237,7 +320,7 @@ function dateEvent(event){
             try{
                 json_data = JSON.parse(this.responseText);
                 clearCalendar(time);
-                populateCalendar(json_data, time);
+                populateCalendar(json_data, time, start_date);
             }
             catch(e){
                 // display error message
@@ -245,7 +328,17 @@ function dateEvent(event){
                 console.error(e, e.stack);
             }
         }
-      };
+        else if (this.status==400){
+            // display a error message to the user since it was generated by the php
+            const error_message = document.createElement("div");
+            error_message.classList.add("alert alert-danger");
+            error_message.setAttribute("role", "alert");
+            error_message.innerText = JSON.parse(this.responseText)["error"];
+    
+            document.querySelector("body").insertBefore(error_message, document.querySelector("body").firstChild);
+
+        }
+    };
 
     xmlhttp.open("POST", "/calendar/get-calendar-data.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -257,7 +350,7 @@ function dateEvent(event){
 
 function setDateToday(){
     today = Date.today().toString("yyyy-MM-dd");
-    
+
     changeDate(today);
 }
 
@@ -300,7 +393,7 @@ function switchTable(time){
 }
 
 function getCurrentTimeButton(){
-    
+
     var buttons = document.querySelectorAll('.time-button');
     time = ""; 
     buttons.forEach(function(x){
@@ -333,7 +426,6 @@ function displayTableDates(start_date){
     else if(period=="Week"){
         const timeTableWeek = document.getElementById('timetable-week');
         const cells = Array.from(timeTableWeek.querySelectorAll('th')).slice(1,6);
-        console.log(cells)
         for(let i=0;i<cells.length;i++){
             cells[i].innerHTML = `${weekdays[i]}<br>${dateDay}`;
             dateDay+=1;
