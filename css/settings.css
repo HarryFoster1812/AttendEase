@@ -20,7 +20,18 @@ hr.divider {
 .nav-pills .nav-link {
     text-align: left !important;
     width: 100%;
+    transition: none !important; /* Disable animation */
+    white-space: nowrap; /* Prevents wrapping */
+    overflow: hidden; /* Ensures no extra space */
 }
+
+.nav-pills .nav-link {
+    transition: none !important; /* Disable animation */
+    white-space: nowrap; /* Prevents wrapping */
+    overflow: hidden; /* Ensures no extra space */
+    width: 100%; /* Makes sure they stay uniform */
+}
+
 .sidebar-container {
     width: 320px; 
     height: 100vh; 
