@@ -1,0 +1,183 @@
+/* Existing CSS */
+.nav-pills .nav-link.active {
+    background-color: #ffcc33 !important;
+    color: #660099 !important;
+    width: 320px;
+}
+.nav-pills .nav-link:hover {
+    color: #d4a30e !important;
+}
+.nav-pills .nav-link.active:hover {
+    color: #4a0073 !important;
+    background-color: #d4a30e !important
+}
+hr.divider { 
+    margin: 0px;
+    border-width: 0px;
+    color: black;
+    height: 5px;
+}
+.nav-pills .nav-link {
+    text-align: left !important;
+    width: 100%;
+}
+.sidebar-container {
+    width: 320px; 
+    height: 100vh; 
+    position: fixed;
+    left: 0;
+    top: 87px;
+    border-top: 2px solid black;
+    background-color: #660099;
+    border-radius: 0;
+    padding: 15px;
+    padding-right: 0px;
+    overflow-y: auto; 
+    transition: transform 0.3s ease-in-out;
+}
+.search-container {
+    position: relative;
+    padding-bottom: 50px;
+    width: 290px;
+    padding-left: 0;
+}
+.search-input {
+    height: 50px;
+    border-radius: 30px;
+    padding-left: 50px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.search-icon {
+    position: absolute;
+    top: 25%;
+    left: 25px;
+    right: auto;
+    transform: translateY(-50%);
+    color: #888;
+}
+.pills-container {
+    width: 100%;
+}
+.main-content {
+    margin-left: 320px;
+    color: black;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* Responsive Sidebar Handling */
+@media (max-width: 991.98px) {
+    .sidebar-container {
+        transform: translateX(-100%);
+    }
+    .main-content {
+        margin-left: 0;
+    }
+    .search-container {
+        padding-bottom: 10px !important;
+        transition: 1s ease-in-out;
+    }
+    .search-icon {
+        top: 40%;
+        transition: 1s ease-in-out;
+    }
+}
+@media (min-width: 992px) {
+    .sidebar-container {
+        transform: translateX(0);
+    }
+    .main-content {
+        margin-left: 320px;
+    }
+}
+
+/* Remove bottom margin when search bar is inside the navbar */
+.no-margin {
+    margin-bottom: 0 !important;
+}
+
+/* Keep spacing in sidebar */
+.sidebar-container .search-container {
+    margin-bottom: 15px;
+}
+        /* Main Content */
+        .main-content {
+            margin-left: 320px; /* Leaves space for sidebar */
+            padding-top: 20px;
+            padding-left: 30px;
+        }
+
+        /* User Settings Header */
+        .heading {
+            font-size: 30px;
+            font-weight: bold;
+            padding-left: 10px;
+            padding-bottom: 10px;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .profile-section img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+
+        /* Upload Section */
+        .upload-section {
+            display: flex;
+            flex-direction: column;
+        }
+        .upload-section button {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .upload-section button:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Divider */
+        .divider {
+            border-top: 2px solid var(--secondary-color);
+            margin: 20px 0;
+        }
+
+        .form-label, .form-control, .form-select {
+            margin-left: 10px;
+        }
+
+        /* Input Fields */
+        .form-control, .form-select {
+            width: 800px; /* Set desired width */
+            max-width: 100%; /* Prevents overflow */
+        }
+
+        .upload-section {
+            width: 700px;
+        }
+
+        .divider {
+            display: block; /* Ensures it's visible */
+            height: 2px; /* Thickness */
+            background-color: #ffcc33; /* Yellow (Secondary Color) */
+            border: none; /* Removes default border */
+            margin-top: 20px !important; /* Forces top margin */
+            margin-bottom: 20px; /* Adds space below */
+            opacity: 1 !important; /* Ensures full opacity */
+            width: 98%;
+        }
+        
+        
+        
