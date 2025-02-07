@@ -68,3 +68,73 @@
   .success {
     border-color:green;
   }
+  .modal-opener{
+    background-color:#129cf3;
+    padding:20px;
+    border-radius:5px;
+    color:#fff;
+  }
+.popup-container{
+    display:none;
+    height:100vh;
+    width:100%;
+    background-color:rgba(0,0,0,0.5);
+    align-items:center;
+    justify-content:center;
+    left:0;
+    top:0;
+    position: fixed;
+}
+.popup{
+    background-color:#fff;
+    height:75vh;
+    width:50vw;
+    border-radius:20px;
+    box-shadow:2px 2px 2px 2px #aaa;
+    color:#660099;
+    overflow-y: scroll;
+    transform: translateY(-50px); /* Move it out of view (you can change this direction as needed) */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Move and fade-in transition */
+}
+.popup-title h2{
+    font-size:1.4rem;
+}
+.popup-close h2{
+    font-size:1.5rem;
+    line-height:1;
+    color: #660099;
+    transition: all 1s;
+}
+.popup-close:hover h2{
+  color: #ffcc33;
+  transition: all 1s;
+}
+.popup-head{
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+    height:auto;
+}
+.popup-close:hover h2{
+    color:#666;
+    transition: all 1s;
+}
+.popup-body{
+    font-size:1.2rem;
+}
+.form-error{
+  border: 3px solid #e74c3c;
+}
+.form-error-msg{
+  font-size:0.8rem;
+  color:#e74c3c;
+  margin-left:1rem;
+}
+.hide{
+  display:none;
+}
+@media (max-width:1200px){
+  .popup{
+    width:80vw;
+  }
+}
