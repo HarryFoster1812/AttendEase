@@ -1,3 +1,10 @@
+/* Make the navbar sticky */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
 /* Existing CSS */
 .nav-pills .nav-link.active {
     background-color: #ffcc33 !important;
@@ -77,7 +84,7 @@ hr.divider {
 }
 
 /* Responsive Sidebar Handling */
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
     .sidebar-container {
         transform: translateX(-100%);
     }
@@ -86,11 +93,11 @@ hr.divider {
     }
     .search-container {
         padding-bottom: 10px !important;
-        transition: 1s ease-in-out;
+        transition: 0.3s ease-in-out;
     }
     .search-icon {
         top: 40%;
-        transition: 1s ease-in-out;
+        transition: 0.3s ease-in-out;
     }
 }
 @media (min-width: 992px) {
@@ -233,7 +240,6 @@ hr.divider {
 .upload-section .row {
     margin-left: 10px; /* Match Step 1's form-label alignment */
 }
-
 
 
 
