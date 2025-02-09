@@ -70,9 +70,10 @@
             </div>
         </div>
     </div>
+    <!-- -------------------------------------PROFILE PAGE---------------------------------------------- -->
 <!-- ----------------------------------------Main Content-------------------------------------------------- -->
    <!-- Main Content -->
-   <div class="main-content">
+   <div class="main-content" id="profile-content">
         <h2 class="heading">User Settings</h2>
 
         <!-- Profile Picture & Upload Section -->
@@ -127,8 +128,61 @@
                 </div>
             </div>
         </div>
-    
-<!-- ----------------------------------------Main Content-------------------------------------------------- -->
+    </div>
+    <!-- ----------------------------------------Main Content-------------------------------------------------- -->
+    <!-- -------------------------------------ACCOUNT PAGE---------------------------------------------- -->
+    <div class="main-content d-none" id="account-content">
+        <h2 class="heading">Account Settings</h2>
+
+        <!-- Add Delete Account and Log Out buttons -->
+        <div class="d-flex flex-column flex-md-row align-items-start mt-4 px-3 gap-2">
+            <button class="btn btn-danger" style="width: 80%; height: 50px;" id="delete-account-btn">Delete Account</button>
+            <button class="btn btn-secondary" style="width: 80%; height: 50px;" id="logout-btn">Log Out</button>
+        </div>
+
+        <hr class="divider">
+
+        <!-- Profile Details -->
+        <div class="container-fluid mt-5">
+            <h3 class="mb-3">Profile Details</h3>
+            
+            <!-- Added Bootstrap grid wrapper -->
+            <div class="row">
+                <div class="col-10 col-sm-9 col-md-8 col-xl-7 col-xxl-6">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control border-primary" value="Anonymous" disabled>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control border-primary" value="anonymous@student.manchester.ac.uk" disabled>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label class="form-label">University ID</label>
+                        <input type="text" class="form-control border-primary" value="14999999" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add your account settings content here -->
+        
+    </div>
+    <!-- ----------------------------------------Main Content-------------------------------------------------- -->
+    <!-- -------------------------------------PREFERENCES PAGE---------------------------------------------- -->
+    <div class="main-content d-none" id="preferences-content">
+        <h2 class="heading">Preferences</h2>
+        <!-- Add your preferences content here -->
+    </div>
+    <!-- ----------------------------------------Main Content-------------------------------------------------- -->
+    <!-- -------------------------------------PRIVACY PAGE---------------------------------------------- -->
+    <div class="main-content d-none" id="privacy-content">
+        <h2 class="heading">Privacy and Security</h2>
+        <!-- Add your privacy and security content here -->
+    </div>
+    <!-- ----------------------------------------Main Content-------------------------------------------------- -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="bootstrap/dist/js/bootstrap.js"></script>

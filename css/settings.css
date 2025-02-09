@@ -51,7 +51,7 @@ hr.divider {
     padding: 15px;
     padding-right: 0px;
     overflow-y: auto; 
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.7s ease-in-out;
 }
 .search-container {
     position: relative;
@@ -80,7 +80,7 @@ hr.divider {
 .main-content {
     margin-left: 320px;
     color: black;
-    transition: margin-left 0.3s ease-in-out;
+    transition: margin-left 0.7s ease-in-out;
 }
 
 /* Responsive Sidebar Handling */
@@ -93,11 +93,11 @@ hr.divider {
     }
     .search-container {
         padding-bottom: 10px !important;
-        transition: 0.3s ease-in-out;
+        transition: 0.7s ease-in-out;
     }
     .search-icon {
         top: 40%;
-        transition: 0.3s ease-in-out;
+        transition: 0.7s ease-in-out;
     }
 }
 @media (min-width: 992px) {
