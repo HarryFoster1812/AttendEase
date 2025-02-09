@@ -13,13 +13,21 @@ function hidePopup() {
     popup.classList.remove('show');
 }
 
-function toggleMode(){
-    codeForm.classList.toggle('d-none');
-    codeImage.classList.toggle('d-none');
-    locButton.classList.toggle('btn-secondary');
-    locButton.classList.toggle('btn-light');
-    codeButton.classList.toggle('btn-secondary');
-    codeButton.classList.toggle('btn-light');
+function openCode(){
+    codeForm.classList.remove('d-none');
+    codeImage.classList.add('d-none');
+    locButton.classList.remove('btn-secondary');
+    locButton.classList.add('btn-light');
+    codeButton.classList.add('btn-secondary');
+    codeButton.classList.remove('btn-light');
+}
+function openLoc(){
+    codeForm.classList.add('d-none');
+    codeImage.classList.remove('d-none');
+    locButton.classList.add('btn-secondary');
+    locButton.classList.remove('btn-light');
+    codeButton.classList.remove('btn-secondary');
+    codeButton.classList.add('btn-light');
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -27,5 +35,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 closeBtn.addEventListener('click', hidePopup);
-codeButton.addEventListener('click', toggleMode);
-locButton.addEventListener('click', toggleMode);
+codeButton.addEventListener('click', openCode);
+locButton.addEventListener('click', openLoc);
