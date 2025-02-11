@@ -13,20 +13,23 @@ else{
     header("Location:../");
 }
 
+$userData = unserialize($_SESSION["user"]);
+
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Settings | AttendEase</title>
+    <title>Dashboard | AttendEase</title>
     <?php include("../php/template/header.php"); ?>
-
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
      <?php include($nav_path); ?>
 
     <section class="user-details mt-5 mb-4">
+ <div class="loader"></div> 
         <div class="px-5">
             <div class="row justify-content-center justify-content-xxl-start">
                 <div class="col-xxl-6 mb-5">
@@ -35,10 +38,10 @@ else{
                             <img src="../images/pfp.png" alt="">
                         </div>
                         <div class="col-xxl-9 justify-content-center text-center text-xxl-start d-xl-block">
-                            <h2 class="text-black"><b>Welcome, Anonymous!</b></h2>
-                            <h5 class="text-muted">anonymous@student.manchester.ac.uk</h5>
+                        <h2 class="text-black"><b>Welcome, <?php echo $userData->getName() ?> </b></h2>
+                        <h5 class="text-muted"><?php echo $userData->getEmail() ?></h5>
                             <h4 class="text-black">B.Sc Chemistry</h3>
-                            <h4 class="text-black">Student ID: 47233245</h3>
+                            <h4 class="text-black">Student ID: <?php echo $userData->getUserId() ?></h3>
                         </div>
                     </div>
                 </div>
@@ -78,7 +81,7 @@ else{
         </div>
     </section>
     <?php include("../php/template/footer.php"); ?>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="dashboard.js"></script>
 </body>
 </html>

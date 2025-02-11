@@ -71,4 +71,20 @@ class TimeslotManager {
             ":start_date" => $startDate
         ]);
     }
+
+    public function getStatistics(){
+        // the user should be authenticated
+        $query = "SELECT * 
+            FROM Attendance 
+            INNER JOIN TimeSlot ON Attendance.timeslot_id = TimeSlot.timeslot_id
+            INNER JOIN Course ON TimeSlot.course_id = Course.course_id
+            WHERE user_id = :user_id AND 
+                (date < DATE(NOW()) or date=DATE(NOW()) AND start_time<Time(NOW())) 
+            "
+        
+        return $this->db->query($query, [
+            ":user_id" => $this->user->getUserId(),
+        ]);
+    
+    } 
 }

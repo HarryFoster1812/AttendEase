@@ -43,6 +43,12 @@ class User {
 
         return false;
     }
+
+    public function getName(): string {
+        // either can calculate the name based off the email
+        // or create a new row?
+        return "";
+    }
 }
 
 ?>

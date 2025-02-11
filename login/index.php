@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $_SESSION["navbar"] = "navbar.php";
                 }
 
-                header("Location:../calendar");
+                header("Location:../dashboard/");
             }
         } 
         

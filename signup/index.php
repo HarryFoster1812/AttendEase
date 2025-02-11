@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user'] = serialize(new User($userid, 0, $email, 1, 1));
 
 
-            header('Location:../calendar'); // redirect the user to the dashboard
+            header('Location:../dashboard/'); // redirect the user to the dashboard
                 exit();
         } 
             
