@@ -1,11 +1,10 @@
 <?php
-
 session_start();
 
 require_once "../php/db.php";
 require_once '../autoload.php';
 
-if(!isset($SESSION["user"])){
+if(!isset($_SESSION["user"])){
     // change respose header to 400
     http_response_code(400);
     echo json_encode(["error" => "Could not authenticate user"]);
@@ -34,5 +33,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         echo json_encode(["error" => $e->getMessage()]);
     }
 }
-
 ?>

@@ -122,8 +122,9 @@ function days_between(date1, date2) {
     const differenceMs = Math.abs(date1 - date2);
 
     // Convert back to days and return
-    return Math.round(differenceMs / ONE_DAY);
-
+    let days = Math.round(differenceMs / ONE_DAY);
+    let noWeeks = days/7;
+    return days - 2*noWeeks; 
 }
 
 function populateMonth(json_data, tableElements, start_date){
@@ -137,6 +138,7 @@ function populateMonth(json_data, tableElements, start_date){
             event_item.querySelector(".class-loc").innerText = json_data[i][j]["location_name"];
 
             event_date = Date.parse(json_data[i][j]["date"]);
+            // It is not that simple. I forgot to account for weekends.
             index = days_between(event_date, start_date);
             tableElements[index].appendChild(event_item);
         }

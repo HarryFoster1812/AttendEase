@@ -1,5 +1,4 @@
 <?php
-
 class TimeslotManager {
     private $db;
     private $user;
@@ -79,8 +78,9 @@ class TimeslotManager {
             INNER JOIN TimeSlot ON Attendance.timeslot_id = TimeSlot.timeslot_id
             INNER JOIN Course ON TimeSlot.course_id = Course.course_id
             WHERE user_id = :user_id AND 
-                (date < DATE(NOW()) or date=DATE(NOW()) AND start_time<Time(NOW())) 
-            "
+                (date < DATE(NOW()) or date=DATE(NOW()) AND start_time<Time(NOW()))
+            ORDER BY date, start_time 
+            ";
         
         return $this->db->query($query, [
             ":user_id" => $this->user->getUserId(),
@@ -88,3 +88,4 @@ class TimeslotManager {
     
     } 
 }
+?>

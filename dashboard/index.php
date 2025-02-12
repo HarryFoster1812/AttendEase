@@ -82,6 +82,6 @@ $userData = unserialize($_SESSION["user"]);
     </section>
     <?php include("../php/template/footer.php"); ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="dashboard.js"></script>
+    <script type="module" src="dashboard.js"></script>
 </body>
 </html>

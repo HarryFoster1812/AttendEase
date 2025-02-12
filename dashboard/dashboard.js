@@ -1,3 +1,5 @@
+import StatisticsCalculator from "../../js/StatisticsCalculator.js";
+
 
 const classLists = document.querySelectorAll('.class-block-list');
 
@@ -140,33 +142,40 @@ function createDoughnutChart(ctx, data, label1, label2) {
 }
 
 // send a request for the user statistics
-let xhr = new XMLHttpRequest(); 
+let xmlhttp = new XMLHttpRequest(); 
 
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 
         try{
             console.log(this.responseText);
-            var tab = window.open('about:blank', '_blank');
-            tab.document.write(this.responseText);
-            tab.document.close(); // to finish loading the page
+            let jsonData = JSON.parse(this.responseText);
+            
+            // send this data to a function to calculate statistics
+            var statistics = new StatisticsCalculator(jsonData);
+            console.log(statistics);
+            let totalAttended = statistics.attendedCount;
+            let totalEvents = statistics.totalEventCount;
+            let totalOnTime = statistics.onTimeCount;
+
+            createDoughnutChart(attendanceChart, [totalAttended/totalEvents ,1- totalAttended/totalEvents], `${Math.round((totalAttended/totalEvents)*100)}%`, "Attendance");
+            createDoughnutChart(timeChart, [totalOnTime/totalEvents ,1- totalOnTime/totalEvents], `${Math.round((totalOnTime/totalEvents)*100)}%`, "On Time");
+            createDoughnutChart(rankChart, [100,0],`10%`, "Ranking");
         }
-        catch{
+        catch(e){
             // display error message
-            console.log("ERROR OCCURED");
+            console.log(e.message);
         }
+    }
+    else if (this.status==400){
+        console.log(JSON.parse(this.responseText)["error"]);
     }
 };
 
-xmlhttp.open("POST", "../php/debugging-tools/" + script_name + ".php", true);
-xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xmlhttp.open("POST", "../php/get-statistics-data.php", true);
 xmlhttp.send();
-xmlhttp.onerror = function() { console.error('An error occurred!'); }; 
 
 
-async function getStatisticData() {
-
-}
 
 document.addEventListener("DOMContentLoaded", function () {
     // Create charts
@@ -174,9 +183,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const timeChart = document.getElementById("timeChart").getContext("2d");
     const rankChart = document.getElementById("rankChart").getContext("2d");
 
-    createDoughnutChart(attendanceChart, [70, 30], "70%", "Attendance");
-    createDoughnutChart(timeChart, [80, 20], "80%", "On Time");
-    createDoughnutChart(rankChart, [92, 8], "92%", "Ranking");
 });
 
 
