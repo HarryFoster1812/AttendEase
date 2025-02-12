@@ -432,9 +432,10 @@ function displayTableDates(start_date){
     else if(period=="Week"){
         const timeTableWeek = document.getElementById('timetable-week');
         const cells = Array.from(timeTableWeek.querySelectorAll('th')).slice(1,6);
+        let calendarDate = structuredClone(start_date);
         for(let i=0;i<cells.length;i++){
-            cells[i].innerHTML = `${weekdays[i]}<br>${dateDay}`;
-            dateDay+=1;
+            cells[i].innerHTML = `${weekdays[i]}<br>${calendarDate.getDate()}`;
+            calendarDate.addDays(1);
         }
     }
     else{
