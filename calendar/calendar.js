@@ -15,7 +15,7 @@ document.getElementById("date_back").addEventListener("click", previousDate);
 
 
 
-var months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 function convertSoloDate(date_str) {
     temp_date = date_str.split("-");
@@ -64,7 +64,7 @@ function clearCalendar(period){
         timetable = document.getElementById('timetable-week');
     }
     else{
-        timetable = Array.from(document.getElementsByTagName("calenedar-content"));
+        timetable = Array.from(document.getElementsByClassName('calendar-content'));
         timetable.forEach(dayOfMonth => {
             dayOfMonth.innerHTML = "";
         });
@@ -121,10 +121,12 @@ function days_between(date1, date2) {
     // Calculate the difference in milliseconds
     const differenceMs = Math.abs(date1 - date2);
 
-    // Convert back to days and return
+    // Convert back to days
+
     let days = Math.round(differenceMs / ONE_DAY);
-    let noWeeks = days/7;
+    let noWeeks = Math.floor(days/7);
     return days - 2*noWeeks; 
+
 }
 
 function populateMonth(json_data, tableElements, start_date){
@@ -173,7 +175,8 @@ function populateCalendar(json_data, period, start_date){
 
     }
     else{
-        let timeTableMonth = Array.from(document.getElementById('timetable-month').getElementsByTagName("td"));
+        let timeTableMonth= Array.from(document.getElementsByClassName('calendar-content'));
+
         populateMonth(json_data, timeTableMonth, start_date)
     } 
 }
@@ -237,7 +240,7 @@ function calculateStartEndDate(date, timePeriod){
 
     date =  Date.parse(date);
     let monthBounds=[31,28,31,30,31,30,31,31,30,31,30,31];
-    if (Date.isLeapYear(20081900+date.getYear())){
+    if (Date.isLeapYear(date.getYear())){
         monthBounds[1]+=1;
     }
     cloneDate =  structuredClone(date); // we clone is since the datejs is mutable
@@ -274,19 +277,17 @@ function calculateStartEndDate(date, timePeriod){
     }
 
     else if (timePeriod == "Month"){
-        // i dont know what start date you want from me. 
-        // Do i just go for 1st of the month and last of the month?
-        // Do i do the first monday closest to the first and friday closest to the end?
         const firstMonday = structuredClone(date).first().monday();
         start_date = firstMonday;
-        const firstMonthDay = structuredClone(date).moveToFirstDayOfMonth();
+
         if(firstMonday.getDate()>3){
             start_date = firstMonday.addDays(-7);
         }
-        const lastFriday = structuredClone(date).last().friday();
+
+        const lastFriday = structuredClone(date).final().friday();
         end_date = lastFriday;
         const lastMonthDay = structuredClone(date).moveToLastDayOfMonth();
-        if(lastFriday.getDate()!=lastMonthDay.getDate()){
+        if(lastFriday.getDate()+3 <= lastMonthDay.getDate()){
             end_date = lastFriday.addDays(7);
         }
     }
@@ -310,8 +311,11 @@ function dateEvent(event){
         date_header.innerText = convertSoloDate(start_date);
     }
 
-    else{
+    else if (time == "Week"){
         date_header.innerText = convertDate(start_date, end_date);
+    }
+    else{
+        date_header.innerText =  months[Date.parse(date).getMonth()];
     }
 
     var xmlhttp = new XMLHttpRequest();
@@ -413,10 +417,10 @@ function displayTableDates(start_date){
     const weekdays = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
     let dateDayOfWeek = weekdays[start_date.getDay()-1];
     let monthBounds=[31,28,31,30,31,30,31,31,30,31,30,31];
-    if (Date.isLeapYear(20081900+start_date.getYear())){
+    if (Date.isLeapYear(start_date.getYear())){
         monthBounds[1]+=1;
     }
-    const monthChosen = start_date.getMonth();
+    let monthChosen = start_date.getMonth();
 
     let dateDay =start_date.getDate();
 
@@ -434,20 +438,17 @@ function displayTableDates(start_date){
         }
     }
     else{
+        monthChosen = Date.parse(date_picker.value).getMonth(); 
+    
         const timeTableMonth = document.getElementById('timetable-month');
         const cells = Array.from((timeTableMonth.querySelectorAll('.calendar-date')));
+        let calendarDate = structuredClone(start_date);
         for(let i=0;i<cells.length;i++){
-
-            cells[i].innerHTML = `${dateDay}`;
-            dateDay+=1;
-            if(dateDay>monthBounds[monthChosen]){
-                dateDay=1;
-            }
-            if(i%5==4){
-                dateDay+=2;
-            }
-            if(dateDay>monthBounds[monthChosen]){
-                dateDay=1;
+            
+            cells[i].innerHTML = `${calendarDate.getDate()}`;
+            calendarDate.addDays(1);
+            if(isWeekend(calendarDate)){
+                calendarDate.next().monday();
             }
         }
     }
