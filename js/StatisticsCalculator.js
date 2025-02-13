@@ -7,6 +7,8 @@ export default class StatisticsCalculator { data;
     streak;
     graphDataThisWeek;
     graphDataAllWeeks;
+    hoursAttended;
+    hoursScheduled;
 
     constructor(json_data) {
         this.data = json_data;
@@ -15,6 +17,8 @@ export default class StatisticsCalculator { data;
         this.hightAttended=0;
         this.lowestAttended=0;
         this.streak=0;
+        this.hoursAttended=0;
+        this.hoursScheduled = 0;
         this.graphDataThisWeek=0;
         this.graphDataAllWeeks=0;
         this.totalEvents = this.data.length;
@@ -38,18 +42,21 @@ export default class StatisticsCalculator { data;
                 this.totalOnTime++;
                 tmpStreak++;
                 attendanceCounts[element["course_title"]][0]++;
+                this.hoursAttended += StatisticsCalculator.calculateTimeDifference(element["start_time"], element["end_time"]);
             } 
             else if (element.status == "Late"){ 
                 this.totalAttended++;
                 tmpStreak++;
                 attendanceCounts[element["course_title"]][0]++;
+                this.hoursAttended += StatisticsCalculator.calculateTimeDifference(element["start_time"], element["end_time"]);
             } 
-
+ 
             else{ 
                 tmpStreak = 0;
             } 
 
             attendanceCounts[element["course_title"]][1]++; // increment the number of classes for the course 
+            this.hoursScheduled += StatisticsCalculator.calculateTimeDifference(element["start_time"], element["end_time"]);
             
             this.streak = Math.max(this.streak, tmpStreak);
         });
@@ -73,6 +80,14 @@ export default class StatisticsCalculator { data;
         // need to do graphData somehow. we need to know week data (eg. which weeks are are arent academic)
     }
 
+    static calculateTimeDifference(start_time, end_time){
+        const hourMs = 1000*60*60; 
+        start_time = Date.parse(start_time);
+        end_time = Date.parse(end_time);
+        let differenceMs = end_time - start_time;
+        return differenceMs/hourMs;
+    }
+
     get attendedCount(){
         return this.totalAttended;
     }
@@ -85,6 +100,8 @@ export default class StatisticsCalculator { data;
         return this.totalEvents;
     }
 
-
+    get hoursAttended(){
+        return this.hoursAttended;
+    }
 
 }

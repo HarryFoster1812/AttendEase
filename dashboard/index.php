@@ -72,16 +72,10 @@ $userData = unserialize($_SESSION["user"]);
         </div>
     </section>
     <hr class="mx-5 border-secondary dash-line py-2 border-3">
-    <section class="previous-classes mb-4 outer">
-        <div class="px-5">
-            <div class="row justify-content-center justify-content-lg-start"></div>   
-                <h2 class="text-center text-black">Previous Classes</h2>
-            <div class="row mt-5 class-block-list">
-            </div>
-        </div>
-    </section>
+    
     <?php include("../php/template/footer.php"); ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="../js/date.js"></script>
     <script type="module" src="dashboard.js"></script>
 </body>
 </html>

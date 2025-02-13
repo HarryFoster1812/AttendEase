@@ -13,18 +13,18 @@ class TimeslotManager {
         
         // Student or GTA (Student Lessons)
         if ($this->user->getRoleId() == 0 || $this->user->getRoleId() == 1) {
-            $data[] = $this->getStudentTimeslots($startDate, $endDate);
+            $data["student"] = $this->getStudentTimeslots($startDate, $endDate);
         }
 
         // Lecture or GTA (Lecture Lessons)
         if ($this->user->getRoleId() == 1 || $this->user->getRoleId() == 2) {
-            $data[] = $this->getStaffTimeslots($startDate, $endDate);
+            $data["staff"] = $this->getStaffTimeslots($startDate, $endDate);
         }
 
         // Admin
         if ($this->user->getRoleId() == 3) {
-            $data[] = $this->getStudentTimeslots($startDate, $endDate);
-            $data[] = $this->getStaffTimeslots($startDate, $endDate);
+            $data["student"] = $this->getStudentTimeslots($startDate, $endDate);
+            $data["staff"] = $this->getStaffTimeslots($startDate, $endDate);
         }
 
         return $data;

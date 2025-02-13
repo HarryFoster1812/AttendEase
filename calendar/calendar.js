@@ -85,12 +85,12 @@ function populateDay(json_data, tableElements, dateFilter){
 
     // filter the json_data for the given date
     filtered_json  = []
-    for (let i =0; i<json_data.length;i++){ 
-
-      filtered_json.push(json_data[i].filter((item) => {
+    Object.keys(json_data).forEach(element => {
+       filtered_json.push(json_data[element].filter((item) => {
            return item["date"] === dateFilter;
         }));
-    }
+       
+    });
 
     // loop over each event in the  filtered_json
     for (let i=0;i<filtered_json.length;i++){
@@ -130,21 +130,22 @@ function days_between(date1, date2) {
 }
 
 function populateMonth(json_data, tableElements, start_date){
-    for (let i=0;i<json_data.length;i++){
-        for(let j=0;j<json_data[i].length;j++){
+    Object.keys(json_data).forEach(element => {
+        json_data[element].forEach(event => {
+            
             let event_item = event_template.content.cloneNode(true);
             // change node content
             // need to add something so that student and lecturer events can be distinct (maybe a class?)
-            event_item.querySelector(".class-time-text").innerText = json_data[i][j]["start_time"] + " - " + json_data[i][j]["end_time"];
-            event_item.querySelector(".class-title").innerText  = json_data[i][j]["course_title"];
-            event_item.querySelector(".class-loc").innerText = json_data[i][j]["location_name"];
+            event_item.querySelector(".class-time-text").innerText = event["start_time"] + " - " + event["end_time"];
+            event_item.querySelector(".class-title").innerText  = event["course_title"];
+            event_item.querySelector(".class-loc").innerText = event["location_name"];
 
-            event_date = Date.parse(json_data[i][j]["date"]);
+            event_date = Date.parse(event["date"]);
             // It is not that simple. I forgot to account for weekends.
             index = days_between(event_date, start_date);
             tableElements[index].appendChild(event_item);
-        }
-    }        
+        });
+    });        
 }
 
 function populateCalendar(json_data, period, start_date){

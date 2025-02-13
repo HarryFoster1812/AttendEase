@@ -43,46 +43,43 @@ const toggleClassClick = function(event){
 
 }
 
-const classBlock = `<div class="col-md-6 col-xl-4 class-block-container gap-3">
-<div class="class-block bg-primary mb-4 text-secondary shrink">
-<div class="p-4">
-<div class="row class-block-upper mb-2">
-<div class="col-6 class-code">
-<h4>comp16321</h4>
-</div>
-<div class="colzzzzzz-6 class-time">
-<h4>09:00 - 10:00</h4>
-</div>
-</div>
-<div class="row class-block-mid mb-2">
-<div class="col-6 class-type">
-<h4>workshop</h4>
-</div>
-<div class="col-6 class-day">
-<h4>tuesday</h4>
-</div>
-</div>
-<div class="row class-block-lower">
-<div class="class-venue">
-<h4>kilburn th 1.1</h4>
-</div>
-</div>
-<div class='row class-attend-block mt-2 d-none'>
-<button class="btn btn-primary rounded-pill"><h4 class='text-secondary'>attend</h4></button>
-</div>
-</div>
-</div> 
-</div>
-`
+function addEvent(event_info){
+    const classBlock = `<div class="col-md-6 col-xl-4 class-block-container gap-3">
+                            <div class="class-block bg-primary mb-4 text-secondary shrink">
+                                <div class="p-4">
+                                    <div class="row class-block-upper mb-2">
+                                        <div class="col-6 class-code">
+                                            <h4>${event_info["course_title"]}</h4>
+                                        </div>
+                                        <div class="colzzzzzz-6 class-time">
+                                            <h4>${event_info["start_time"]} - ${event_info["end_time"]}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row class-block-mid mb-2">
+                                        <div class="col-6 class-day">
+                                            <h4>${event_info["date"]}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row class-block-lower">
+                                        <div class="class-venue">
+                                            <h4>${event_info['location_name']}</h4>
+                                        </div>
+                                    </div>
+                                    <div class='row class-attend-block mt-2 d-none'>
+                                        <button class="btn btn-primary rounded-pill">
+                                            <h4 class='text-secondary'>attend</h4>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>`
 
-for(let i=0;i<6;i++){
-
-    for(const list of classLists){
-        list.insertAdjacentHTML('beforeend',classBlock);
-        const classElement = list.lastElementChild.querySelector('.class-block');;
-        classElement.addEventListener('click', toggleClassClick);
-    }
+    classLists[0].insertAdjacentHTML('beforeend',classBlock);
+    const classElement = classLists[0].lastElementChild.querySelector('.class-block');;
+    classElement.addEventListener('click', toggleClassClick);
 }
+
+
 
 
 // Reusable chart creation function
@@ -198,9 +195,17 @@ calendarAjax.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         // update the calendar
         try{
-            json_data = JSON.parse(this.responseText);
-            clearCalendar(time);
-            populateCalendar(json_data, time, start_date);
+            let json_data = JSON.parse(this.responseText);
+            
+             json_data["student"].forEach(element => {
+                addEvent(element);
+            });
+
+            json_data["staff"].forEach(element => {
+                addEvent(element);
+            });
+            
+
         }
         catch(e){
             // display error message
@@ -222,4 +227,4 @@ calendarAjax.onreadystatechange = function() {
 
 calendarAjax.open("POST", "/calendar/get-calendar-data.php", true);
 calendarAjax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-//calendarAjax.send("start_date="++"&end_date="+);
+calendarAjax.send("start_date="+Date.today().toString("yyyy-MM-dd")+"&end_date="+Date.today().toString("yyyy-MM-dd"));
