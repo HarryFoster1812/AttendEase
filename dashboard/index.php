@@ -29,7 +29,7 @@ $userData = unserialize($_SESSION["user"]);
      <?php include($nav_path); ?>
 
     <section class="user-details mt-5 mb-4">
- <div class="loader"></div> 
+        <!-- <div class="loader"></div> --> 
         <div class="px-5">
             <div class="row justify-content-center justify-content-xxl-start">
                 <div class="col-xxl-6 mb-5">

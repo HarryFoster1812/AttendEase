@@ -58,12 +58,12 @@ export default class StatisticsCalculator { data;
             const [attendedCount, totalClassesCount] = attendanceCounts[course];
             
             // Check for highest attended course 
-            if (attendedCount > tempHighest.count) { 
-                tempHighest = { course, count: attendedCount };
+            if ((attendedCount/totalClassesCount)*100 > tempHighest.count) { 
+                tempHighest = { course, count: (attendedCount/totalClassesCount)*100 };
             } 
             // Check for lowest attended course 
-            if (attendedCount < tempLowest.count) { 
-                tempLowest = { course, count: attendedCount };
+            if ((attendedCount/totalClassesCount)*100 < tempLowest.count) { 
+                tempLowest = { course, count: (attendedCount/totalClassesCount)*100 };
             } 
 
         } 
