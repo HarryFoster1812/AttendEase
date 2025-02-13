@@ -4,10 +4,6 @@ $(document).ready(function () {
     function updateSidebarContent() {
         if ($(window).width() < 992) {
             $('#settings-content').html(`
-                <div class="search-container no-margin">
-                    <input type="text" class="form-control search-input" placeholder="Search...">
-                    <i class="fas fa-search search-icon"></i>
-                </div>
                 <div class="nav flex-column nav-pills mt-2">
                     <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">
                         <span class="ms-3">Profile</span>

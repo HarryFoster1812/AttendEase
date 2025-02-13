@@ -49,6 +49,7 @@ hr.divider {
     background-color: #660099;
     border-radius: 0;
     padding: 15px;
+    padding-left:0px;
     padding-right: 0px;
     overflow-y: auto; 
     transition: transform 0.7s ease-in-out;
@@ -98,6 +99,11 @@ hr.divider {
     .search-icon {
         top: 40%;
         transition: 0.7s ease-in-out;
+    }
+}
+@media (max-width: 1200px) {
+    .time-select{
+        margin-left:0px;
     }
 }
 @media (min-width: 992px) {
@@ -174,10 +180,9 @@ hr.divider {
     border-top: 2px solid var(--secondary-color);
     margin: 20px 0;
 }
-
-.form-label, .form-control, .form-select {
-    margin-left: 10px;
-}
+.form-c-label{
+    font-size:1em;
+  }
 
 /* Input Fields */
 .form-control, .form-select {
@@ -240,6 +245,58 @@ hr.divider {
 .upload-section .row {
     margin-left: 10px; /* Match Step 1's form-label alignment */
 }
+.settings-text{
+    font-size:1.15rem;
+}
 
-
-
+.switch {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 3.5rem;
+    height: 2rem;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: #d4acfb;
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 1.4rem;
+    width: 1.4rem;
+    left: 0.3rem;
+    bottom: 0.3rem;
+    background-color: white;
+    border-radius: 50px;
+    box-shadow: 0 0px 20px rgba(0,0,0,0.4);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .switch input:checked + .slider {
+    background: #b84fce;
+  }
+  
+  .switch input:focus + .slider {
+    box-shadow: 0 0 1px #b84fce;
+  }
+  .switch input:checked + .slider:before {
+    transform: translateX(1.6rem);
+    width: 2rem;
+    height: 2rem;
+    bottom: 0;
+  }
