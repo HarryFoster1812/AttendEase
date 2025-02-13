@@ -196,10 +196,6 @@ calendarAjax.onreadystatechange = function() {
         // update the calendar
         try{
             let json_data = JSON.parse(this.responseText);
-            
-            if (Object.keys(json_data).length == 0){
-                // add a message: no events today
-            }
 
             if (Object.keys(json_data).includes("student")){
 
@@ -213,7 +209,10 @@ calendarAjax.onreadystatechange = function() {
                     addEvent(element);
                 });
             }
-
+            if (classLists[0].childElementCount == 0){
+                // add a message: no events today
+                classLists[0].innerHTML = `<p class="text-primary" style="text-align:center">You have no events scheduled for today.</p>`;
+            }
 
         }
         catch(e){

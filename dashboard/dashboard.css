@@ -9,9 +9,14 @@ body{
     transition: max-height 1.5s ease, background-color 0.7s ease;
 }
 
+.class-block-list{
+    justify-content: center;
+}
+
 .class-attend-block h4{
     margin:0;
 }
+
 /* HTML: <div class="loader"></div> */
 .loader {
   --c1:#673b14;
