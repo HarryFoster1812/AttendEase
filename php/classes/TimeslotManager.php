@@ -53,7 +53,7 @@ class TimeslotManager {
 
     private function getStaffTimeslots($startDate, $endDate) {
         $query = "
-            SELECT status, start_time, end_time, date, location_name, name, course_title 
+            SELECT start_time, end_time, date, location_name, name, course_title 
             FROM TimeSlot 
             INNER JOIN Location ON TimeSlot.location_id = Location.location_id 
             INNER JOIN CourseAssignment ON TimeSlot.course_id = CourseAssignment.course_id 

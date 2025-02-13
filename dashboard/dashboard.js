@@ -197,14 +197,23 @@ calendarAjax.onreadystatechange = function() {
         try{
             let json_data = JSON.parse(this.responseText);
             
-             json_data["student"].forEach(element => {
-                addEvent(element);
-            });
+            if (Object.keys(json_data).length == 0){
+                // add a message: no events today
+            }
 
-            json_data["staff"].forEach(element => {
-                addEvent(element);
-            });
-            
+            if (Object.keys(json_data).includes("student")){
+
+                json_data["student"].forEach(element => {
+                    addEvent(element);
+                });
+            }
+
+            if (Object.keys(json_data).includes("staff")){
+                json_data["staff"].forEach(element => {
+                    addEvent(element);
+                });
+            }
+
 
         }
         catch(e){
