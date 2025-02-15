@@ -182,7 +182,7 @@ hr.divider {
 }
 .form-c-label{
     font-size:1em;
-  }
+}
 
 /* Input Fields */
 .form-control, .form-select {
@@ -255,26 +255,26 @@ hr.divider {
     display: inline-block;
     width: 3.5rem;
     height: 2rem;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
+}
+
+/* Hide default HTML checkbox */
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  /* The slider */
-  .slider {
+}
+
+/* The slider */
+.slider {
     position: absolute;
     cursor: pointer;
     inset: 0;
     background: #d4acfb;
     border-radius: 50px;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
-  }
-  
-  .slider:before {
+}
+
+.slider:before {
     position: absolute;
     content: "";
     height: 1.4rem;
@@ -285,18 +285,78 @@ hr.divider {
     border-radius: 50px;
     box-shadow: 0 0px 20px rgba(0,0,0,0.4);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  
-  .switch input:checked + .slider {
+}
+
+.switch input:checked + .slider {
     background: #b84fce;
-  }
-  
-  .switch input:focus + .slider {
+}
+
+.switch input:focus + .slider {
     box-shadow: 0 0 1px #b84fce;
-  }
-  .switch input:checked + .slider:before {
+}
+.switch input:checked + .slider:before {
     transform: translateX(1.6rem);
     width: 2rem;
     height: 2rem;
     bottom: 0;
-  }
+}
+
+
+
+/* Overlay and crop container styles */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    z-index: 9999;
+}
+
+
+.upload-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 365px;
+    text-align: center;
+}
+.popup img {
+    max-width: 100%;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.popup button {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+}
+.popup button.cancel {
+    background-color: #dc3545;
+}
+.popup button.crop {
+    background-color: #28a745;
+}

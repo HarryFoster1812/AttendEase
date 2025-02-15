@@ -23,9 +23,9 @@ $(document).ready(function () {
             $('.main-content').css('margin-left', '0'); // Reset margin for smaller screens
         } else {
             $('#settings-content').removeClass('show'); // Hide with animation
-            // setTimeout(() => {
-            //     $('#settings-content').html('');
-            // }, 500); // Wait for the animation to complete
+             setTimeout(() => {
+                 $('#settings-content').html('');
+             }, 500); // Wait for the animation to complete
             $('.main-content').css('margin-left', '320px'); // Reset margin when sidebar is visible
         }
         addNavLinkEventListeners(); // Add event listeners to the new buttons
