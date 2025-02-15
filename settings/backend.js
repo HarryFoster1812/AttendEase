@@ -1,23 +1,5 @@
-/*
-       saveCropButton.addEventListener('click', function() {
-            cropme.crop(); // Crop the image
-            cropme.on('crop', (croppedImage) => {
-                // Set the cropped image as the profile picture
-                overlay.style.display = 'none'; // Hide the overlay
-            });
-        });
 
-        // Close the crop overlay (Cancel)
-        cancelCropButton.addEventListener('click', function() {
-            overlay.style.display = 'none'; // Hide the overlay
-            // Clean up the image and reset the file input
-            container.innerHTML = '';
-            fileUpload.value = ''; 
-            cropme.destroy();
-        });
-
-*/
-
+// PROFILE PICTURE SECTION 
 
 const imageUpload = document.getElementById('fileUpload');
 const popup = document.getElementById('popup');
@@ -106,6 +88,10 @@ cropBtn.addEventListener('click', function () {
 
 uploadBtn.addEventListener("click", () => {
     // check if an image has been selected and cropped
+    //
+    // NEED TO ADD INPUT VALIDATION
+    //
+    //
     console.log(profileImage.src);
 
     var xhr = new XMLHttpRequest();
@@ -136,3 +122,16 @@ uploadBtn.addEventListener("click", () => {
     // Send the data as a JSON string
     xhr.send(JSON.stringify(data));
 });
+
+
+// PROFILE DETAILS
+
+
+
+// ACCOUNT SETTINGS
+
+
+// PREFERENCES
+
+
+// PRIVACY AND SECURITY

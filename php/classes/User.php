@@ -26,7 +26,7 @@ class User {
         return $this->role_id;
     }
 
-    public function getPronouns(): int {
+    public function getPronouns(): string {
         return $this->pronouns;
     }
 

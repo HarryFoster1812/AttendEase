@@ -82,7 +82,7 @@ $user = unserialize($_SESSION["user"]);
                        id="fileUpload" 
                        class="form-control border-primary mw-100 w-100" 
                        accept=".jpeg, .jpg, .png, .tif, .tiff, .heif, .heic, .bmp, .webp">
-                 <button id="uploadBtn" class="btn btn-primary mt-3">Upload</button> 
+                 <button id="uploadBtn" class="btn btn-light border-dark px-3">Upload</button> 
             </div>
         </div>
 
@@ -98,28 +98,28 @@ $user = unserialize($_SESSION["user"]);
                 <div class="col-10 col-sm-9 col-md-8 col-xl-7 col-xxl-6">
                     <div class="mb-3">
                         <label class="form-label">Name</label>
-                        <input type="text" class="form-control border-primary" value="Anonymous" disabled>
+                        <input class="form-control border-primary" value="<?php echo $user->getName(); ?>" disabled>
                     </div>
             
                     <div class="mb-3">
                         <label class="form-label">Pronouns</label>
                         <select class="form-select border-primary">
-                            <option selected>He/Him</option>
-                            <option>She/Her</option>
-                            <option>They/Them</option>
-                            <option>Other</option>
-                            <option>Not Set</option>
+                        <option <?php if($user->getPronouns()){ echo "selected";}?> >He/Him</option>
+                            <option <?php if($user->getPronouns() == "She/Her"){ echo "selected";}?>>She/Her</option>
+                            <option <?php if($user->getPronouns() == "They/Them"){ echo "selected";}?>>They/Them</option>
+                            <option <?php if($user->getPronouns()== "Other"){ echo "selected";}?>>Other</option>
+                            <option <?php if($user->getPronouns() == "Not Set"){ echo "selected";}?>>Not Set</option>
                         </select>
                     </div>
             
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control border-primary" value="anonymous@student.manchester.ac.uk" disabled>
+                        <input class="form-control border-primary" value="<?php echo $user->getEmail(); ?>" disabled>
                     </div>
             
                     <div class="mb-3">
                         <label class="form-label">University ID</label>
-                        <input type="text" class="form-control border-primary" value="14999999" disabled>
+                        <input type="text" class="form-control border-primary" value="<?php echo $user->getUserId(); ?>" disabled>
                     </div>
                 </div>
             </div>
@@ -215,25 +215,46 @@ $user = unserialize($_SESSION["user"]);
                     <div class="col-3">
                         <div class="d-flex align-items-center justify-content-end">
                             <label class="switch">
-                                <input type="checkbox">
+                                <input type="checkbox" <?php if($user->isLocationOpt()){echo "checked";} ?>>
                                 <span class="slider"></span>
                               </label>
                         </div>
                     </div>
                 </div>
-                <hr class="divider">
-                <div class="row mt-5">
-                    <div class="col-10 col-sm-9 col-md-8 col-xl-7 col-xxl-6">
-                        <div class="mb-3">
-                            <label class="form-label">Your Password</label>
-                            <input type="password" class="form-control border-primary" value="Anonymous">
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="pass-toggle">
-                            <label for="toggle_pass" class="form-c-label">Show Password</label>
+            <hr>
+            <h3 class="mb-4">Allow data to be used in the leaderboard</h3>
+                <div class="row">
+                    <div class="col-9">
+                    <p> By enabling this setting, you are agreeing to allow us to use your attendance data for leaderboard purposes. Your personal details and attendance statistics will be visible to all users of the site or university. This data will be displayed on the public leaderboard and updated regularly. Please be aware that by opting in, your participation will be visible to others, and your personal statistics will be shared accordingly. </p> 
+                   </div>
+                    <div class="col-3">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <label class="switch">
+                            <input type="checkbox" <?php if($user->isLeaderboardOpt()){echo "checked";} ?>>
+                                <span class="slider"></span>
+                              </label>
                         </div>
                     </div>
-                    <div class="mt-4 d-flex justify-content-end">
+                </div>
+
+                <hr class="divider">
+                <div class="row mt-5">
+                    <h3 class="mb-4">Change Password</h3>
+                    <div class="col-10 col-sm-9 col-md-8 col-xl-7 col-xxl-6">
+                        <div class="mb-3">
+                            <label class="form-label">Enter Current Password</label>
+                            <input type="password" class="form-control border-primary" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Enter New Password</label>
+                            <input type="password" class="form-control border-primary" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Enter New Password Again</label>
+                            <input type="password" class="form-control border-primary" value="">
+                        </div>
+                    </div>
+                    <div class="mt-4 d-flex justify-content-start">
                         <button class="btn btn-danger btn-lg">Change Password</button>
                     </div>
                 </div>
