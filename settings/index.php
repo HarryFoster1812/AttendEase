@@ -112,13 +112,13 @@ $user = unserialize($_SESSION["user"]);
  
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text" class="form-control border-primary" value="Anonymous">
+                        <input id="usernameInput" type="text" class="form-control border-primary" value="<?php echo $user->getUsername() ?>" disabled>
                     </div>
 
            
                     <div class="mb-3">
                         <label class="form-label">Pronouns</label>
-                        <select class="form-select border-primary">
+                        <select id="pronounSelect" class="form-select border-primary">
                         <option <?php if($user->getPronouns()){ echo "selected";}?> >He/Him</option>
                             <option <?php if($user->getPronouns() == "She/Her"){ echo "selected";}?>>She/Her</option>
                             <option <?php if($user->getPronouns() == "They/Them"){ echo "selected";}?>>They/Them</option>
@@ -214,7 +214,7 @@ $user = unserialize($_SESSION["user"]);
                     <div class="col-3">
                         <div class="d-flex align-items-center justify-content-end">
                             <label class="switch">
-                                <input type="checkbox" <?php if($user->isLocationOpt()){echo "checked";} ?>>
+                                <input id="locationToggle" type="checkbox" <?php if($user->isLocationOpt()){echo "checked";} ?>>
                                 <span class="slider"></span>
                               </label>
                         </div>
@@ -229,11 +229,12 @@ $user = unserialize($_SESSION["user"]);
                     <div class="col-3">
                         <div class="d-flex align-items-center justify-content-end">
                             <label class="switch">
-                            <input type="checkbox" <?php if($user->isLeaderboardOpt()){echo "checked";} ?>>
+                            <input id="leaderboardToggle" type="checkbox" <?php if($user->isLeaderboardOpt()){echo "checked";} ?>>
                                 <span class="slider"></span>
                               </label>
                         </div>
                     </div>
+                <button id="privacySubmit" class="btn btn-success">Save Changes</button>
                 </div>
 
                 <hr class="divider">
@@ -242,19 +243,21 @@ $user = unserialize($_SESSION["user"]);
                     <div class="col-10 col-sm-9 col-md-8 col-xl-7 col-xxl-6">
                         <div class="mb-3">
                             <label class="form-label">Enter Current Password</label>
-                            <input type="password" class="form-control border-primary" value="">
+                            <input id="oldpass" type="password" class="form-control border-primary" value="">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Enter New Password</label>
-                            <input type="password" class="form-control border-primary" value="">
+                            <input id="newpass" type="password" class="form-control border-primary" value="">
+                            <small id="newerror" style="color:red" ></small>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Enter New Password Again</label>
-                            <input type="password" class="form-control border-primary" value="">
+                            <input id="renewpass" type="password" class="form-control border-primary" value="">
+                            <small id="renewerror" style="color:red"></small>
                         </div>
                     </div>
                     <div class="mt-4 d-flex justify-content-start">
-                        <button class="btn btn-danger btn-lg">Change Password</button>
+                        <button id="changePassBtn" class="btn btn-danger btn-lg">Change Password</button>
                     </div>
                 </div>
         </div>

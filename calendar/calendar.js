@@ -381,7 +381,7 @@ function dateEvent(event){
         }
     };
 
-    xmlhttp.open("POST", "/calendar/get-calendar-data.php", true);
+    xmlhttp.open("POST", "./get-calendar-data.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send("start_date="+start_date+"&end_date="+end_date);
 

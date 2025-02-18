@@ -7,12 +7,14 @@ class User {
     private $location;
     private $leaderboard;
     private $name;
+    private $username;
     private $pronouns;
     private $profile_path;
     
 
-    public function __construct($user_id, $role_id, $email, $location, $leaderboard, $name, $pronouns, $pfp) {
+    public function __construct($user_id, $username, $role_id, $email, $location, $leaderboard, $name, $pronouns, $pfp) {
         $this->user_id = $user_id;
+        $this->username = $username;
         $this->role_id = $role_id;
         $this->email = $email;
         $this->location = $location;
@@ -47,6 +49,10 @@ class User {
         return false;
     }
 
+    public function getUsername(){
+        return $this->username;
+    }
+
     public function isLeaderboardOpt(): bool {
         if ($this->leaderboard == 1){
             return true;
@@ -70,7 +76,15 @@ class User {
     }
 
     public function setPronouns($newPronouns){
-        $this->pronouns=$newPronouns;
+        $this->pronouns = $newPronouns;
+    }
+
+    public function setLocationOpt($newOption){
+        $this->location=$newOption;
+    }
+
+    public function setLeaderboardOpt($newOption){
+        $this->leaderboard=$newOption;
     }
 }
 

@@ -1,4 +1,3 @@
-
 // PROFILE PICTURE SECTION 
 
 const imageUpload = document.getElementById('fileUpload');
@@ -133,11 +132,38 @@ uploadBtn.addEventListener("click", () => {
 
 const saveProfile = document.getElementById("saveChangesProfile");
 
+const username = document.getElementById("usernameInput");
+const pronouns = document.getElementById("pronounSelect");
+
 saveProfile.addEventListener("click", () => {
     // add validation to make sure something is selected
     // add ajax to send the new information off
-    //
+    // Need modCount
+    // modified fields
+    // replacement fields
+   if (username.value = ""){
+        console.log("you must enter a username");
+    }
+
+    sendChangeSettingsAJAX(["username", "pronouns"], [usernameInput.value, pronouns.value])
+    
 });
+
+
+function sendChangeSettingsAJAX(changedFields, newValues){
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // display success messages
+            console.log(this.responseText);
+        }
+    };
+
+    xmlhttp.open("POST", "./changeSettings.php", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.send("modCount="+ changedFields.length.toString() +"&changedFields="+JSON.stringify(changedFields)+"&newValues="+JSON.stringify(newValues));
+}
 
 
 // ACCOUNT SETTINGS
@@ -192,3 +218,99 @@ timeselect.addEventListener("change", () => {
 });
 
 // PRIVACY AND SECURITY
+
+const locationToggle = document.getElementById("locationToggle");
+const leaderboardToggle = document.getElementById("leaderboardToggle");
+
+const privacySubmitBtn = document.getElementById("privacySubmit");
+privacySubmitBtn.addEventListener("click", () =>{
+    // get the location and leaderboard as 0 or 1
+    let locationint = locationToggle.checked ? 1 : 0;
+    let leaderboardint = leaderboardToggle.checked ? 1 : 0;
+    sendChangeSettingsAJAX(["location", "leaderboard"],[locationint, leaderboardint]);
+});
+
+
+function checkPassword(text){ 
+    const re = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    testValid = re.test(text);
+
+    return testValid;
+}
+
+const changePass = document.getElementById("changePassBtn");
+const newPassError = document.getElementById("newerror")
+const renewPassError = document.getElementById("renewerror")
+
+
+const oldpass = document.getElementById("oldpass");
+const newpass = document.getElementById("newpass");
+
+    newpass.addEventListener("input",() =>{
+    validatepassword();
+});
+
+const renewpass = document.getElementById("renewpass");
+renewpass.addEventListener("input", () =>{
+    validatepassword();
+   });
+
+function validatepassword(){
+    if(checkPassword(newpass.value)){
+        newPassError.innerText = "";
+    }
+    else{
+        newPassError.innerText = "Password must has at least 8 characters that include at least 1 lowercase character, 1 uppercase characters, 1 number, and 1 special character in (!@#$%^&*)"
+    }
+
+    if(renewpass.value != newpass.value){
+        renewPassError.innerText = "Passwords do not match";
+    }
+    else{
+        renewPassError.innerText = "";
+        if(checkPassword(newpass.value)){
+            return true;
+        }
+    }
+    return false;
+
+}
+
+
+changePass.addEventListener("click", () => {
+    // validate the new password
+    // make sure they match
+    // send ajax
+    // if successful then log them out
+    if (oldpass.value.trim() != "" && validatepassword()){
+        //send the form
+        var xhr = new XMLHttpRequest();
+
+        // Set up the request type and URL (POST request to upload.php)
+        xhr.open('POST', './changePassword.php', true);
+
+        // Set the content-type to JSON (since we're sending a JSON object)
+
+        // Define what to do when the request completes
+        xhr.onreadystatechange = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                console.log(this.responseText);
+                window.location.replace("../login/")
+            }
+            else if(xhr.startus == 400){
+                console.log(this.responseText);
+            }
+        };
+
+        // Define what to do in case of an error (like a network failure)
+        xhr.onerror = function () {
+            console.error('Request failed.');
+            console.log(JSON.parse(xhr.responseText));
+        };
+
+        // Prepare the data to send (the base64 image string inside a JSON object)
+        // Send the data as a JSON string
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("oldPass="+oldpass.value+"&newPass="+newpass.value);
+    }
+});
