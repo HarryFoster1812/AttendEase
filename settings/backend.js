@@ -9,8 +9,10 @@ const cropContainer = document.getElementById('cropContainer');
 const overlay = document.getElementById('overlay');
 const profileImage = document.getElementById('profileImage');
 const uploadBtn = document.getElementById("uploadBtn");
+const errorDiv = document.getElementById("errormsg");
 
 let cropper;
+let fileSelected = false;
 
 // Open the crop popup when an image is selected
 imageUpload.addEventListener('change', function (e) {
@@ -23,6 +25,7 @@ imageUpload.addEventListener('change', function (e) {
             openCropPopup(imageUrl);
         };
         reader.readAsDataURL(file);
+        errorDiv.innerText = "";
     }
 });
 
@@ -30,6 +33,7 @@ imageUpload.addEventListener('change', function (e) {
 function openCropPopup(imageUrl) {
     overlay.style.display = 'flex'; // Show the overlay
     popup.style.display = 'block';
+    deletepopup.style.display = 'none';
 
     cropper = new Cropme(cropContainer, {
         "viewport": {
@@ -41,11 +45,6 @@ function openCropPopup(imageUrl) {
                 "enable": true,
                 "color": "#fff"
             }
-        },
-
-        cropCallback: function (result) {
-            console.log(result);
-            // Handle the cropped result (image or data)
         },
 
         "zoom": {
@@ -71,7 +70,7 @@ cancelBtn.addEventListener('click', function () {
     overlay.style.display = 'none';
     if (cropper) {
         cropper.destroy();
-        
+       imageUpload.value = ""; 
     }
 });
 
@@ -83,16 +82,17 @@ cropBtn.addEventListener('click', function () {
         profileImage.src = result["_v"];
         cropper.destroy();
         overlay.style.display = 'none';
+        fileSelected = true;
     }
 });
 
 uploadBtn.addEventListener("click", () => {
-    // check if an image has been selected and cropped
-    //
-    // NEED TO ADD INPUT VALIDATION
-    //
-    //
-    console.log(profileImage.src);
+
+    if (!fileSelected){
+        // add error message
+        errorDiv.innerText = "You need to select a file first"; 
+        return;
+    }
 
     var xhr = new XMLHttpRequest();
 
@@ -105,6 +105,11 @@ uploadBtn.addEventListener("click", () => {
     // Define what to do when the request completes
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
+            // remove the selected file
+            fileSelected = false;
+            fileUpload.value = "";
+            errorDiv.style.color = "green";
+            errorDiv.innerText = "File upload successful";
         }
     };
 
@@ -126,12 +131,64 @@ uploadBtn.addEventListener("click", () => {
 
 // PROFILE DETAILS
 
+const saveProfile = document.getElementById("saveChangesProfile");
+
+saveProfile.addEventListener("click", () => {
+    // add validation to make sure something is selected
+    // add ajax to send the new information off
+    //
+});
 
 
 // ACCOUNT SETTINGS
+deleteButton = document.getElementById("deleteAccount");
+signOutButton = document.getElementById("signOutBtn");
 
+const deleteOverlay = document.getElementById("deleteOverlay");
+const deletepopup = document.getElementById("deletepopup");
+const yesButton = document.getElementById("yesBtn");
+const noButton = document.getElementById("noBtn");
+
+noButton.addEventListener("click", () => {
+    overlay.style.display = 'none'; // Show the overlay
+});
+
+yesButton.addEventListener("click", () => {
+    // do ajax
+    window.location.replace("../signout/"); 
+});
+
+deleteButton.addEventListener("click", () => {
+    // are you sure popup
+    
+    overlay.style.display = 'flex'; // Show the overlay
+    deletepopup.style.display = "block";
+});
+
+
+
+signOutBtn.addEventListener('click', () => {
+    window.location.replace("../signout/"); 
+});
 
 // PREFERENCES
+darkMode = document.getElementById("darkModeInput");
+timeselect = document.getElementById("timeSelect");
 
+darkMode.addEventListener("change", () => {
+   if (darkMode.checked){
+        Cookies.set("darkMode", "enabled");
+        // add new css
+    } 
+    else{
+        // remove cookie and remove css
+        Cookies.remove("darkMode");
+    }
+});
+
+
+timeselect.addEventListener("change", () => {
+   Cookies.set("time", timeselect.value);
+});
 
 // PRIVACY AND SECURITY

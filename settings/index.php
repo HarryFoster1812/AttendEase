@@ -34,8 +34,15 @@ $user = unserialize($_SESSION["user"]);
                 <button class="crop" id="cropBtn">Crop</button>
             </div>
         </div>
-    </div>
 
+        <div class="popup" id="deletepopup">
+            <p>Are you sure that you want to delete your account?</p>
+            <div class="button-container">
+                <button class="cancel" id="noBtn">Cancel</button>
+                <button class="crop" id="yesBtn">Delete</button>
+            </div>
+        </div>
+    </div>
 
     <?php include($nav_path); ?>
     <!-- Sidebar -->
@@ -82,8 +89,9 @@ $user = unserialize($_SESSION["user"]);
                        id="fileUpload" 
                        class="form-control border-primary mw-100 w-100" 
                        accept=".jpeg, .jpg, .png, .tif, .tiff, .heif, .heic, .bmp, .webp">
-                 <button id="uploadBtn" class="btn btn-light border-dark px-3">Upload</button> 
+            <small id="errormsg" style="color:red"></small>
             </div>
+            <button id="uploadBtn" class="btn btn-light border-dark px-3">Upload</button> 
         </div>
 
         <!-- Divider -->
@@ -100,7 +108,13 @@ $user = unserialize($_SESSION["user"]);
                         <label class="form-label">Name</label>
                         <input class="form-control border-primary" value="<?php echo $user->getName(); ?>" disabled>
                     </div>
-            
+ 
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control border-primary" value="Anonymous">
+                    </div>
+
+           
                     <div class="mb-3">
                         <label class="form-label">Pronouns</label>
                         <select class="form-select border-primary">
@@ -121,6 +135,8 @@ $user = unserialize($_SESSION["user"]);
                         <label class="form-label">University ID</label>
                         <input type="text" class="form-control border-primary" value="<?php echo $user->getUserId(); ?>" disabled>
                     </div>
+
+                <button id="saveChangesProfile" class="btn btn-success">Save Changes</button> 
                 </div>
             </div>
         </div>
@@ -135,7 +151,7 @@ $user = unserialize($_SESSION["user"]);
             <h3 class="mb-3">Delete Account</h3>
             <p class="mb-4 settings-text">Deleting your account would lead to you not having access to your account and your attendance data. Kindly proceed with caution as your account can not be recovered upon deleting your account!</p>
             <div class="mt-4 d-flex justify-content-end">
-                <button class="btn btn-danger btn-lg">Delete Account</button>
+                <button id="deleteAccount" class="btn btn-danger btn-lg">Delete Account</button>
             </div>
         </div>
         <hr class="divider">
@@ -143,27 +159,10 @@ $user = unserialize($_SESSION["user"]);
             <h3 class="mb-3">Sign Out</h3>
             <p class="mb-4 settings-text">Sign out from your account.</p>
             <div class="mt-4 d-flex justify-content-end">
-                <button class="btn btn-success btn-lg">Sign out</button>
+                <button id="signOutBtn" class="btn btn-success btn-lg">Sign out</button>
             </div>
         </div>
 
-        <hr class="divider">
-
-        <!-- Profile Details -->
-        <div class="container-fluid mt-5 pe-5">
-            <h3 class="mb-3">Profile Details</h3>
-            
-            <!-- Added Bootstrap grid wrapper -->
-            <div class="row">
-                <div class="col-10 col-sm-9 col-md-8 col-xl-7 col-xxl-6">
-                    <div class="mb-3">
-                        <label class="form-label">Username</label>
-                        <input type="text" class="form-control border-primary" value="Anonymous">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Add your account settings content here -->
         
     </div>
     <!-- ----------------------------------------Main Content-------------------------------------------------- -->
@@ -176,7 +175,7 @@ $user = unserialize($_SESSION["user"]);
                 <div class="d-flex justify-content-between">
                     <p>Enable Dark Mode?</p>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input id="darkModeInput" type="checkbox">
                         <span class="slider"></span>
                       </label>
                 </div>
@@ -189,7 +188,7 @@ $user = unserialize($_SESSION["user"]);
                         <p>Please select one of the time settings from the dropdown</p>
                     </div>
                     <div class="col-xl-6">
-                        <select class="form-select border-primary time-select">
+                        <select id="timeSelect" class="form-select border-primary time-select">
                             <option selected>24 Hour</option>
                             <option>12 Hour AM/PM</option>
                         </select>
@@ -199,7 +198,6 @@ $user = unserialize($_SESSION["user"]);
                     
         </div>
     </div>
-    <hr class="divider">
     </div>
     <!-- ----------------------------------------Main Content-------------------------------------------------- -->
     <!-- -------------------------------------PRIVACY PAGE---------------------------------------------- -->
@@ -266,7 +264,9 @@ $user = unserialize($_SESSION["user"]);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="../bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bootstrap/js/dist/util/index.js"></script>
     <script src="../node_modules/cropme/dist/cropme.js"></script>
+    <script src="../node_modules/js-cookie/dist/js.cookie.min.js"></script>
 
     <script src="../php/debugging-tools/debug.js"></script>
 
