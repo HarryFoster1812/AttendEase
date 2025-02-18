@@ -13,7 +13,37 @@ event_template = document.getElementById("class-ui");
 document.getElementById("date_forward").addEventListener("click", nextDate);
 document.getElementById("date_back").addEventListener("click", previousDate);
 
+var twelveHourFormat = false;
+if (Cookies.get("time") !== undefined){
+    let timeformat = Cookies.get("time");
+    if (timeformat == "12 Hour AM/PM"){
+        twelveHourFormat = true; 
+    }
+}
 
+
+function hours12(date){
+    let ampm = date.getHours() >= 12 ? 'pm' : 'am';
+    return `${date.toString("hh:mm")}${ampm}`;
+}
+
+function hours24(date){
+    return `${date.toString("HH:mm")}`;
+}
+
+function createTimeString(start_time, end_time){
+    let timetext = "";
+    let startTime = Date.parse(start_time);
+    let endTime = Date.parse(end_time);
+    if (twelveHourFormat){
+        timetext = hours12(startTime) + " - " + hours12(endTime);
+    }
+    else{
+        timetext = hours24(startTime) + " - " + hours24(endTime);
+    }
+
+    return timetext;
+}
 
 const months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -98,7 +128,9 @@ function populateDay(json_data, tableElements, dateFilter){
             let event_item = event_template.content.cloneNode(true);
             // change node content
             // need to add something so that student and lecturer events can be distinct (maybe a class?)
-            event_item.querySelector(".class-time-text").innerText = filtered_json[i][j]["start_time"] + " - " + filtered_json[i][j]["end_time"];
+            let timetext = createTimeString(filtered_json[i][j]["start_time"], filtered_json[i][j]["end_time"]);
+            
+            event_item.querySelector(".class-time-text").innerText = timetext;
             event_item.querySelector(".class-title").innerText  = filtered_json[i][j]["course_title"];
             event_item.querySelector(".class-loc").innerText = filtered_json[i][j]["location_name"];
 
@@ -136,7 +168,9 @@ function populateMonth(json_data, tableElements, start_date){
             let event_item = event_template.content.cloneNode(true);
             // change node content
             // need to add something so that student and lecturer events can be distinct (maybe a class?)
-            event_item.querySelector(".class-time-text").innerText = event["start_time"] + " - " + event["end_time"];
+            
+            let timetext = createTimeString(filtered_json[i][j]["start_time"], filtered_json[i][j]["end_time"]);
+            event_item.querySelector(".class-time-text").innerText = timetext;
             event_item.querySelector(".class-title").innerText  = event["course_title"];
             event_item.querySelector(".class-loc").innerText = event["location_name"];
 

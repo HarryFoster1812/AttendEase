@@ -6,6 +6,38 @@ const classLists = document.querySelectorAll('.class-block-list');
 
 const rows = document.querySelectorAll('.outer');
 
+
+var twelveHourFormat = false;
+if (Cookies.get("time") !== undefined){
+    let timeformat = Cookies.get("time");
+    if (timeformat == "12 Hour AM/PM"){
+        twelveHourFormat = true; 
+    }
+}
+
+function hours12(date){
+    let ampm = date.getHours() >= 12 ? 'pm' : 'am';
+    return `${date.toString("hh:mm")}${ampm}`;
+}
+
+function hours24(date){
+    return `${date.toString("HH:mm")}`;
+}
+
+function createTimeString(start_time, end_time){
+    let timetext = "";
+    let startTime = Date.parse(start_time);
+    let endTime = Date.parse(end_time);
+    if (twelveHourFormat){
+        timetext = hours12(startTime) + " - " + hours12(endTime);
+    }
+    else{
+        timetext = hours24(startTime) + " - " + hours24(endTime);
+    }
+
+    return timetext;
+}
+
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if(entry.isIntersecting) {
@@ -43,6 +75,8 @@ const toggleClassClick = function(event){
 
 }
 
+
+
 function addEvent(event_info){
     const classBlock = `<div class="col-md-6 col-xl-4 class-block-container gap-3">
                             <div class="class-block bg-primary mb-4 text-secondary shrink">
@@ -52,7 +86,7 @@ function addEvent(event_info){
                                             <h4>${event_info["course_title"]}</h4>
                                         </div>
                                         <div class="colzzzzzz-6 class-time">
-                                            <h4>${event_info["start_time"]} - ${event_info["end_time"]}</h4>
+                                            <h4>${createTimeString(event_info["start_time"], event_info["end_time"])}</h4>
                                         </div>
                                     </div>
                                     <div class="row class-block-mid mb-2">
