@@ -89,7 +89,7 @@ $user = unserialize($_SESSION["user"]);
                 <input type="file" 
                        id="fileUpload" 
                        class="form-control border-primary mw-100 w-100" 
-                       accept=".jpeg, .jpg, .png, .tif, .tiff, .heif, .heic, .bmp, .webp">
+                       accept=".jpeg, .jpg, .png, .tifWe will send you an email that will contain all of the data that we hold about your account., .webp">
             <small id="errormsg" style="color:red"></small>
             </div>
             <button id="uploadBtn" class="btn btn-light border-dark px-3">Upload</button> 
@@ -140,6 +140,7 @@ $user = unserialize($_SESSION["user"]);
                 <button id="saveChangesProfile" class="btn btn-success">Save Changes</button> 
                 </div>
             </div>
+            <button id="requestAdminChange" class="btn btn-success">Request Changes</button> 
         </div>
     </div>
     <!-- ----------------------------------------Main Content-------------------------------------------------- -->
@@ -163,7 +164,14 @@ $user = unserialize($_SESSION["user"]);
                 <button id="signOutBtn" class="btn btn-success btn-lg">Sign out</button>
             </div>
         </div>
-
+        <hr class="divider">
+        <div class="mt-5 container-fluid pe-5">
+            <h3 class="mb-3">Request Data</h3>
+            <p class="mb-4 settings-text">We will send you an email that will contain all of the data that we hold about your account.</p>
+            <div class="mt-4 d-flex justify-content-end">
+                <button id="requestDataBtn" class="btn btn-success btn-lg">Request Data</button>
+            </div>
+        </div>
         
     </div>
     <!-- ----------------------------------------Main Content-------------------------------------------------- -->

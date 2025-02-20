@@ -169,7 +169,7 @@ function populateMonth(json_data, tableElements, start_date){
             // change node content
             // need to add something so that student and lecturer events can be distinct (maybe a class?)
             
-            let timetext = createTimeString(filtered_json[i][j]["start_time"], filtered_json[i][j]["end_time"]);
+            let timetext = createTimeString(event["start_time"], event["end_time"]);
             event_item.querySelector(".class-time-text").innerText = timetext;
             event_item.querySelector(".class-title").innerText  = event["course_title"];
             event_item.querySelector(".class-loc").innerText = event["location_name"];

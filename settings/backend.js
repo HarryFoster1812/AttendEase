@@ -1,4 +1,4 @@
-// PROFILE PICTURE SECTION 
+//-------------------- PROFILE PICTURE SECTION --------------------
 
 const imageUpload = document.getElementById('fileUpload');
 const popup = document.getElementById('popup');
@@ -128,7 +128,7 @@ uploadBtn.addEventListener("click", () => {
 });
 
 
-// PROFILE DETAILS
+// -------------------- PROFILE DETAILS --------------------
 
 const saveProfile = document.getElementById("saveChangesProfile");
 
@@ -166,9 +166,10 @@ function sendChangeSettingsAJAX(changedFields, newValues){
 }
 
 
-// ACCOUNT SETTINGS
+//-------------------- ACCOUNT SETTINGS--------------------
 deleteButton = document.getElementById("deleteAccount");
 signOutButton = document.getElementById("signOutBtn");
+requestDataButton = document.getElementById("requestDataBtn");
 
 const deleteOverlay = document.getElementById("deleteOverlay");
 const deletepopup = document.getElementById("deletepopup");
@@ -191,13 +192,27 @@ deleteButton.addEventListener("click", () => {
     deletepopup.style.display = "block";
 });
 
-
-
 signOutBtn.addEventListener('click', () => {
     window.location.replace("../signout/"); 
 });
 
-// PREFERENCES
+requestDataButton.addEventListener("click", ()=> {
+    // add ajax for the request data php
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // display success messages
+            console.log(this.responseText);
+        }
+    };
+
+    xmlhttp.open("POST", "./requestData.php", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.send();
+});
+
+// ------------ PREFERENCES --------------------
 darkMode = document.getElementById("darkModeInput");
 timeselect = document.getElementById("timeSelect");
 
@@ -217,7 +232,7 @@ timeselect.addEventListener("change", () => {
    Cookies.set("time", timeselect.value);
 });
 
-// PRIVACY AND SECURITY
+// --------------------PRIVACY AND SECURITY--------------------
 
 const locationToggle = document.getElementById("locationToggle");
 const leaderboardToggle = document.getElementById("leaderboardToggle");
@@ -314,3 +329,12 @@ changePass.addEventListener("click", () => {
         xhr.send("oldPass="+oldpass.value+"&newPass="+newpass.value);
     }
 });
+
+
+
+
+// NEED TO DO
+//
+// ADD REQUEST ALL DATA
+// ADD LINE TO PROFILE DATA TO SHOW DEGREE
+// MAKE DARKMODE WORK
