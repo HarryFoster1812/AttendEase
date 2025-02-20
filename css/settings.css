@@ -57,8 +57,10 @@ hr.divider {
 .search-container {
     position: relative;
     padding-bottom: 50px;
-    width: 290px;
+    width: 100%;
     padding-left: 0;
+    display: flex;
+    justify-content:center;
 }
 .search-input {
     height: 50px;
@@ -66,6 +68,7 @@ hr.divider {
     padding-left: 50px;
     border: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width:90%;
 }
 .search-icon {
     position: absolute;

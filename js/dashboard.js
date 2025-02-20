@@ -4,6 +4,8 @@ console.log(classLists);
 
 
 const rows = document.querySelectorAll('.outer');
+var dashStyles;
+
 
 const observer = new IntersectionObserver(entries => {
     entries.forEach((entry,idx) => {
@@ -76,6 +78,13 @@ for(let i=0;i<6;i++){
 
 
 document.addEventListener("DOMContentLoaded", function () {
+    const isDark = true;
+    if(!isDark){
+        dashStyles = ["#660099",'#7a00b3','#ededed']
+    }
+    else{
+        dashStyles = ["#ffcc33",'#eaab00','#333333']
+    }
     // Reusable chart creation function
     function createDoughnutChart(ctx, data, label1, label2) {
         return new Chart(ctx, {
@@ -84,8 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 labels: [],
                 datasets: [{
                     data: data,
-                    backgroundColor: ["#660099", "#ededed"],
-                    hoverBackgroundColor: ["#7a00b3", "#ededed"]
+                    backgroundColor: [dashStyles[0],dashStyles[2]],
+                    hoverBackgroundColor: [dashStyles[1], dashStyles[2]]
                 }]
             },
             options: {
@@ -110,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     let fontSize = (height / 6).toFixed(2);
                     ctx.font = fontSize + "px convergence";
                     ctx.textBaseline = "middle";
-                    ctx.fillStyle = "#660099";
+                    ctx.fillStyle = dashStyles[0];
 
                     // Draw percentage
                     const text1 = label1, // Custom text inside the chart

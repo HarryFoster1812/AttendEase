@@ -1,0 +1,19 @@
+body{
+    background-color: #333;
+    color: #ffcc33;
+}
+.main-content{
+    color: #ffcc33; 
+}
+/* .sidebar-container{
+    background-color:#444;
+}
+.nav-pills .nav-link {
+    background-color: #444 !important;
+    color: #ffcc33 !important;
+    width: 320px;
+}
+.nav-pills .nav-link.active:hover {
+    color: #4a0073 !important;
+    background-color: #d4a30e !important
+} */
