@@ -78,7 +78,7 @@ for(let i=0;i<6;i++){
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const isDark = true;
+    const isDark = true;            //Set this to the value stored in the cookie
     if(!isDark){
         dashStyles = ["#660099",'#7a00b3','#ededed']
     }
