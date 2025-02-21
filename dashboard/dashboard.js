@@ -5,7 +5,13 @@ const classLists = document.querySelectorAll('.class-block-list');
 
 
 const rows = document.querySelectorAll('.outer');
-
+var dashStyles;
+if(Cookies.get("darkMode") != undefined){
+    dashStyles = ["#ffcc33",'#eaab00','#333333'];
+}
+else{
+    dashStyles = ["#660099",'#7a00b3','#ededed'];
+}
 
 var twelveHourFormat = false;
 if (Cookies.get("time") !== undefined){
@@ -124,8 +130,8 @@ function createDoughnutChart(ctx, data, label1, label2) {
             labels: [],
             datasets: [{
                 data: data,
-                backgroundColor: ["#660099", "#ededed"],
-                hoverBackgroundColor: ["#7a00b3", "#ededed"]
+                backgroundColor: [dashStyles[0],dashStyles[2]],
+                hoverBackgroundColor: [dashStyles[1],dashStyles[2]]
             }]
         },
         options: {
@@ -150,7 +156,7 @@ function createDoughnutChart(ctx, data, label1, label2) {
                 let fontSize = (height / 6).toFixed(2);
                 ctx.font = fontSize + "px convergence";
                 ctx.textBaseline = "middle";
-                ctx.fillStyle = "#660099";
+                ctx.fillStyle = dashStyles[0];
 
                 // Draw percentage
                 const text1 = label1, // Custom text inside the chart
@@ -217,6 +223,7 @@ xmlhttp.send();
 
 document.addEventListener("DOMContentLoaded", function () {
     // Create charts
+    
     const attendanceChart = document.getElementById("attendanceChart").getContext("2d");
     const timeChart = document.getElementById("timeChart").getContext("2d");
     const rankChart = document.getElementById("rankChart").getContext("2d");

@@ -23,7 +23,7 @@ $user = unserialize($_SESSION["user"]);
     <title>Settings | AttendEase</title>
     <?php include("../php/template/header.php"); ?>
     <link rel="stylesheet" href="./settings.css">
-    <link rel="stylesheet" href="../node_modules/cropme/dist/cropme.css">
+    <link rel="stylesheet" id="darkStyleSheet" href="../css/settings_dark.css">
 </head>
 <body>
 
@@ -184,7 +184,7 @@ $user = unserialize($_SESSION["user"]);
                 <div class="d-flex justify-content-between">
                     <p>Enable Dark Mode?</p>
                     <label class="switch">
-                        <input id="darkModeInput" type="checkbox">
+                        <input id="darkModeInput" type="checkbox" <?php if(isset($_COOKIE["darkMode"])){echo 'checked';}?> >
                         <span class="slider"></span>
                       </label>
                 </div>

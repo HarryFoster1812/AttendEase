@@ -1,3 +1,5 @@
+const darkStyle = document.getElementById("darkStyleSheet");
+
 //-------------------- PROFILE PICTURE SECTION --------------------
 
 const imageUpload = document.getElementById('fileUpload');
@@ -220,10 +222,12 @@ darkMode.addEventListener("change", () => {
    if (darkMode.checked){
         Cookies.set("darkMode", "enabled");
         // add new css
+        darkStyle.disabled = false;
     } 
     else{
         // remove cookie and remove css
         Cookies.remove("darkMode");
+        darkStyle.disabled = true;
     }
 });
 
@@ -331,7 +335,10 @@ changePass.addEventListener("click", () => {
 });
 
 
-
+document.body.onload = (() => {
+   let event = new Event("change");
+    darkMode.dispatchEvent(event);
+});
 
 // NEED TO DO
 //
