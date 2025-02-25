@@ -23,6 +23,7 @@ $userData = unserialize($_SESSION["user"]);
 <head>
     <title>Dashboard | AttendEase</title>
     <?php include("../php/template/header.php"); ?>
+    <base  href=".">
     <link rel="stylesheet" href="dashboard.css">
 <?php    
 if(isset($_COOKIE["darkMode"])){
