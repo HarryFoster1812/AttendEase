@@ -24,6 +24,7 @@ $user = unserialize($_SESSION["user"]);
     <?php include("../php/template/header.php"); ?>
     <link rel="stylesheet" href="./settings.css">
     <link rel="stylesheet" id="darkStyleSheet" href="../css/settings_dark.css">
+    <link rel="stylesheet" href="../node_modules/cropme/dist/cropme.css">
 </head>
 <body>
 
