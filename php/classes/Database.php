@@ -2,6 +2,11 @@
 
 class Database {
     private $pdo;
+    private $host;
+    private $port;
+    private $dbname;
+    private $username;
+    private $password;
 
     public function __construct($host, $port, $dbname, $user, $pass) {
         try {
@@ -9,8 +14,33 @@ class Database {
         } catch (Exception $e) {
             die("Error: " . $e->getMessage());
         }
+
+        $this->host = $host;
+        $this->port = $port;
+        $this->dbname = $dbname;
+        $this->username = $user;
+        $this->password = $pass;
     }
 
+    public function getHost(){
+        return $this->host;
+    }
+
+    public function getPort(){
+        return $this->port; 
+    }
+
+    public function getDbname(){
+        return $this->dbname; 
+    }
+
+    public function getUsername(){
+        return $this->username; 
+    }
+
+    public function getPassword(){
+        return $this->password; 
+    }
     public function query($query, $params = []) {
         $stmt = $this->pdo->prepare($query);
         if ($stmt->execute($params)) {

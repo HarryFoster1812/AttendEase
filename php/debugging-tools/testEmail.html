@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Test Email</title>
+        <link href="css/style.css" rel="stylesheet">
+        <style>
+        body{
+        background: black;
+        }
+        p{
+        color: white;
+        }
+        form{
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        }
+        #body{
+        height: 10em;
+        text-align:top;
+        }
+        </style>
+    </head>
+    <body>
+        <form action="./testEmail.php" method="post">
+            <p>recipient</p>
+            <input type="text" name="recipient"/>
+            <p>subject</p>
+            <input type="text" name="subject"/>
+            <p>body</p>
+            <input type="text" id="body" name="body"/>
+            <button type="submit" class="btn submit border-secondary">Send Test Mail</button>
+        </form>
+    </body>
+</html>
