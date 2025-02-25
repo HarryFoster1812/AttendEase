@@ -9,10 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $subject = $_POST['subject'];
     $body = $_POST['body'];
 
-    echo "Host: " . $db->getHost() . "\n";
-    echo "Username: " . $db->getUsername() . "\n";
-    echo "Password: " . $db->getPassword() . "\n";
-    echo "DbName: " . $db->getDbname() . "\n";
+    echo "Host: " . $db->getHost() . "\r\n". "<br>";
+    echo "Username: " . $db->getUsername() . "\r\n". "<br>";
+    echo "Password: " . $db->getPassword() . "\r\n". "<br>";
+    echo "DbName: " . $db->getDbname() . "\r\n". "<br>";
+    echo "recipient: " . $recipient . "\r\n". "<br>";
+    echo "subject: " . $subject . "\r\n". "<br>";
+    echo "body: " . $body. "\r\n";
 
     try{
         $mm = new MailManager($db->getHost(), $db->getUsername(), $db->getPassword(), $db->getDbname());
@@ -23,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $mm->send();
 
-        echo "Should of been success full...";
+        echo "Should of been successful...";
     }
     catch (Exception $e) {
         die("Error: " . $e->getMessage());
