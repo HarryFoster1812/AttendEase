@@ -274,6 +274,6 @@ calendarAjax.onreadystatechange = function() {
     }
 };
 
-calendarAjax.open("POST", "/calendar/get-calendar-data.php", true);
+calendarAjax.open("POST", "../calendar/get-calendar-data.php", true);
 calendarAjax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 calendarAjax.send("start_date="+Date.today().toString("yyyy-MM-dd")+"&end_date="+Date.today().toString("yyyy-MM-dd"));
