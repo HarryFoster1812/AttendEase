@@ -1,4 +1,4 @@
-import StatisticsCalculator from "../../js/StatisticsCalculator.js";
+import StatisticsCalculator from "../js/StatisticsCalculator.js";
 
 
 const classLists = document.querySelectorAll('.class-block-list');
