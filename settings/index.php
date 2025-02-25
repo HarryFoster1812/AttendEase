@@ -199,8 +199,8 @@ $user = unserialize($_SESSION["user"]);
                     </div>
                     <div class="col-xl-6">
                         <select id="timeSelect" class="form-select border-primary time-select">
-                        <option <?php if($_COOKIE["time"] == "24 Hour"){echo "selected";} ?> >24 Hour</option>
-                        <option <?php if($_COOKIE["time"] == "12 Hour AM/PM"){echo "selected";} ?> >12 Hour AM/PM</option>
+                        <option <?php if(isset($_COOKIE["time"]) && $_COOKIE["time"] == "24 Hour"){echo "selected";} ?> >24 Hour</option>
+                        <option <?php if(isset($_COOKIE["time"]) && $_COOKIE["time"] == "12 Hour AM/PM"){echo "selected";} ?> >12 Hour AM/PM</option>
                         </select>
                     </div>
                 </div>
