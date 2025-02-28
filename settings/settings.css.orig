@@ -1,3 +1,4 @@
+
 /* Make the navbar sticky */
 .navbar {
     position: sticky;
@@ -363,6 +364,6 @@ hr.divider {
 .popup button.crop {
     background-color: #28a745;
 }
-.main-content{
+  .main-content{
     color-scheme: only dark !important;
 }
