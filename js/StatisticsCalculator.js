@@ -11,6 +11,7 @@ export default class StatisticsCalculator { data;
     graphDataAllWeeks;
     hoursAttended;
     hoursScheduled;
+    module_data;
 
     constructor(json_data) {
         this.data = json_data;
@@ -173,10 +174,105 @@ export default class StatisticsCalculator { data;
         return [months, percentages];
     }
 
-    calculateStaffData(moduleName){
-        // filter for the module
-        // get each class data
-        // filter for each week
+    calculateStaffData(moduleName, type="*"){
+        if(type === "*"){
+            // go through each date
+            let dates = {};
+            Object.keys(this.module_data[moduleName]).forEach(moduleType => {
+                Object.keys(this.module_data[moduleName][moduleType]).forEach(date => {
+
+                    let date_attendance = this.module_data[moduleName][moduleType][date][0]; 
+                    let date_total      = this.module_data[moduleName][moduleType][date][1]; 
+                    if(Object.keys(dates).includes(date)){
+                        dates[date][0] += date_attendance;
+                        dates[date][1] += date_total;
+                    }
+                    else{
+                        dates[date] = [date_attendance, date_total];
+                    }
+                    
+                });
+            });
+
+            // go through the dates and convert them into an array of dates and percentages
+
+            let date_percentage_array = Object.keys(dates).map((key) => {
+                return [key, Math.floor((dates[key][0]/dates[key][1])*100)]
+            })
+
+            // sort the dates
+            date_percentage_array.sort((date, percentage)=>{
+                return Date.parse(date);
+            });
+            
+
+            // split into parallel arrays
+
+            let date_array = [];
+            let percentage_array = [];
+
+            for(let i=0;i<date_percentage_array.length;i++){
+                date_array.push(date_percentage_array[i][0]);
+                percentage_array.push(date_percentage_array[i][1]);
+            }
+
+            return [date_array, percentage_array];
+        }
+
+        let percentages = []
+        Object.keys(this.module_data[moduleName][type]).forEach((date, index) => {
+            let date_attendance = this.module_data[moduleName][type][date][0]; 
+            let date_total      = this.module_data[moduleName][type][date][1]; 
+            percentages[index] = Math.round((date_attendance / date_total)*100)
+        });
+        return [Object.keys(this.module_data[moduleName][type]), percentages]; 
+    }
+
+    processStaffData(){
+        this.module_data = {};
+        this.data.forEach(event => {
+            let course = event["course_title"]; 
+            let type = event["type"]; 
+            let date = event["date"]; 
+            let attendedCount = event["total_attended"];
+            let totalAssigned = event["total_assigned"];
+
+            if(!Object.keys(this.module_data).includes(course)){
+                // create a new dictionary for the course
+                this.module_data[course] = {};
+                // add the type to the dictionary and a date dictionary
+                this.module_data[course][type] = {}
+                // for the data add a array which is [attendedCount, totalCount]
+                this.module_data[course][type][date] = [attendedCount, totalAssigned]; 
+            }
+            // check if type does not exists in course
+            else if(!Object.keys(this.module_data[course]).includes(type)){
+                // add the type to the dictionary and a date dictionary
+                this.module_data[course][type] = {}
+                // for the data add a array which is [attendedCount, totalCount]
+                this.module_data[course][type][date] = [attendedCount, totalAssigned];
+            }
+            // check if date does not exist
+            else if(!Object.keys(this.module_data[course][type]).includes(date)){
+                // for the data add a array which is [attendedCount, totalCount]
+                this.module_data[course][type][date] = [attendedCount, totalAssigned];
+            }
+            else{
+                this.module_data[course][type][date][0] += attendedCount; 
+                this.module_data[course][type][date][1] += totalAssigned;
+            }
+        });
+    }
+
+
+
+    getModuleList(){
+        return Object.keys(this.module_data);
+    }
+
+    getTypeList(moduleName){
+        return Object.keys(this.module_data[moduleName]);
+
     }
 
 

@@ -31,11 +31,21 @@ else{
     <?php include($nav_path); ?>
     <section id="content">
         <h2 class="text-black text-center my-5">Lesson Statistics</h2>
-        <div>
-            <div id="moduleSelect" class="dropdown-menu">
+        <div class="d-flex flex-column align-items-center justify-content-center">
+            
+
+            <div class="text-primary d-flex align-items-center justify-content-center mb-5">
+                <h2>Selected Module:&emsp;</h2>
+                <select id="ModuleDropdown" class="form-select w-auto">
+                </select>
             </div>
-            <h2 class="text-primary text-center mb-5">Selected Module: COMP10120</h2>
-        </div>        
+
+            <div class="text-primary d-flex align-items-center justify-content-center mb-5">
+                <h2>Selected Type:&emsp;</h2>
+                <select id="TypeDropdown" class="form-select w-auto">
+                </select>
+            </div>       
+         </div>        
         <div class="px-5">
             <canvas id="AttendanceChart" class="mb-4 bg-primary p-3"></canvas>
         </div>
