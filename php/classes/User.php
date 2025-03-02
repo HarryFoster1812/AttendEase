@@ -10,9 +10,9 @@ class User {
     private $username;
     private $pronouns;
     private $profile_path;
-    
+    private $academic;
 
-    public function __construct($user_id, $username, $role_id, $email, $location, $leaderboard, $name, $pronouns, $pfp) {
+    public function __construct($user_id, $username, $role_id, $email, $location, $leaderboard, $name, $academic, $pronouns = "Not Set", $pfp = "../images/Default_pfp.jpg") {
         $this->user_id = $user_id;
         $this->username = $username;
         $this->role_id = $role_id;
@@ -22,6 +22,7 @@ class User {
         $this->name = $name;
         $this->pronouns = $pronouns;
         $this->profile_path = $pfp;
+        $this->academic = $academic;
     }
 
     public function getRoleId(): int {
@@ -63,6 +64,10 @@ class User {
 
     public function getPfpPath(): string{
         return $this->profile_path;
+    }
+
+    public function getAcademic(): string{
+        return $this->academic;
     }
 
     public function getName(): string {

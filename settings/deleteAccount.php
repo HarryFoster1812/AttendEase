@@ -14,31 +14,36 @@ if(!isset($_SESSION["user"]){
 }
 
 $user = unserialize($_SESSION["user"]);
-$SQL = "DELETE FROM User WHERE user_id = :user_id;";
-try{
+$queries = ["DELETE FROM User WHERE user_id = :user_id;"];
+//try{
     if($user->getRoleId() == 0){
         // it is a student
-        $SQL = $SQL . "DELETE FROM Attendance WHERE user_id = :user_id;"; 
+        array_push($queries, "DELETE FROM Attendance WHERE user_id = :user_id;"); 
     }
     else if($user->getRoleId() == 1){
         // it is a gta
-        $SQL = $SQL . "DELETE FROM Attendance WHERE user_id = :user_id; DELETE FROM CourseAssignment WHERE lecturer_id = :user_id;";
+        array_push($queries, "DELETE FROM Attendance WHERE user_id = :user_id;");
+        array_push($queries, "DELETE FROM CourseAssignment WHERE lecturer_id = :user_id;");
     }
     else if($user->getRoleId() == 2){
         // it is a lecturer
-        $SQL = $SQL . "DELETE FROM CourseAssignment WHERE lecturer_id = :user_id;";
+        array_push($queries, "DELETE FROM CourseAssignment WHERE lecturer_id = :user_id;");
     }
 
-    $db->query($SQL, [
-            ":user_id" => $userData->getUserId(),
+    foreach($queries as $query){
+        $db->query($query, [
+            ":user_id" => $user->getUserId()
         ]);
-}
+    }
+
+    //}
+/*
 catch(Exception $e){
     http_response_code(500);
     echo json_encode(["error" => $e->getMessage()]);
     exit();
 }
-
+ */
 session_destroy();
 header("Location:../");
 ?>

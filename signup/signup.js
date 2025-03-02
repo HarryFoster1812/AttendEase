@@ -1,4 +1,5 @@
 username = document.getElementById("username");
+affiliation = document.getElementById("affiliation");
 email = document.getElementById("email");
 password = document.getElementById("user_pass");
 togglePass = document.getElementById("toggle_pass");
@@ -10,6 +11,7 @@ background.style.height = "1050px"; // i need to hard code this to start because
 
 
 username.addEventListener("input", checkUsername);
+affiliation.addEventListener("input", checkAffiliation);
 email.addEventListener("input", checkEmail);
 password.addEventListener("input", checkPassword);
 togglePass.addEventListener("click", togglePassword);
@@ -80,6 +82,36 @@ function checkUsername(input){
 
     return valid;
 }
+
+function checkAffiliation(input){
+    valid = false;
+    
+    // two types of inputs are given to this function, the element its self or the event
+
+    if (input.srcElement != null || input.srcElement != undefined){ // check if it is an event
+        // extract the sender element
+        element = input.srcElement;
+    }
+
+    else{
+        element = input;
+    }
+    
+    text = element.value;
+
+    if (text == null || text.trim() == ""){
+        showError(element, "Affiliation field can not be empty.");
+    }
+
+    else{
+        removeError(element);
+        valid = true;
+    }
+
+    return valid;
+}
+
+
 
 function checkPassword(input){
     let valid = false;
@@ -187,9 +219,10 @@ function checkSubmit(e){
     usernameValid = checkUsername(username);
     emailValid = checkEmail(email);
     passwordValid = checkPassword(password);
+    affiliationValid = checkAffiliation(affiliation);
     termsValid = checkTerms(terms);
 
-    formValid = usernameValid && emailValid && passwordValid && termsValid;
+    formValid = usernameValid && emailValid && passwordValid && affiliationValid && termsValid;
 
     if (!formValid){
         e.preventDefault(); // stop the form from submitting

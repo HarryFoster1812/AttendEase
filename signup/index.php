@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $affiliation = $_POST['affiliation'];
 
     $pdo = $db->getPdo();
 
@@ -54,18 +55,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $userid = $userid + 1;
 
-        $query = 'INSERT INTO User VALUES (:userid, :username, :password, :salt, :email, 0, 1, 1, "")';
+        $name = explode("@", $email)[0];
+        $name = explode("-", $name)[0];
+        $name = str_replace(".", " ", $name);
+
+        $query = 'INSERT INTO User (user_id, username, password, salt, email, name, academic_affiliation) VALUES (:userid, :username, :password, :salt, :email, :name)';
+
         // VALUES for the User table are (UserId, Username, Password, Salt, Email, Role, Location  opt in, leaderboard opt in)
 
         if ($stmt = $pdo->prepare($query)) {
-            $stmt->execute([":userid" => $userid, ":username" => $username, ":password" => $hashed_password, ":salt" => $salt,":email" => $email]);
-            $_SESSION["user_id"] = $userid;
-            $_SESSION["role_id"] = 0;
-            $_SESSION["email"] = $email;
-            $_SESSION["location"] = 1;
-            $_SESSION["leaderboard"] = 1;
+            $stmt->execute([":userid" => $userid, ":username" => $username, ":password" => $hashed_password, ":salt" => $salt,":email" => $email, ":name"=>$name]);
 
-            $_SESSION['user'] = serialize(new User($userid, 0, $email, 1, 1));
+            $_SESSION['user'] = serialize(new User($userid, $username, 0, $email, 1, 1, $name, $affiliation));
 
 
             header('Location:../dashboard/'); // redirect the user to the dashboard
@@ -141,6 +142,13 @@ function get_user_id ($pdo){
                                     <div class="mb-4">
                                         <label for="user_pass" class="form-label">Password</label>
                                         <input type="password" class="form-control" id="user_pass" placeholder="Enter your password..." name="password">
+                                        <small></small>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-4">
+                                        <label for="user_pass" class="form-label">Academic Affiliation <span class="email-small">(Degree name or Department)</span> </label>
+                                        <input type="text" class="form-control" id="affiliation" placeholder="BSc Computer Science / Department of Computer Science " name="affiliation">
                                         <small></small>
                                     </div>
                                 </div>
