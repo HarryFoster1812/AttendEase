@@ -16,7 +16,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $userData = unserialize($_SESSION["user"]);
     $timeslotManager = new TimeslotManager($db, $userData);
 
-    $data = $timeslotManager->getStatistics();
+    if($userData->getRoleId() != 2){
+        $data = $timeslotManager->getStudentStatistics();
+    }
+    else{
+        $data = $timeslotManager->getStaffStatistics();
+    }
     echo json_encode($data);
 
 }

@@ -7,6 +7,9 @@ session_start();
 
 if(isset($_SESSION["navbar"])){
     $nav_path = "../php/template/" . $_SESSION["navbar"];
+    if(unserialize($_SESSION["user"])->getRoleId() != 2){
+        header("location:../statistics/");
+    }
 }
 
 else{
@@ -28,7 +31,11 @@ else{
     <?php include($nav_path); ?>
     <section id="content">
         <h2 class="text-black text-center my-5">Lesson Statistics</h2>
-        <h2 class="text-primary text-center mb-5">Selected Module: COMP10120</h2>
+        <div>
+            <div id="moduleSelect" class="dropdown-menu">
+            </div>
+            <h2 class="text-primary text-center mb-5">Selected Module: COMP10120</h2>
+        </div>        
         <div class="px-5">
             <canvas id="AttendanceChart" class="mb-4 bg-primary p-3"></canvas>
         </div>
@@ -36,7 +43,7 @@ else{
 
     <?php include("../php/template/footer.php"); ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./lecturer_statistics.js"></script>
+    <script type="module" src="./lecturer_statistics.js"></script>
 
 </body>
 </html>

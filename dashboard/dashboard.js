@@ -190,6 +190,7 @@ xmlhttp.onreadystatechange = function() {
 
             // send this data to a function to calculate statistics
             var statistics = new StatisticsCalculator(jsonData);
+            statistics.processData();
             console.log(statistics);
             let totalAttended = statistics.attendedCount;
             let totalEvents = statistics.totalEventCount;
