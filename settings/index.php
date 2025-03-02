@@ -49,11 +49,6 @@ $user = unserialize($_SESSION["user"]);
     <?php include($nav_path); ?>
     <!-- Sidebar -->
     <div class="sidebar-container collapse show" id="sidebarCollapse">
-        <div class="search-container" id="search-sidebar">
-            <input type="text" class="form-control search-input" placeholder="Search...">
-            <i class="fas fa-search search-icon"></i>
-        </div>
-
         <div class="pills-container">
             <div class="d-flex align-items-start bg-primary">
                 <div class="nav flex-column nav-pills sidebar-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
