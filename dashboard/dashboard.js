@@ -91,7 +91,7 @@ function addEvent(event_info){
                                         <div class="col-6 class-code">
                                             <h4>${event_info["course_title"]}</h4>
                                         </div>
-                                        <div class="colzzzzzz-6 class-time">
+                                        <div class="col-6 class-time">
                                             <h4>${createTimeString(event_info["start_time"], event_info["end_time"])}</h4>
                                         </div>
                                     </div>
@@ -107,7 +107,7 @@ function addEvent(event_info){
                                     </div>
                                     <div class='row class-attend-block mt-2 d-none'>
                                         <button class="btn btn-primary rounded-pill">
-                                            <h4 class='text-secondary'>attend</h4>
+                                            <h4 class='text-secondary'>ATTEND</h4>
                                         </button>
                                     </div>
                                 </div>

@@ -31,7 +31,7 @@ if(isset($_COOKIE["darkMode"])){
 </head>
 <body>
     <template id="class-ui">
-        <div class="class-block">
+        <div class="class-block my-2">
             <div class="class-head">
                 <div class="class-time-icon">
                     <i class="fa-regular fa-clock"></i>

@@ -183,7 +183,7 @@ function populateMonth(json_data, tableElements, start_date){
 }
 
 function populateCalendar(json_data, period, start_date){
-
+    console.log(json_data);
     if (json_data.length == 0){
         return;
     }
@@ -360,6 +360,7 @@ function dateEvent(event){
             // update the calendar
             try{
                 json_data = JSON.parse(this.responseText);
+                console.log(json_data);
                 clearCalendar(time);
                 populateCalendar(json_data, time, start_date);
             }
