@@ -7,6 +7,9 @@ const codeImage = document.getElementById('attend-image');
 const backdrop = document.querySelector(".attend-backdrop");
 const cancelButton = document.querySelector(".attendance-control .btn-light");
 const acceptButton = document.querySelector(".attendance-control .btn-success");
+
+const uncertaintyLat = 0.000180;
+const uncertaintyLong = 0.000255;
 function showPopup() {
     popup.classList.add('show');
 }
@@ -55,6 +58,8 @@ async function getUserLoc(event){
     try{
         const positionData = await new Promise((resolve,reject)=>{navigator.geolocation.getCurrentPosition(resolve,reject)});
         console.log(positionData);
+        console.log(positionData.coords.latitude);
+        console.log(positionData.coords.longitude);
     }
     catch(error){
         console.log("Error getting location",error)
