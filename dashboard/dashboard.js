@@ -70,14 +70,20 @@ rows.forEach((row,idx) =>{
     },50)
 })
 const toggleClassClick = function(event){
-    console.log(event.target);
-    const buttonBlock = this.querySelector('.class-attend-block');
-    buttonBlock.classList.toggle('d-none');
-    this.classList.toggle('bg-primary');
-    this.classList.toggle('bg-secondary');
-    this.classList.toggle('text-primary');
-    this.classList.toggle('text-secondary');
-    this.classList.toggle('expand');
+    const button = this.querySelector('.class-attend-block .btn');
+    if(event.target.closest("button")){
+        toggleAttend();
+    }
+    else{
+        const buttonBlock = this.querySelector('.class-attend-block');
+        buttonBlock.classList.toggle('d-none');
+        this.classList.toggle('bg-primary');
+        this.classList.toggle('bg-secondary');
+        this.classList.toggle('text-primary');
+        this.classList.toggle('text-secondary');
+        this.classList.toggle('expand');
+    }
+
 
 }
 
