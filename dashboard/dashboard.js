@@ -72,7 +72,7 @@ rows.forEach((row,idx) =>{
 const toggleClassClick = function(event){
     const button = this.querySelector('.class-attend-block .btn');
     if(event.target.closest("button")){
-        toggleAttend();
+        toggleAttend(event.target.closest(".class-block"));
     }
     else{
         const buttonBlock = this.querySelector('.class-attend-block');
@@ -90,8 +90,9 @@ const toggleClassClick = function(event){
 
 
 function addEvent(event_info){
+    console.log(event_info);
     const classBlock = `<div class="col-md-6 col-xl-4 class-block-container gap-3">
-                            <div class="class-block bg-primary mb-4 text-secondary shrink">
+                            <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}">
                                 <div class="p-4">
                                     <div class="row class-block-upper mb-2">
                                         <div class="col-6 class-code">
@@ -121,7 +122,9 @@ function addEvent(event_info){
                         </div>`
 
     classLists[0].insertAdjacentHTML('beforeend',classBlock);
-    const classElement = classLists[0].lastElementChild.querySelector('.class-block');;
+    
+    const classElement = classLists[0].lastElementChild.querySelector('.class-block');
+    console.log(classElement,classElement.dataset);
     classElement.addEventListener('click', toggleClassClick);
 }
 

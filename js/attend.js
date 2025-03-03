@@ -13,9 +13,21 @@ function showPopup() {
 
 function hidePopup() {
     popup.classList.remove('show');
-    toggleAttend();
+    toggleAttend(null);
 }
-function toggleAttend(){
+function toggleAttend(block){
+    if(block){
+        console.log(block);
+        const instructor = block.dataset.aeName;
+        const location = block.querySelector('.class-venue h4').textContent;
+        const classCode = block.querySelector('.class-code h4').textContent;
+        const classTime = block.querySelector('.class-time h4').textContent;
+        document.querySelector('.attend-class-code .attend-details-content').textContent = classCode;
+        document.querySelector('.attend-class-time .attend-details-content').textContent = classTime;
+        document.querySelector('.attend-class-loc .attend-details-content').textContent = location;
+        document.querySelector('.attend-class-instructor .attend-details-content').textContent = instructor;
+        console.log(instructor,location,classCode,classTime);
+    }
     backdrop.classList.toggle('d-none');
     backdrop.classList.toggle('d-flex');
     if(backdrop.classList.contains('d-flex')){
