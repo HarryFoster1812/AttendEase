@@ -74,4 +74,28 @@
     .attend-image img{
         width:80%;
     }
+    .nav-box-fail{
+        max-width:90%;
+      }
   }
+  .nav-box-fail{
+    top:0;
+    right:0;
+    position: fixed;
+    z-index:999;
+    max-width:40%;
+    background-color: #ef9898;
+  }
+  .nav-box-fail p, .nav-box-success p{
+    font-size:1.1rem;
+  }
+  .nav-box-success{
+    top:0;
+    right:0;
+    position: fixed;
+    z-index:999;
+    max-width:40%;
+    background-color: #77dd77;
+  }
+  
+  

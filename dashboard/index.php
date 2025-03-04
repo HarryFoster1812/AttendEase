@@ -42,7 +42,7 @@ if(isset($_COOKIE["darkMode"])){
         </div>
      </template>
      <template id="nav-success">
-        <div class="nav-box-success p-2 m-1 border border-2 border-danger rounded-3">
+        <div class="nav-box-success p-2 m-1 border border-2 border-success rounded-3">
             <h5 class="text-success fw-bold">Marked your attendance!</h4>
             <p class="text-success">Your attendance for this class has been successfully marked!</p>
         </div>

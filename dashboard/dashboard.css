@@ -67,32 +67,7 @@ body{
   10%,70%  {background-size:100% 205%,var(--s,0) 100%}
   70%,100% {background-position: top,center}
 }
-.nav-box-fail{
-  top:0;
-  right:0;
-  position: fixed;
-  z-index:999;
-  max-width:40%;
-  background-color: #ef9898;
-}
-.nav-box-fail p, .nav-box-success-p{
-  font-size:0.9rem;
-}
-.nav-box-success{
-  top:0;
-  right:0;
-  position: fixed;
-  z-index:999;
-  max-width:40%;
-  background-color: #77dd77;
-}
-
 img{
-    width: 138px;
-    height: 137px;
-}
-@media(max-width: 768px){
-  .nav-box-fail{
-    max-width:90%;
-  }
+  width: 138px;
+  height: 137px;
 }

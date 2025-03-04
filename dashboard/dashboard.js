@@ -92,7 +92,7 @@ const toggleClassClick = function(event){
 function addEvent(event_info){
     console.log(event_info);
     const classBlock = `<div class="col-md-6 col-xl-4 class-block-container gap-3">
-                            <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}">
+                            <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}" data-ae-user="${event_info["user_id"]}" data-ae-timeslot="${event_info["timeslot_id"]}">
                                 <div class="p-4">
                                     <div class="row class-block-upper mb-2">
                                         <div class="col-6 class-code">
@@ -246,7 +246,7 @@ calendarAjax.onreadystatechange = function() {
         // update the calendar
         try{
             let json_data = JSON.parse(this.responseText);
-
+            console.log("TTJSON",json_data)
             if (Object.keys(json_data).includes("student")){
 
                 json_data["student"].forEach(element => {

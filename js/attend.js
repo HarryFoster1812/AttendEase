@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     }
 })
 function toggleAttend(block){
+    console.log("ifj")
     if(block){
         console.log(block);
         const instructor = block.dataset.aeName;
@@ -48,6 +49,8 @@ function toggleAttend(block){
         document.querySelector('.attend-class-time .attend-details-content').textContent = classTime;
         document.querySelector('.attend-class-loc .attend-details-content').textContent = location;
         document.querySelector('.attend-class-instructor .attend-details-content').textContent = instructor;
+        acceptButton.dataset.aeTimeslot = block.dataset.aeTimeslot;
+        acceptButton.dataset.aeUser = block.dataset.aeUser;
     }
     backdrop.classList.toggle('d-none');
     backdrop.classList.toggle('d-flex');
@@ -88,18 +91,25 @@ async function getUserLoc(event){
     cancelButton.disabled = false;
 }
 function compareLocData(lat,long, loc){
+    console.log(lat,long)
+    
     const loc_map = new Map([["Stopford_TH 1",1],["Nancy Rothwell_3A.078 M&T",2],["Crawford House_TH 1",3],["Kilburn_IT407",4],["Kilburn_G23",5],["Oddfellows Hall_G.010",6],["Kilburn_Tootill (0 + 1)",7],["Simon_TH E",8]])
     const building_data = json_loc[loc_map.get(loc)-1]
-    if(building_data.latitude-uncertaintyLat<=lat && lat<=building_data.latitude+uncertaintyLat && building_data.longitude-uncertaintyLong<=long && long <=building_data.longitude+uncertaintyLong){
+    console.log(building_data)
+    console.log(building_data.latitude);
+    if(parseFloat(building_data.latitude)-uncertaintyLat<=lat && lat<=parseFloat(building_data.latitude)+uncertaintyLat && parseFloat(building_data.longitude)-uncertaintyLong<=long && long <=parseFloat(building_data.longitude)+uncertaintyLong){
         const succBox = document.getElementById('nav-success');
         let succDOM = document.importNode(succBox,true).content;
         document.body.append(succDOM);
         succDOM = document.body.lastElementChild;
         const removeSucc = setTimeout(()=>{
-            failDOM.remove()
-        },5000);
+            succDOM.remove()
+        },4000);
         calculateNav = false;
         hidePopup();
+        const timeslotID = parseInt(acceptButton.dataset.aeUser);
+        const userID = parseInt(acceptButton.dataset.aeTimeslot);
+        publishAttendance(userID, timeslotID);
     }
     else{
         const failBox = document.getElementById('nav-fail');
@@ -108,8 +118,11 @@ function compareLocData(lat,long, loc){
         failDOM = document.body.lastElementChild;
         const removeFail = setTimeout(()=>{
             failDOM.remove()
-        },5000)
+        },3500)
     }
+}
+const publishAttendance = (userID, timeslotID) => {         //Use the TimeSlotID and UserID to update the attendance to the database
+    return;
 }
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(showPopup, 50);
