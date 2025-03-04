@@ -10,11 +10,15 @@ const acceptButton = document.querySelector(".attendance-control .btn-success");
 
 const uncertaintyLat = 0.000180;
 const uncertaintyLong = 0.000255;
+let calculateNav = false;
 function showPopup() {
     popup.classList.add('show');
 }
 
 function hidePopup() {
+    if(calculateNav){
+        return
+    }
     popup.classList.remove('show');
     toggleAttend(null);
 }
@@ -44,7 +48,6 @@ function toggleAttend(block){
         document.querySelector('.attend-class-time .attend-details-content').textContent = classTime;
         document.querySelector('.attend-class-loc .attend-details-content').textContent = location;
         document.querySelector('.attend-class-instructor .attend-details-content').textContent = instructor;
-        console.log(instructor,location,classCode,classTime);
     }
     backdrop.classList.toggle('d-none');
     backdrop.classList.toggle('d-flex');
@@ -70,6 +73,8 @@ function openLoc(){
 }
 async function getUserLoc(event){
     event.target.disabled = true;
+    cancelButton.disabled = true;
+    calculateNav = true
     const loc = event.target.closest(".container").querySelector('.attend-class-loc .attend-details-content').textContent;
     try{
         const positionData = await new Promise((resolve,reject)=>{navigator.geolocation.getCurrentPosition(resolve,reject)});
@@ -78,16 +83,32 @@ async function getUserLoc(event){
     catch(error){
         console.log("Error getting location",error)
     }
+    calculateNav = false;
     event.target.disabled = false;
+    cancelButton.disabled = false;
 }
 function compareLocData(lat,long, loc){
     const loc_map = new Map([["Stopford_TH 1",1],["Nancy Rothwell_3A.078 M&T",2],["Crawford House_TH 1",3],["Kilburn_IT407",4],["Kilburn_G23",5],["Oddfellows Hall_G.010",6],["Kilburn_Tootill (0 + 1)",7],["Simon_TH E",8]])
     const building_data = json_loc[loc_map.get(loc)-1]
     if(building_data.latitude-uncertaintyLat<=lat && lat<=building_data.latitude+uncertaintyLat && building_data.longitude-uncertaintyLong<=long && long <=building_data.longitude+uncertaintyLong){
-        console.log(true);
+        const succBox = document.getElementById('nav-success');
+        let succDOM = document.importNode(succBox,true).content;
+        document.body.append(succDOM);
+        succDOM = document.body.lastElementChild;
+        const removeSucc = setTimeout(()=>{
+            failDOM.remove()
+        },5000);
+        calculateNav = false;
+        hidePopup();
     }
     else{
-        console.log(false);
+        const failBox = document.getElementById('nav-fail');
+        let failDOM = document.importNode(failBox,true).content;
+        document.body.append(failDOM);
+        failDOM = document.body.lastElementChild;
+        const removeFail = setTimeout(()=>{
+            failDOM.remove()
+        },5000)
     }
 }
 document.addEventListener('DOMContentLoaded', function () {

@@ -35,6 +35,18 @@ if(isset($_COOKIE["darkMode"])){
 </head>
 <body>
      <?php include($nav_path); ?>
+     <template id="nav-fail">
+        <div class="nav-box-fail p-2 m-1 border border-2 border-danger rounded-3">
+            <h5 class="text-danger fw-bold">Could not mark your attendance, please try again!</h4>
+            <p class="text-danger">We could not mark your attendance. This is because either you are not in the assigned room or our geoloction detector has failed its purpose. If this issue persists, please contact AttendEase.</p>
+        </div>
+     </template>
+     <template id="nav-success">
+        <div class="nav-box-success p-2 m-1 border border-2 border-danger rounded-3">
+            <h5 class="text-success fw-bold">Marked your attendance!</h4>
+            <p class="text-success">Your attendance for this class has been successfully marked!</p>
+        </div>
+     </template>
      <div class="attend-backdrop d-none justify-content-center align-items-center">
         <div class="attend-popup">
             <div class="container px-5 py-4">
