@@ -107,8 +107,8 @@ function compareLocData(lat,long, loc){
         },4000);
         calculateNav = false;
         hidePopup();
-        const timeslotID = parseInt(acceptButton.dataset.aeUser);
-        const userID = parseInt(acceptButton.dataset.aeTimeslot);
+        const userID = parseInt(acceptButton.dataset.aeUser);
+        const timeslotID = parseInt(acceptButton.dataset.aeTimeslot);
         publishAttendance(userID, timeslotID);
     }
     else{
@@ -122,7 +122,19 @@ function compareLocData(lat,long, loc){
     }
 }
 const publishAttendance = (userID, timeslotID) => {         //Use the TimeSlotID and UserID to update the attendance to the database
-    return;
+    const data = { userid: userID, timeslotid: timeslotID };
+    console.log(JSON.stringify(data))
+    fetch("../dashboard/set-attendance-data.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.text())  // Get response from PHP
+    .then(result => console.log(result))
+    .catch(error => console.error("Error:", error));
+
 }
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(showPopup, 50);

@@ -44,7 +44,11 @@ class Database {
     public function query($query, $params = []) {
         $stmt = $this->pdo->prepare($query);
         if ($stmt->execute($params)) {
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if (stripos(trim($query), "SELECT") === 0) {
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            // For UPDATE, INSERT, DELETE, return affected row count
+            return $stmt->rowCount();
         } else {
             throw new Exception("Database Query Failed");
         }
