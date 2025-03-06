@@ -126,6 +126,7 @@ function populateDay(json_data, tableElements, dateFilter){
     for (let i=0;i<filtered_json.length;i++){
         for(let j=0;j<filtered_json[i].length;j++){
             let event_item = event_template.content.cloneNode(true);
+            
             // change node content
             // need to add something so that student and lecturer events can be distinct (maybe a class?)
             let timetext = createTimeString(filtered_json[i][j]["start_time"], filtered_json[i][j]["end_time"]);
@@ -137,6 +138,8 @@ function populateDay(json_data, tableElements, dateFilter){
             time = Number(filtered_json[i][j]["start_time"].substring(0,2));
             index = time -8;
             tableElements[index].appendChild(event_item);
+            event_item = tableElements[index].lastElementChild;
+            event_item.addEventListener('click',toggleAttend.bind(this,"calendar"));
         }
     }   
     
@@ -178,12 +181,14 @@ function populateMonth(json_data, tableElements, start_date){
             // It is not that simple. I forgot to account for weekends.
             index = days_between(event_date, start_date);
             tableElements[index].appendChild(event_item);
+            event_item = tableElements[index].lastElementChild;
+            event_item.addEventListener('click',toggleAttend.bind(this,"calendar"));
         });
     });        
 }
 
 function populateCalendar(json_data, period, start_date){
-
+    console.log(json_data);
     if (json_data.length == 0){
         return;
     }
@@ -360,6 +365,7 @@ function dateEvent(event){
             // update the calendar
             try{
                 json_data = JSON.parse(this.responseText);
+                console.log(json_data);
                 clearCalendar(time);
                 populateCalendar(json_data, time, start_date);
             }

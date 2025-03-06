@@ -70,28 +70,35 @@ rows.forEach((row,idx) =>{
     },50)
 })
 const toggleClassClick = function(event){
-    console.log(event.target);
-    const buttonBlock = this.querySelector('.class-attend-block');
-    buttonBlock.classList.toggle('d-none');
-    this.classList.toggle('bg-primary');
-    this.classList.toggle('bg-secondary');
-    this.classList.toggle('text-primary');
-    this.classList.toggle('text-secondary');
-    this.classList.toggle('expand');
+    const button = this.querySelector('.class-attend-block .btn');
+    if(event.target.closest("button")){
+        toggleAttend(event.target.closest(".class-block"));
+    }
+    else{
+        const buttonBlock = this.querySelector('.class-attend-block');
+        buttonBlock.classList.toggle('d-none');
+        this.classList.toggle('bg-primary');
+        this.classList.toggle('bg-secondary');
+        this.classList.toggle('text-primary');
+        this.classList.toggle('text-secondary');
+        this.classList.toggle('expand');
+    }
+
 
 }
 
 
 
 function addEvent(event_info){
+    console.log(event_info);
     const classBlock = `<div class="col-md-6 col-xl-4 class-block-container gap-3">
-                            <div class="class-block bg-primary mb-4 text-secondary shrink">
+                            <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}" data-ae-user="${event_info["user_id"]}" data-ae-timeslot="${event_info["timeslot_id"]}">
                                 <div class="p-4">
                                     <div class="row class-block-upper mb-2">
                                         <div class="col-6 class-code">
                                             <h4>${event_info["course_title"]}</h4>
                                         </div>
-                                        <div class="colzzzzzz-6 class-time">
+                                        <div class="col-6 class-time">
                                             <h4>${createTimeString(event_info["start_time"], event_info["end_time"])}</h4>
                                         </div>
                                     </div>
@@ -107,7 +114,7 @@ function addEvent(event_info){
                                     </div>
                                     <div class='row class-attend-block mt-2 d-none'>
                                         <button class="btn btn-primary rounded-pill">
-                                            <h4 class='text-secondary'>attend</h4>
+                                            <h4 class='text-secondary'>ATTEND</h4>
                                         </button>
                                     </div>
                                 </div>
@@ -115,7 +122,9 @@ function addEvent(event_info){
                         </div>`
 
     classLists[0].insertAdjacentHTML('beforeend',classBlock);
-    const classElement = classLists[0].lastElementChild.querySelector('.class-block');;
+    
+    const classElement = classLists[0].lastElementChild.querySelector('.class-block');
+    console.log(classElement,classElement.dataset);
     classElement.addEventListener('click', toggleClassClick);
 }
 
@@ -238,7 +247,7 @@ calendarAjax.onreadystatechange = function() {
         // update the calendar
         try{
             let json_data = JSON.parse(this.responseText);
-
+            console.log("TTJSON",json_data)
             if (Object.keys(json_data).includes("student")){
 
                 json_data["student"].forEach(element => {
