@@ -59,12 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $name = explode("-", $name)[0];
         $name = str_replace(".", " ", $name);
 
-        $query = 'INSERT INTO User (user_id, username, password, salt, email, name, academic_affiliation) VALUES (:userid, :username, :password, :salt, :email, :name)';
+        $query = 'INSERT INTO User (user_id, username, password, salt, email, name, academic_affiliation) VALUES (:userid, :username, :password, :salt, :email, :name, :affiliation)';
 
         // VALUES for the User table are (UserId, Username, Password, Salt, Email, Role, Location  opt in, leaderboard opt in)
 
         if ($stmt = $pdo->prepare($query)) {
-            $stmt->execute([":userid" => $userid, ":username" => $username, ":password" => $hashed_password, ":salt" => $salt,":email" => $email, ":name"=>$name]);
+            $stmt->execute([":userid" => $userid, ":username" => $username, ":password" => $hashed_password, ":salt" => $salt,":email" => $email, ":name"=>$name, ":affiliation"=>$affiliation]);
 
             $_SESSION['user'] = serialize(new User($userid, $username, 0, $email, 1, 1, $name, $affiliation));
 

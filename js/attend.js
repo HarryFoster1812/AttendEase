@@ -27,7 +27,7 @@ let json_loc;
 document.addEventListener('DOMContentLoaded', async function(){
     try {
         const response = await fetch('../dashboard/get-location-data.php');
-        
+
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -166,6 +166,12 @@ function updateClassBlocks(timeslotID) {
         }
     }
 }
+
+
+function submitFormClick(){
+    
+}
+
 function displayAttended(block){
     const midRow = block.querySelector('.class-block-mid');
     const attendCode = `
@@ -176,11 +182,11 @@ function displayAttended(block){
     midRow.insertAdjacentHTML('beforeend',attendCode);
 }
 document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(showPopup, 50);
+    setTimeout(toggleAttend, 50);
 });
 
 closeBtn.addEventListener('click', hidePopup);
 codeButton.addEventListener('click', openCode);
 locButton.addEventListener('click', openLoc);
 cancelButton.addEventListener('click',hidePopup);
-acceptButton.addEventListener('click',getUserLoc);
+acceptButton.addEventListener('click', submitFormClick);
