@@ -50,7 +50,7 @@ class User {
         return false;
     }
 
-    public function getUsername(){
+    public function getUsername(): string{
         return $this->username;
     }
 
@@ -76,19 +76,19 @@ class User {
         return $this->name;
     }
 
-    public function setPfpPath($newPath){
+    public function setPfpPath($newPath): void{
         $this->profile_path = $newPath;
     }
 
-    public function setPronouns($newPronouns){
+    public function setPronouns($newPronouns): void{
         $this->pronouns = $newPronouns;
     }
 
-    public function setLocationOpt($newOption){
+    public function setLocationOpt($newOption): void{
         $this->location=$newOption;
     }
 
-    public function setLeaderboardOpt($newOption){
+    public function setLeaderboardOpt($newOption): void{
         $this->leaderboard=$newOption;
     }
 }

@@ -11,6 +11,7 @@ const acceptButton = document.querySelector(".attendance-control .btn-success");
 const uncertaintyLat = 0.000180;
 const uncertaintyLong = 0.000255;
 let calculateNav = false;
+
 function showPopup() {
     popup.classList.add('show');
 }
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', async function(){
         }
         const data = await response.text();
         json_loc = JSON.parse(data);
+        console.log(json_loc);
         
     } catch (error) {
         console.error('Error fetching locations:', error);
@@ -92,9 +94,25 @@ async function getUserLoc(event){
 }
 function compareLocData(lat,long, loc){
     console.log(lat,long)
-    
-    const loc_map = new Map([["Stopford_TH 1",1],["Nancy Rothwell_3A.078 M&T",2],["Crawford House_TH 1",3],["Kilburn_IT407",4],["Kilburn_G23",5],["Oddfellows Hall_G.010",6],["Kilburn_Tootill (0 + 1)",7],["Simon_TH E",8]])
-    const building_data = json_loc[loc_map.get(loc)-1]
+
+    let building_data = null;
+    for(let i = 0; i < json_loc.length;i++){
+        if(json_loc[i].location_name == loc){
+            building_data = json_loc[i];
+        }
+    }
+
+    if (building_data === null){
+        const failBox = document.getElementById('nav-fail');
+        let failDOM = document.importNode(failBox,true).content;
+        document.body.append(failDOM);
+        failDOM = document.body.lastElementChild;
+        const removeFail = setTimeout(()=>{
+            failDOM.remove()
+        },3500);
+        return;
+    }
+
     console.log(building_data)
     console.log(building_data.latitude);
     if(parseFloat(building_data.latitude)-uncertaintyLat<=lat && lat<=parseFloat(building_data.latitude)+uncertaintyLat && parseFloat(building_data.longitude)-uncertaintyLong<=long && long <=parseFloat(building_data.longitude)+uncertaintyLong){
