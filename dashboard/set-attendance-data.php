@@ -16,8 +16,8 @@ if ($decodedData) {
     echo $decodedData["userid"] . " " . $decodedData["timeslotid"];
     $params = [
         "status" => "Attended",
-        "userID" => $decodedData["userid"],
-        "timeslotID" => $decodedData["timeslotid"]
+        "userID" => (int) $decodedData["userid"],
+        "timeslotID" => (int) $decodedData["timeslotid"]
     ];
     try {
         $rowsAffected = $db->query(

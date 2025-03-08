@@ -133,8 +133,29 @@ const publishAttendance = (userID, timeslotID) => {         //Use the TimeSlotID
     })
     .then(response => response.text())  // Get response from PHP
     .then(result => console.log(result))
-    .catch(error => console.error("Error:", error));
+    .catch(error => console.error("Error:", error))
+    .then(updateClassBlocks(timeslotID))
 
+}
+
+function updateClassBlocks(timeslotID) {
+    const classBlocks = document.querySelectorAll('.class-block');
+    for(const block of classBlocks){
+        if(parseInt(block.id)===timeslotID){
+            block.click();
+            displayAttended(block)
+            block.removeEventListener('click',window.toggleClassClick)
+        }
+    }
+}
+function displayAttended(block){
+    const midRow = block.querySelector('.class-block-mid');
+    const attendCode = `
+    <div class="col-6 class-attended">
+        <span><i class="fa-solid fa-circle-check me-2 text-success"></i><h4 style="display:inline">ATTENDED</h4></span>
+    </div>
+    `
+    midRow.insertAdjacentHTML('beforeend',attendCode);
 }
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(showPopup, 50);

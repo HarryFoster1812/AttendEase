@@ -121,7 +121,7 @@ if(isset($_COOKIE["darkMode"])){
             <div class="row mt-5 pt-4">
                 <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start mb-4">
                     <div class="btn-group rounded-pill time-select" role="group">
-                        <input class="btn btn-secondary border-dark rounded-start-pill px-3" type="date" id="datepicker"/>
+                        <input class="btn btn-secondary border-dark rounded-start-pill px-3 text-primary" type="date" id="datepicker"/>
                         <button class="btn btn-light border-dark px-3" id="date_back"><i class="fa-solid fa-chevron-left"></i></button>
                         <button class="btn btn-light border-dark rounded-end-circle px-3" id="date_forward"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>

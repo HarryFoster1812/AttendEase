@@ -16,6 +16,12 @@ body{
 .class-attend-block h4{
     margin:0;
 }
+.class-block h4{
+  font-size:1.25rem;
+}
+.attended{
+  border-left:0.6rem solid #198754;
+}
 
 /* HTML: <div class="loader"></div> */
 .loader {
