@@ -96,9 +96,17 @@ td{
   }
   .class-block{
     background-color: #ffcc33;
-    border-left:0.5rem solid #129cf3;
     border-radius:12px;
     padding:0.8rem;
+  }
+  .class-block.upcoming{
+    border-left:0.5rem solid #129cf3;
+  }
+  .class-block.missed{
+    border-left:0.5rem solid #dc3545;
+  }
+  .class-block.attended{
+    border-left:0.5rem solid #2dca22;
   }
   .class-head,.class-body{
     color:#660099;

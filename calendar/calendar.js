@@ -139,6 +139,7 @@ function populateDay(json_data, tableElements, dateFilter){
             index = time -8;
             tableElements[index].appendChild(event_item);
             event_item = tableElements[index].lastElementChild;
+            event_item.classList.add(filtered_json[i][j]["status"].toLowerCase());
             event_item.addEventListener('click',toggleAttend.bind(this,"calendar"));
         }
     }   
@@ -182,6 +183,8 @@ function populateMonth(json_data, tableElements, start_date){
             index = days_between(event_date, start_date);
             tableElements[index].appendChild(event_item);
             event_item = tableElements[index].lastElementChild;
+            console.log(event["status"])
+            event_item.classList.add(event["status"].toLowerCase());
             event_item.addEventListener('click',toggleAttend.bind(this,"calendar"));
         });
     });        
