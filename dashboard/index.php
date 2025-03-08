@@ -71,32 +71,30 @@ if(isset($_COOKIE["darkMode"])){
                     <img src="../images/map.png" alt="">
                 </div>
                 <div class="row attend-code-block mb-4 d-none" id="code-block">
-                    <form action="">
-                        <input type="text" class="form-control form-control-lg attend-code" placeholder="Enter Class Code..." id="attend-code">
-                    </form>
+                        <input type="number" class="form-control form-control-lg attend-code" placeholder="Enter Class Code..." id="attendCode">
                 </div>
                 <div class="row mt-5 pt-3">
-                    <div class="col-lg-6 mb-3 attend-class-code">
+                    <div class="col-lg-6 mb-3 attend-class-code d-flex flex-column align-items-center justify-content-center">
                         <h3 class="attend-details-title">Class</h3>
                         <h4 class="attend-details-content">COMP10120</h4>
                     </div>
-                    <div class="col-lg-6 mb-3 attend-class-time">
+                    <div class="col-lg-6 mb-3 attend-class-time d-flex flex-column align-items-center justify-content-center">
                         <h3 class="attend-details-title">Time</h3>
                         <h4 class="attend-details-content">10:00 - 11:00</h4>
                     </div>
                 </div>
                 <div class="row mb-5">
-                    <div class="col-lg-6 mb-3 attend-class-loc">
+                    <div class="col-lg-6 mb-3 attend-class-loc d-flex flex-column align-items-center justify-content-center">
                         <h3 class="attend-details-title">Location</h3>
                         <h4 class="attend-details-content">Kilburn TH 1.1</h4>
                     </div>
-                    <div class="col-lg-6 mb-3 attend-class-instructor">
+                    <div class="col-lg-6 mb-3 attend-class-instructor d-flex flex-column align-items-center justify-content-center">
                         <h3 class="attend-details-title">Instructor</h3>
                         <h4 class="attend-details-content">Mr. Walter White</h4>
                     </div>
                 </div>
-                <div class="attendance-control d-flex justify-content-end gap-3 mt-5">
-                    <button class="btn btn-light">Cancel</button>
+                <div class="attendance-control d-flex align-items-center justify-content-center gap-3 mt-5">
+                    <button class="btn btn-danger" id="cancel">Cancel</button>
                     <button class="btn btn-success">Proceed</button>
                 </div>
             </div>

@@ -69,7 +69,7 @@ rows.forEach((row,idx) =>{
         observer.observe(row);
     },50)
 })
-window.toggleClassClick = function(event){
+const toggleClassClick = function(event){
     const button = this.querySelector('.class-attend-block .btn');
     if(event.target.closest("button")){
         toggleAttend(event.target.closest(".class-block"));
@@ -86,15 +86,13 @@ window.toggleClassClick = function(event){
 
 
 }
-function removeBlockToggle(block){
-    block.removeEventListener('click',window.toggleClassClick);
-}
+
 
 
 function addEvent(event_info){
-    console.log("E",event_info);
+    console.log(event_info);
     const classBlock = `<div class="col-md-6 col-xl-4 class-block-container gap-3">
-                            <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}" data-ae-user="${event_info["user_id"]}" data-ae-timeslot="${event_info["timeslot_id"]}" id=${event_info["timeslot_id"]}>
+                            <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}" data-ae-user="${event_info["user_id"]}" data-ae-timeslot="${event_info["timeslot_id"]}">
                                 <div class="p-4">
                                     <div class="row class-block-upper mb-2">
                                         <div class="col-6 class-code">
