@@ -21,30 +21,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $max = 99999999;
     $user = unserialize($_SESSION["user"]);
     // generate the correct code
-    srand(floor(time()/60)*timeSlotId); // we might need to change this later but for now its fine
+    srand(floor(time()/60)*$timeSlotId); // we might need to change this later but for now its fine
     $generatedCode = rand($min, $max);
     // compare to the user code
 
     $time_slot_information = $db->query(
-        "SELECT * FROM TimeSlot WHERE timeslot_id=:ID", 
+        "SELECT * FROM TimeSlot WHERE timeslot_id=:id", 
         [":id" => $timeSlotId]
     );
     
+    if(sizeof($time_slot_information)>0){
+        $time_slot_information = $time_slot_information[0];
+    }   
+    else{
+        http_response_code(400);
+        echo json_encode(["error" => "No TimeSlot could be found with the given ID"]);
+        exit();
+    }
 
     if((string) $generatedCode == $code){
         // change timeslot
         $st_time    =   strtotime($time_slot_information["start_time"]);
         $end_time   =   strtotime($time_slot_information["end_time"]);
-        $quaterTime =   $st_time + ($end_time-$st_time)/4;
+        $quarterTime =   $st_time + ($end_time-$st_time)/4;
         $cur_time   =   strtotime("now");
 
         if($st_time < $cur_time && $end_time > $cur_time)
         {
-            if($cur_time > quaterTime){
-                $status = attendance_options[1];
+            if($cur_time > $quarterTime){
+                $status = $attendance_options[1];
             }
             else{
-                $status = attendance_options[0];
+                $status = $attendance_options[0];
             }
         }
         else{
