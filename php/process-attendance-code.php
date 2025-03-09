@@ -16,13 +16,10 @@ $attendance_options = ["Attended", "Late"];
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $code = $_POST["code"];
-    $timeSlotId = (int) $_POST["timeslot_id"];
-    $min = 10000000;
-    $max = 99999999;
     $user = unserialize($_SESSION["user"]);
-    // generate the correct code
-    srand(floor(time()/60)*$timeSlotId); // we might need to change this later but for now its fine
-    $generatedCode = rand($min, $max);
+    $timeSlotId = (int) $_POST["timeslot_id"];
+
+    $generatedCode = CodeGenerator::generate($timeSlotId); 
     // compare to the user code
 
     $time_slot_information = $db->query(
@@ -57,7 +54,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         else{
             http_response_code(400);
-            echo json_encode(["error" => "The event you are trying to attend is over."]);
+            echo json_encode(["error" => "The event you are trying to attend has either not started or has ended."]);
             exit();
         }
 

@@ -8,6 +8,10 @@ session_start();
 
 $error_msg = "";
 
+if(isset($_SESSION["user"])){
+    header("Location:../dashboard/");
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once '../php/db.php';
 
