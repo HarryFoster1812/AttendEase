@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', async function(){
         }
         const data = await response.text();
         json_loc = JSON.parse(data);
-        console.log(json_loc);
 
     } catch (error) {
         console.error('Error fetching locations:', error);
@@ -101,7 +100,6 @@ async function getUserLoc(event){
     cancelButton.disabled = false;
 }
 function compareLocData(lat,long, loc){
-    console.log(lat,long)
 
     let building_data = null;
     for(let i = 0; i < json_loc.length;i++){
@@ -121,8 +119,6 @@ function compareLocData(lat,long, loc){
         return;
     }
 
-    console.log(building_data)
-    console.log(building_data.latitude);
     if(parseFloat(building_data.latitude)-uncertaintyLat<=lat && lat<=parseFloat(building_data.latitude)+uncertaintyLat && parseFloat(building_data.longitude)-uncertaintyLong<=long && long <=parseFloat(building_data.longitude)+uncertaintyLong){
         const succBox = document.getElementById('nav-success');
         let succDOM = document.importNode(succBox,true).content;
@@ -149,7 +145,6 @@ function compareLocData(lat,long, loc){
 }
 const publishAttendance = (userID, timeslotID) => {         //Use the TimeSlotID and UserID to update the attendance to the database
     const data = { userid: userID, timeslotid: timeslotID };
-    console.log(JSON.stringify(data))
     fetch("../dashboard/set-attendance-data.php", {
         method: "POST",
         headers: {
@@ -187,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function submitCode(event){
     let codePhp = new XMLHttpRequest();
-    console.log(codeInput.value);
 
     const timeslotID = parseInt(acceptButton.dataset.aeTimeslot);
 
@@ -195,7 +189,6 @@ function submitCode(event){
         if (this.readyState == 4 && this.status == 200) {
             // update the calendar
             try{
-                console.log(this.responseText);
                 // get the response and if good close popup
                 if(this.responseText == "Success"){
                     const succBox = document.getElementById('nav-success');
