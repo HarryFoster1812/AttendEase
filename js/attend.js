@@ -175,13 +175,11 @@ function updateClassBlocks(timeslotID) {
     }
 }
 function displayAttended(block){
-    const midRow = block.querySelector('.class-block-mid');
+    const statusField = block.querySelector('.class-block-mid .class-status');
     const attendCode = `
-<div class="col-6 class-attended">
-<span><i class="fa-solid fa-circle-check me-2 text-success"></i><h4 style="display:inline">ATTENDED</h4></span>
-</div>
-`
-    midRow.insertAdjacentHTML('beforeend',attendCode);
+        <span><i class="fa-solid fa-circle-check me-2 text-success"></i><h4 style="display:inline">ATTENDED</h4></span>
+    `
+    statusField.innerHTML = attendCode;
 }
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(showPopup, 50);

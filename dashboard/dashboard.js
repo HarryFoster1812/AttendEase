@@ -125,7 +125,32 @@ function addEvent(event_info){
     
     const classElement = classLists[0].lastElementChild.querySelector('.class-block');
     console.log(classElement,classElement.dataset);
-    classElement.addEventListener('click', toggleClassClick);
+    if(event_info["status"]==="Upcoming"){
+        const upcomingCode = `
+        <div class="col-6 class-status">
+            <span><i class="fa-solid fa-clock me-2"></i><h4 style="display:inline">UPCOMING</h4></span>
+        </div>
+        `
+        classElement.querySelector('.class-block-mid').insertAdjacentHTML('beforeend',upcomingCode);
+        const startTime = new Date(event_info["date"]+"T"+event_info["start_time"]);
+        const endTime = new Date(event_info["date"]+"T"+event_info["end_time"]);
+        const currTime = Date.now()
+        console.log(startTime,currTime,endTime);
+        if(startTime<=currTime && currTime<=endTime){
+            classElement.addEventListener('click', toggleClassClick);
+            console.log("SUCCESS")
+        }
+        
+    }
+    else{
+        const attendCode = `
+        <div class="col-6 class-status">
+            <span><i class="fa-solid fa-circle-check me-2 text-success"></i><h4 style="display:inline">ATTENDED</h4></span>
+        </div>
+        `
+        classElement.querySelector('.class-block-mid').insertAdjacentHTML('beforeend',attendCode);
+    }
+    
 }
 
 
