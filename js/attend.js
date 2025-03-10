@@ -5,12 +5,14 @@ const codeButton = document.getElementById('code-button');
 const codeForm = document.getElementById('code-block');
 const codeImage = document.getElementById('attend-image');
 const backdrop = document.querySelector(".attend-backdrop");
-const cancelButton = document.querySelector(".attendance-control .btn-light");
+const cancelButton = document.getElementById("cancel");
 const acceptButton = document.querySelector(".attendance-control .btn-success");
+const codeInput = document.querySelector("#attendCode");
 
 const uncertaintyLat = 0.000180;
 const uncertaintyLong = 0.000255;
 let calculateNav = false;
+
 function showPopup() {
     popup.classList.add('show');
 }
@@ -26,17 +28,19 @@ let json_loc;
 document.addEventListener('DOMContentLoaded', async function(){
     try {
         const response = await fetch('../dashboard/get-location-data.php');
-        
+
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.text();
         json_loc = JSON.parse(data);
-        
+        console.log(json_loc);
+
     } catch (error) {
         console.error('Error fetching locations:', error);
     }
-})
+});
+
 function toggleAttend(block){
     console.log("ifj")
     if(block){
@@ -58,14 +62,20 @@ function toggleAttend(block){
         showPopup();
     }
 }
+
 function openCode(){
+    // hide the location imge
     codeForm.classList.remove('d-none');
     codeImage.classList.add('d-none');
+
+    // change form button colors
     locButton.classList.remove('btn-secondary');
     locButton.classList.add('btn-light');
     codeButton.classList.add('btn-secondary');
     codeButton.classList.remove('btn-light');
+
 }
+
 function openLoc(){
     codeForm.classList.add('d-none');
     codeImage.classList.remove('d-none');
@@ -92,9 +102,25 @@ async function getUserLoc(event){
 }
 function compareLocData(lat,long, loc){
     console.log(lat,long)
-    
-    const loc_map = new Map([["Stopford_TH 1",1],["Nancy Rothwell_3A.078 M&T",2],["Crawford House_TH 1",3],["Kilburn_IT407",4],["Kilburn_G23",5],["Oddfellows Hall_G.010",6],["Kilburn_Tootill (0 + 1)",7],["Simon_TH E",8]])
-    const building_data = json_loc[loc_map.get(loc)-1]
+
+    let building_data = null;
+    for(let i = 0; i < json_loc.length;i++){
+        if(json_loc[i].location_name == loc){
+            building_data = json_loc[i];
+        }
+    }
+
+    if (building_data === null){
+        const failBox = document.getElementById('nav-fail');
+        let failDOM = document.importNode(failBox,true).content;
+        document.body.append(failDOM);
+        failDOM = document.body.lastElementChild;
+        const removeFail = setTimeout(()=>{
+            failDOM.remove()
+        },3500);
+        return;
+    }
+
     console.log(building_data)
     console.log(building_data.latitude);
     if(parseFloat(building_data.latitude)-uncertaintyLat<=lat && lat<=parseFloat(building_data.latitude)+uncertaintyLat && parseFloat(building_data.longitude)-uncertaintyLong<=long && long <=parseFloat(building_data.longitude)+uncertaintyLong){
@@ -131,10 +157,10 @@ const publishAttendance = (userID, timeslotID) => {         //Use the TimeSlotID
         },
         body: JSON.stringify(data)
     })
-    .then(response => response.text())  // Get response from PHP
-    .then(result => console.log(result))
-    .catch(error => console.error("Error:", error))
-    .then(updateClassBlocks(timeslotID))
+        .then(response => response.text())  // Get response from PHP
+        .then(result => console.log(result))
+        .catch(error => console.error("Error:", error))
+        .then(updateClassBlocks(timeslotID))
 
 }
 
@@ -159,8 +185,68 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(showPopup, 50);
 });
 
+function submitCode(event){
+    let codePhp = new XMLHttpRequest();
+    console.log(codeInput.value);
+
+    const timeslotID = parseInt(acceptButton.dataset.aeTimeslot);
+
+    codePhp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // update the calendar
+            try{
+                console.log(this.responseText);
+                // get the response and if good close popup
+                if(this.responseText == "Success"){
+                    const succBox = document.getElementById('nav-success');
+                    let succDOM = document.importNode(succBox,true).content;
+                    document.body.append(succDOM);
+                    succDOM = document.body.lastElementChild;
+                    const removeSucc = setTimeout(()=>{
+                        succDOM.remove()
+                    },4000);
+                    calculateNav = false;
+                    hidePopup();
+                }
+            }
+            catch(e){
+                console.log(e);
+                const failBox = document.getElementById('nav-fail');
+                let failDOM = document.importNode(failBox,true).content;
+                document.body.append(failDOM);
+                failDOM = document.body.lastElementChild;
+                const removeFail = setTimeout(()=>{
+                    failDOM.remove()
+                },3500);
+                return;
+
+            }
+        }
+        else if (this.status==400){
+            const failBox = document.getElementById('nav-fail');
+            let failDOM = document.importNode(failBox,true).content;
+            document.body.append(failDOM);
+            failDOM = document.body.lastElementChild;
+            const removeFail = setTimeout(()=>{
+                failDOM.remove()
+            },3500);
+            return;
+        }
+    };
+
+    codePhp.open("POST", "../php/process-attendance-code.php", true);
+    codePhp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    codePhp.send("code="+codeInput.value+"&timeslot_id="+timeslotID);
+}
+
+
 closeBtn.addEventListener('click', hidePopup);
 codeButton.addEventListener('click', openCode);
 locButton.addEventListener('click', openLoc);
 cancelButton.addEventListener('click',hidePopup);
-acceptButton.addEventListener('click',getUserLoc);
+acceptButton.addEventListener('click', getUserLoc);
+codeInput.addEventListener('input', submitCode);
+/*
+TODO:
+Need to auto change to code when the location option is disabled
+*/

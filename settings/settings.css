@@ -363,3 +363,6 @@ hr.divider {
 .popup button.crop {
     background-color: #28a745;
 }
+.main-content{
+    color-scheme: only dark !important;
+}

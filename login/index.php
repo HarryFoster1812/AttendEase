@@ -8,6 +8,10 @@ session_start();
 
 $error_msg = "";
 
+if(isset($_SESSION["user"])){
+    header("Location:../dashboard/");
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once '../php/db.php';
 
@@ -39,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             if ($hashed_password == $result["password"]){
                 
-                $_SESSION['user'] = serialize(new User($result["user_id"], $result["username"],$result["role_id"], $result["email"], $result["location_opt_in"], $result["leaderboard_opt_in"], $result["name"], $result["pronouns"], $result["file_loc"]));
+                $_SESSION['user'] = serialize(new User($result["user_id"], $result["username"],$result["role_id"], $result["email"], $result["location_opt_in"], $result["leaderboard_opt_in"], $result["name"], $result["academic_affiliation"], $result["pronouns"], $result["file_loc"]));
                 
                 //check if the user is an admin
                 if ($result["role_id"] == 3){

@@ -1,0 +1,17 @@
+canvas{
+    min-height:250px;
+}
+
+.statistic-box{
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    align-items: start;
+}
+
+/*
+#graphs{
+    display: flex;
+    justify-content: space-evenly;
+}
+*/

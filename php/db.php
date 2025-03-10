@@ -3,17 +3,22 @@ require_once 'classes/Database.php';
 // set up local variables to store the host, database name, username
 // and user password.
 
-// $port          = "3306";
+$port          = "3306";
 
-// $database_host = "***REMOVED***";
-// $database_user = "***REMOVED***";
-// $database_pass = "***REMOVED***";
-// $database_name = "***REMOVED***";
+//$database_host = "***REMOVED***";
+//$database_user = "***REMOVED***";
+//$database_pass = "***REMOVED***";
+//$database_name = "***REMOVED***";
 
 $database_host = "localhost";
 $database_user = "root";
-$database_pass = "new_password";
+$database_pass = "password";
 $database_name = "AttendEase";
+
+//$database_host = "localhost";
+//$database_user = "root";
+//$database_pass = "new_password";
+//$database_name = "AttendEase";
 
 //$database_host = "sql213.infinityfree.com";
 //$database_user = "***REMOVED***";

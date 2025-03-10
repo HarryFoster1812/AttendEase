@@ -71,7 +71,7 @@ class TimeslotManager {
         ]);
     }
 
-    public function getStatistics(){
+    public function getStudentStatistics(){
         // the user should be authenticated
         $query = "SELECT * 
             FROM Attendance 
@@ -86,6 +86,41 @@ class TimeslotManager {
             ":user_id" => $this->user->getUserId(),
         ]);
     
+    } 
+
+
+    public function getStaffStatistics(){
+        // need to edit to also return the type of class when the database is updated
+        $query = "
+                SELECT
+                    course_title,
+                    start_time,
+                    end_time,
+                    date,
+                    type,
+                    COUNT(DISTINCT Attendance.user_id) AS total_assigned,
+                    COUNT(DISTINCT CASE WHEN Attendance.status IN ('Attended', 'Late') THEN Attendance.user_id END) AS total_attended
+                FROM
+                    Course
+                JOIN
+                    CourseAssignment ON Course.course_id = CourseAssignment.course_id
+                JOIN
+                    TimeSlot ON Course.course_id = TimeSlot.course_id
+                JOIN
+                    Attendance ON TimeSlot.timeslot_id = Attendance.timeslot_id
+                WHERE
+                    CourseAssignment.lecturer_id = :user_id AND
+                    (date < DATE(NOW()) or date=DATE(NOW()) AND start_time<Time(NOW()))
+                GROUP BY
+                    Course.course_id,
+                    TimeSlot.timeslot_id
+                ORDER BY
+                    date, start_time
+        ";
+
+        return $this->db->query($query, [
+            ":user_id" => $this->user->getUserId(),
+        ]);
     } 
 }
 ?>

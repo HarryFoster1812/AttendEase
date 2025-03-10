@@ -69,7 +69,7 @@ rows.forEach((row,idx) =>{
         observer.observe(row);
     },50)
 })
-window.toggleClassClick = function(event){
+const toggleClassClick = function(event){
     const button = this.querySelector('.class-attend-block .btn');
     if(event.target.closest("button")){
         toggleAttend(event.target.closest(".class-block"));
@@ -86,15 +86,13 @@ window.toggleClassClick = function(event){
 
 
 }
-function removeBlockToggle(block){
-    block.removeEventListener('click',window.toggleClassClick);
-}
+
 
 
 function addEvent(event_info){
-    console.log("E",event_info);
-    const classBlock = `<div class="col-lg-6 col-xl-4 class-block-container gap-3">
-                            <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}" data-ae-user="${event_info["user_id"]}" data-ae-timeslot="${event_info["timeslot_id"]}" id=${event_info["timeslot_id"]}>
+    console.log(event_info);
+    const classBlock = `<div class="col-md-6 col-xl-4 class-block-container gap-3">
+                            <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}" data-ae-user="${event_info["user_id"]}" data-ae-timeslot="${event_info["timeslot_id"]}">
                                 <div class="p-4">
                                     <div class="row class-block-upper mb-2">
                                         <div class="col-6 class-code">
@@ -156,7 +154,41 @@ function addEvent(event_info){
 }
 
 
+function addStaffEvent(event_info){
+    console.log(event_info);
+    const classBlock = `<a href="../staff-event/?id=${event_info["timeslot_id"]}">
+                            <div class="col-md-6 col-xl-4 class-block-container gap-3">
+                                <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}" data-ae-user="${event_info["user_id"]}" data-ae-timeslot="${event_info["timeslot_id"]}">
+                                    <div class="p-4">
+                                        <div class="row class-block-upper mb-2">
+                                            <div class="col-6 class-code">
+                                                <h4>${event_info["course_title"]}</h4>
+                                            </div>
+                                            <div class="col-6 class-time">
+                                                <h4>${createTimeString(event_info["start_time"], event_info["end_time"])}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row class-block-mid mb-2">
+                                            <div class="col-6 class-day">
+                                                <h4>${event_info["date"]}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row class-block-lower">
+                                            <div class="class-venue">
+                                                <h4>${event_info['location_name']}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </a>`
 
+    classLists[0].insertAdjacentHTML('beforeend',classBlock);
+    
+    const classElement = classLists[0].lastElementChild.querySelector('.class-block');
+    console.log(classElement,classElement.dataset);
+    classElement.addEventListener('click', toggleClassClick);
+}
 
 // Reusable chart creation function
 function createDoughnutChart(ctx, data, label1, label2) {
@@ -226,6 +258,7 @@ xmlhttp.onreadystatechange = function() {
 
             // send this data to a function to calculate statistics
             var statistics = new StatisticsCalculator(jsonData);
+            statistics.processData();
             console.log(statistics);
             let totalAttended = statistics.attendedCount;
             let totalEvents = statistics.totalEventCount;
@@ -283,7 +316,7 @@ calendarAjax.onreadystatechange = function() {
 
             if (Object.keys(json_data).includes("staff")){
                 json_data["staff"].forEach(element => {
-                    addEvent(element);
+                    addStaffEvent(element);
                 });
             }
             if (classLists[0].childElementCount == 0){

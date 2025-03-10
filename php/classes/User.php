@@ -10,9 +10,9 @@ class User {
     private $username;
     private $pronouns;
     private $profile_path;
-    
+    private $academic;
 
-    public function __construct($user_id, $username, $role_id, $email, $location, $leaderboard, $name, $pronouns, $pfp) {
+    public function __construct($user_id, $username, $role_id, $email, $location, $leaderboard, $name, $academic, $pronouns = "Not Set", $pfp = "../images/Default_pfp.jpg") {
         $this->user_id = $user_id;
         $this->username = $username;
         $this->role_id = $role_id;
@@ -22,6 +22,7 @@ class User {
         $this->name = $name;
         $this->pronouns = $pronouns;
         $this->profile_path = $pfp;
+        $this->academic = $academic;
     }
 
     public function getRoleId(): int {
@@ -49,7 +50,7 @@ class User {
         return false;
     }
 
-    public function getUsername(){
+    public function getUsername(): string{
         return $this->username;
     }
 
@@ -62,7 +63,17 @@ class User {
     }
 
     public function getPfpPath(): string{
+        if(!isset($this->profile_path)){
+            return "../images/Default_pfp.jpg";
+        }
         return $this->profile_path;
+    }
+
+    public function getAcademic(): string{
+        if(!isset($this->academic)){
+            return "N/A";
+        }
+        return $this->academic;
     }
 
     public function getName(): string {
@@ -71,19 +82,19 @@ class User {
         return $this->name;
     }
 
-    public function setPfpPath($newPath){
+    public function setPfpPath($newPath): void{
         $this->profile_path = $newPath;
     }
 
-    public function setPronouns($newPronouns){
+    public function setPronouns($newPronouns): void{
         $this->pronouns = $newPronouns;
     }
 
-    public function setLocationOpt($newOption){
+    public function setLocationOpt($newOption): void{
         $this->location=$newOption;
     }
 
-    public function setLeaderboardOpt($newOption){
+    public function setLeaderboardOpt($newOption): void{
         $this->leaderboard=$newOption;
     }
 }
