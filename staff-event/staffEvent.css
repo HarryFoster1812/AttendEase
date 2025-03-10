@@ -6,10 +6,12 @@
 
 .bg-custom{
     background: #ca5cff;
+    z-index: 998; /*Needs to be below the error popup*/
 }
 
 .selected-count{
-    top: 50px;
+    z-index: 998;
+    top: 75px;
 }
 
 
