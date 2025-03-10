@@ -63,10 +63,16 @@ class User {
     }
 
     public function getPfpPath(): string{
+        if(!isset($this->profile_path)){
+            return "../images/Default_pfp.jpg";
+        }
         return $this->profile_path;
     }
 
     public function getAcademic(): string{
+        if(!isset($this->academic)){
+            return "N/A";
+        }
         return $this->academic;
     }
 
