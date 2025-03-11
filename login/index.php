@@ -59,12 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } 
         
         else {
-            $error_msg = "<div class='alert alert-danger' role='alert'>The username or password is incorrect.</div>";
+            $error_msg = "<div class='alert alert-danger mb-0' role='alert'>The username or password is incorrect.</div>";
         }
     } 
 
     else {
-            $error_msg = "<div class='alert alert-danger' role='alert'>Database query failed.</div>";
+            $error_msg = "<div class='alert alert-danger mb-0' role='alert'>Database query failed.</div>";
     }
 }
 
@@ -81,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <?php 
         include("../php/template/navbar.php");
+        echo $error_msg;
     ?>
 
 <section class="signup-form">
