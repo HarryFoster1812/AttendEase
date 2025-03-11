@@ -156,8 +156,7 @@ function addEvent(event_info){
 
 function addStaffEvent(event_info){
     console.log(event_info);
-    const classBlock = `<a href="../staff-event/?id=${event_info["timeslot_id"]}">
-                            <div class="col-md-6 col-xl-4 class-block-container gap-3">
+    const classBlock = `<a href="../staff-event/?id=${event_info["timeslot_id"]}" style="text-decoration:none;" class="col-md-6 col-xl-4 class-block-container gap-3">
                                 <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}" data-ae-user="${event_info["user_id"]}" data-ae-timeslot="${event_info["timeslot_id"]}">
                                     <div class="p-4">
                                         <div class="row class-block-upper mb-2">
@@ -180,7 +179,6 @@ function addStaffEvent(event_info){
                                         </div>
                                     </div>
                                 </div> 
-                            </div>
                         </a>`
 
     classLists[0].insertAdjacentHTML('beforeend',classBlock);
