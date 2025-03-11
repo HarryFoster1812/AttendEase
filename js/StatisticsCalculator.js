@@ -237,6 +237,9 @@ export default class StatisticsCalculator { data;
             let attendedCount = event["total_attended"];
             let totalAssigned = event["total_assigned"];
 
+            this.totalAttended += attendedCount;
+            this.totalAssigned += totalAssigned;
+
             if(!Object.keys(this.module_data).includes(course)){
                 // create a new dictionary for the course
                 this.module_data[course] = {};
@@ -265,6 +268,52 @@ export default class StatisticsCalculator { data;
     }
 
 
+    
+
+
+    getWeekDifference(){
+        // get this week (weekend inclusive)
+        let thisWeekRange = calculateCurrentWeek();
+        let thisWeekData = [0, 0];
+        // get last week (weekend inclusive)
+        let lastWeekRange = calculateLastWeek();
+        let lastWeekData = [0, 0];
+        Object.keys(this.module_data).forEach(moduleName => {
+            Object.keys(this.module_data[moduleName]).forEach(moduleType => {
+
+                let filteredKeys  = Object.keys(this.module_data[moduleName][moduleType]).filter((date) => {
+                    if(Date.parse(date).between(lastWeekRange[0], thisWeekRange[1])) return true;
+                });
+                // we have all the dates for this module that is between last week and this week
+
+                filteredKeys.forEach(date => {
+                    event = this.module_data[moduleName][moduleType][date];
+                    if (Date.parse(date).between(thisWeekRange[0], thisWeekRange[1])){
+                        thisWeekData[0] = thisWeekData[0] + Number(event[0]);
+                        thisWeekData[1] = thisWeekData[1] + Number(event[1]);
+                    }
+                    else{
+                        lastWeekData[0] = lastWeekData[0] + Number(event[0]);
+                        lastWeekData[1] = lastWeekData[1] + Number(event[1]);
+                    }
+                });
+
+            });
+        });
+        // loop over all data for this week
+        let thisWeekPercent = Math.round((thisWeekData[0]/thisWeekData[1])*100);
+        if(isNaN(thisWeekPercent)){
+            thisWeekPercent = 0;
+        }
+        let lastWeekPercent = Math.round((lastWeekData[0]/lastWeekData[1])*100);
+        if(isNaN(lastWeekPercent)){
+            lastWeekPercent = 0;
+        }
+        let percentage_difference = thisWeekPercent - lastWeekPercent; 
+        return percentage_difference; 
+        // loop over all data for last week
+
+    }
 
     getModuleList(){
         return Object.keys(this.module_data);
@@ -337,4 +386,36 @@ export default class StatisticsCalculator { data;
         return [labelsArry, dataArry];
     }
 
+}
+
+
+
+function calculateCurrentWeek(){
+    let today = Date.today();
+    if (today.is().weekday()){
+       if(today.is().monday()){
+            return [today, today];
+        }
+        else if(today.is().friday()){
+            return [structuredClone(today).previous().monday(), today];
+        }
+        else{
+            return [structuredClone(today).previous().monday(), today];
+        }
+    }
+    else{
+            return [today.previous().monday(), today.next().friday()];
+    }
+}
+
+
+function calculateLastWeek(){
+    let thisWeek = calculateCurrentWeek();
+    let friday = thisWeek[1];
+    if(!friday.is().friday()){
+        friday.next().friday();
+        friday.addWeeks(-1);
+    }
+    return [thisWeek[0].addWeeks(-1), friday];
+    
 }

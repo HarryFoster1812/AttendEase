@@ -2,7 +2,7 @@ import StatisticsCalculator from "../js/StatisticsCalculator.js";
 
 
 const classLists = document.querySelectorAll('.class-block-list');
-
+const roleId  = Number(document.body.dataset.roleId);
 
 const rows = document.querySelectorAll('.outer');
 var dashStyles;
@@ -254,23 +254,65 @@ xmlhttp.onreadystatechange = function() {
             console.log(this.responseText);
             let jsonData = JSON.parse(this.responseText);
 
+            let chartNames = ["Attendance", "On Time", "Ranking"];
+
             // send this data to a function to calculate statistics
             var statistics = new StatisticsCalculator(jsonData);
-            statistics.processData();
-            console.log(statistics);
-            let totalAttended = statistics.attendedCount;
-            let totalEvents = statistics.totalEventCount;
-            let totalOnTime = statistics.onTimeCount;
-            if (totalEvents == 0){
-                createDoughnutChart(attendanceChart, [0 ,100], `0%`, "Attendance");
-                createDoughnutChart(timeChart, [0 , 100], `0%`, "On Time");
-                createDoughnutChart(rankChart, [0,100],`0%`, "Ranking");
-            }
+            if(roleId == 2 || roleId == 3){ 
+                statistics.processStaffData();
+                let totalAttended = statistics.attendedCount;
+                let totalEvents = statistics.totalEventCount;
+                let percentageDiff = statistics.getWeekDifference();
+                
+                let timeDiv = timeChart.parentElement;
+                timeDiv.removeChild(timeChart);
+                let percentText = document.createElement("h3");
+                let parentTextDiv = document.createElement("div");
+                parentTextDiv.classList.add("d-flex", "flex-column", "w-auto", "justify-content-center","align-items-center");
 
+                timeDiv.classList.add("d-flex","justify-content-center","align-items-center");
+
+                percentText.innerText = percentageDiff + "%";
+                percentText.style.color = percentageDiff > -1 ? "green" : "red";
+                percentText.style.fontSize = "50px";
+                
+                let additionalText = document.createElement("p");
+                additionalText.innerText = "(Difference from last week)"
+                additionalText.classList.add("text-muted");
+                additionalText.style.fontSize = "20px";
+
+                parentTextDiv.appendChild(percentText);
+                parentTextDiv.appendChild(additionalText);
+                timeDiv.appendChild(parentTextDiv);
+                
+
+                if (totalEvents == 0){
+                    createDoughnutChart(attendanceChart, [0 ,100], `0%`, chartNames[0]);
+                    createDoughnutChart(rankChart, [0,100],`0%`, chartNames[2]);
+                }
+
+                else{
+                    createDoughnutChart(attendanceChart, [totalAttended/totalEvents ,1- totalAttended/totalEvents], `${Math.round((totalAttended/totalEvents)*100)}%`, chartNames[0]);
+                    createDoughnutChart(rankChart, [100,0],`0%`, chartNames[2]);
+                }
+            }
             else{
-                createDoughnutChart(attendanceChart, [totalAttended/totalEvents ,1- totalAttended/totalEvents], `${Math.round((totalAttended/totalEvents)*100)}%`, "Attendance");
-                createDoughnutChart(timeChart, [totalOnTime/totalEvents ,1- totalOnTime/totalEvents], `${Math.round((totalOnTime/totalEvents)*100)}%`, "On Time");
-                createDoughnutChart(rankChart, [100,0],`0%`, "Ranking");
+                statistics.processData();
+
+                let totalAttended = statistics.attendedCount;
+                let totalEvents = statistics.totalEventCount;
+                let totalOnTime = statistics.onTimeCount;
+                if (totalEvents == 0){
+                    createDoughnutChart(attendanceChart, [0 ,100], `0%`, chartNames[0]);
+                    createDoughnutChart(timeChart, [0 , 100], `0%`, chartNames[1] );
+                    createDoughnutChart(rankChart, [0,100],`0%`, chartNames[2]);
+                }
+
+                else{
+                    createDoughnutChart(attendanceChart, [totalAttended/totalEvents ,1- totalAttended/totalEvents], `${Math.round((totalAttended/totalEvents)*100)}%`, chartNames[0]);
+                    createDoughnutChart(timeChart, [totalOnTime/totalEvents ,1- totalOnTime/totalEvents], `${Math.round((totalOnTime/totalEvents)*100)}%`, chartNames[1] );
+                    createDoughnutChart(rankChart, [100,0],`0%`, chartNames[2]);
+                }
             }
         }
         catch(e){

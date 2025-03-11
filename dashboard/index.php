@@ -33,7 +33,7 @@ if(isset($_COOKIE["darkMode"])){
 
 ?>
 </head>
-<body>
+    <body data-role-id="<?php echo $userData->getRoleId(); ?>">
      <?php include($nav_path); ?>
 
     <?php include("../php/template/popup.php"); ?>
@@ -55,12 +55,12 @@ if(isset($_COOKIE["darkMode"])){
                     </div>
                 </div>
                 <div class="col-xxl-6 outer">
-                    <div class="row">
+                    <div class="row justify-content-end">
                         <div class="col-lg-4">
                             <canvas id="attendanceChart" class="mb-4"></canvas>
                         </div>
                         <div class="col-lg-4">
-                            <canvas id="timeChart" class="mb-4"></canvas>
+                            <canvas id="timeChart" class="mb-4 w-100 h-100"></canvas>
                         </div>
                         <div class="col-lg-4">
                             <canvas id="rankChart" class="mb-4"></canvas>
