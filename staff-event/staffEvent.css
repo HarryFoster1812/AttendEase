@@ -1,3 +1,6 @@
+body{
+  overflow-x: hidden;
+}
 
 .smallpfp{
     width: 50%;
@@ -17,9 +20,13 @@
 
 
 .selectedUser{
-    background: #2727ff;
+  border-color: #660099;
+  box-shadow: 0 0 20px 3px #660099;
 }
-
+.card{
+  border: 2px solid #ccc;
+  transition: all 0.3s ease-in-out;
+}
 
 /* Overlay and crop container styles */
 #overlay {
@@ -46,8 +53,9 @@
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    width: 365px;
+    width: 40% !important;
     text-align: center;
+    border-radius: 1.5rem;
 }
 
 #countdown {
@@ -60,7 +68,7 @@
 }
 
 #countdown-number {
-  color: black;
+  color: #660099;
   display: inline-block;
   line-height: 40px;
 }
@@ -79,10 +87,35 @@ svg circle {
   stroke-dashoffset: 0px;
   stroke-linecap: round;
   stroke-width: 2px;
-  stroke: black;
+  stroke: #660099;
   fill: none;
 }
-
+.close-ico{
+  font-size:1.5rem;
+}
 .staff-icons{
   font-size:2rem;
+}
+.code-title{
+  font-size:1.7rem;
+}
+.class-code{
+  letter-spacing: 0.5rem;
+  font-size:1.6rem;
+}
+.flex-fill{
+  color:#333;
+  font-size:1.2rem;
+  width:100%;
+}
+.edit-btn{
+  margin-right: 1.2rem;
+}
+@media(max-width:768px){
+  .popup{
+    width:80% !important;
+  }
+  .edit-btn{
+    margin-right: 0;
+  }
 }

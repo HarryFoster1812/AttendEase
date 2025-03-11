@@ -121,9 +121,9 @@ if(!isset($found)){
         <div id="overlay" class="overlay hidden">
             
             <div class="popup flex-column" id="code-popup">
-                <button id="close-code-btn" class="btn btn-sm btn-danger" style="position: absolute; top: 10px; right: 10px;">&times;</button>
-                <h4 class="text-center">Class Code</h4>
-                <div id="class-code" class="text-center my-3">00000000</div>
+                <button id="close-code-btn" class="btn btn-sm btn-danger" style="position: absolute; top: 20px; right: 20px;"><i class="fa fa-times close-ico"></i></button>
+                <h4 class="text-center mt-5 text-primary code-title mb-5">Class Code</h4>
+                <div id="class-code" class="text-center my-3 class-code text-black border border-2 rounded">00000000</div>
                 <div id="countdown">
                     <div id="countdown-number"></div>
                     <svg>
@@ -133,36 +133,36 @@ if(!isset($found)){
             </div>
 
             <div class="popup flex-column" id="attendance-popup">
-                <h4 class="text-center">Change Attendance Status</h4>
+                <h4 class="text-center text-primary mb-4">Change Attendance Status</h4>
                 <select id="TypeDropdown" class="form-select w-auto">
                     <option selected>Attended</option>
                     <option>Late</option>
                     <option>Missed</option>
                 </select>
-                <div class="button-container">
+                <div class="button-container mt-4">
                     <button class="btn btn-danger cancel" >Cancel</button>
                     <button class="btn btn-success" id="attendYesBtn">Change</button>
                 </div>
             </div>
 
-            <div class="popup flex-column w-auto" id="edit-popup">
-                <h4 class="text-center">Edit Time Slot Information</h4>
-                <div class="d-flex justify-content-center align-items-center flex-column">
-                    <div class="d-flex flex-column">
-                        <h2>Start Time</h2>
-                        <input class="flex-fill" id="start-time" type="time" value="<?php echo $timeSlotInfo["start_time"]?>" />
+            <div class="popup flex-column w-auto p-4" id="edit-popup">
+                <h3 class="text-center text-primary mb-4">Edit Time Slot Information</h3>
+                <div class="d-flex justify-content-center align-items-center flex-column text-primary">
+                    <div class="d-flex flex-column mb-3">
+                        <h4>Start Time</h4>
+                        <input class="flex-fill form-control" id="start-time" type="time" value="<?php echo $timeSlotInfo["start_time"]?>" />
                     </div>
-                    <div class="d-flex  flex-column">
-                        <h2>End Time</h2>
-                        <input class="flex-fill" id="end-time" type="time" value="<?php echo $timeSlotInfo["end_time"]?>" />
+                    <div class="d-flex  flex-column mb-3">
+                        <h4>End Time</h4>
+                        <input class="flex-fill form-control" id="end-time" type="time" value="<?php echo $timeSlotInfo["end_time"]?>" />
                     </div>
-                    <div class="d-flex  flex-column">
-                        <h2>Date</h2>
-                        <input class="flex-fill" id="date" type="date" value="<?php echo $timeSlotInfo["date"]?>" />
+                    <div class="d-flex  flex-column mb-3">
+                        <h4>Date</h4>
+                        <input class="flex-fill form-control" id="date" type="date" value="<?php echo $timeSlotInfo["date"]?>" />
                     </div>
-                    <div class="d-flex  flex-column">
-                        <h2>Location</h2>
-                        <select id="location_select">
+                    <div class="d-flex  flex-column mb-3">
+                        <h4>Location</h4>
+                        <select id="location_select" class="flex-fill form-select">
                             <?php 
                             for($i=0;$i<sizeof($locations);$i++){
                                 $selected = "";
@@ -181,9 +181,9 @@ if(!isset($found)){
                         </select>
                     </div>
 
-                    <div class="d-flex  flex-column">
-                        <h2>Type</h2>
-                        <input  id="type" type="text" value="<?php echo $timeSlotInfo["type"]?>" />
+                    <div class="d-flex  flex-column mb-4">
+                        <h4>Type</h4>
+                        <input class ="form-control flex-fill" id="type" type="text" value="<?php echo $timeSlotInfo["type"]?>" />
                     </div>
                 </div>
                 <div class="button-container">
@@ -198,22 +198,22 @@ if(!isset($found)){
         <?php include($nav_path); ?>
 
 
-        <div class="d-flex pb-2 pt-2 px-1 bg-custom sticky-top">
+        <div class="d-flex pb-2 pt-2 px-1 bg-custom sticky-top gap-2">
             <!-- Left-aligned buttons - takes up 1/3 of the width -->
-            <div class="col-4 d-flex gap-2" role="group">
+            <div class="col-md-4 d-flex gap-2" role="group">
                 <button type="button" class="btn btn-success" id="attend-btn">Mark as Attended</button>
-                <button type="button" class="btn btn-danger" id="deselect-btn">Deselect all users</button>
-                <button type="button" class="btn btn-danger" id="select-btn">Select all users</button>
+                <button type="button" class="btn btn-danger" id="deselect-btn">Deselect all</button>
+                <button type="button" class="btn btn-danger" id="select-btn">Select all</button>
             </div>
 
             <!-- Center-aligned button - takes up 1/3 of the width -->
-            <div class="col-4 d-flex justify-content-center" role="group">
+            <div class="col-md-4 d-flex justify-content-center" role="group">
                 <button type="button" class="btn btn-info" id="codeShow">Show Code</button>
             </div>
 
             <!-- Right-aligned buttons - takes up 1/3 of the width -->
-            <div class="col-4 d-flex gap-2 justify-content-end" role="group">
-                <button type="button" class="btn btn-warning" id="edit-info">Edit Event Information</button>
+            <div class="col-md-4 d-flex gap-2 justify-content-end" role="group">
+                <button type="button" class="btn btn-warning edit-btn" id="edit-info">Edit Event</button>
             </div>
         </div>
 
