@@ -1,0 +1,192 @@
+.course-container {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    padding-right: 60px; /* Add space for the button */
+    margin-bottom: 20px;
+    position: relative;
+    background-color: #660099;
+}
+
+/* .course-container:last-child {
+    margin-bottom: 0;
+} */
+
+.expand-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border-radius: 50px;
+    min-width: 40px; /* Ensure minimum button width */
+    text-align: center; /* Center the icon */
+}
+.expand-button:hover, #expandAllButton:hover {
+    background-color: #d4a30e;
+    color: #4a0073;
+    transition: all 0.4s ease;
+}
+
+.expand-button ,#expandAllButton {
+    background-color: #ffcc33;
+    color: #660099;
+    padding: 8px 12px;
+    min-width: 60px;
+    border-color: #ffcc33;
+}
+
+#expandAllButton {
+    width: 20%;
+    font-size: 2rem;
+    border-radius: 50px;
+}
+
+/* Override Bootstrap's default active/focus states */
+.expand-button:active,
+.expand-button:focus-visible,
+#expandAllButton:active,
+#expandAllButton:focus-visible {
+    background-color: #ffcc33 !important;
+    color: #660099 !important;
+    box-shadow: none !important;
+}
+
+
+
+.expand-button .fa-chevron-down, #expandAllButton .fa-chevron-down {
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+}
+
+.expand-button.collapsed .fa-chevron-down, #expandAllButton.collapsed .fa-chevron-down {
+    transform: rotate(-180deg);
+}
+
+.slow-collapse {
+    transition: height 0.7s ease;
+}
+
+/* Add media query for smaller screens */
+@media screen and (max-width: 576px) {
+    .course-container {
+        padding-right: 70px; /* Increase padding for smaller screens */
+    }
+    
+    .course-container h3 {
+        font-size: 1rem; /* Reduce text size on small screens */
+        word-wrap: break-word; /* Allow text to wrap */
+    }
+
+    #expandAllButton {
+        font-size: 1.5rem;
+    }
+    
+}
+@media screen and (max-width: 767.33px) {
+    .form-check-label {
+        font-size: 90%;
+    }
+}
+
+@media screen and (max-width:541.33px) {
+    .form-check-label {
+        font-size: 60%;
+    }
+}
+
+@media screen and (max-width:414px) {
+    .filter-section .d-flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px !important;
+        font-size: 120%;
+    }
+}
+
+@media screen and (max-width: 239.33px) {
+    .search-filter-container {
+        display: none;
+    }
+}
+
+.input-group-text {
+    border: none;
+}
+
+.form-check-label {
+    color: #660099;
+}
+
+.form-check-input:checked {
+    background-color: #660099;
+    border-color: #660099;
+}
+
+.courseList{
+    background-color: black;
+    height: 70vh;
+    padding-top: 20px;
+    border-radius: 3%;
+}
+
+
+.form-check-input:focus {
+    border-color: #D3D3D3;
+    box-shadow: 0 0 0 0 ;
+}
+
+
+
+.search-filter-container {
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); ask team */
+}
+
+.search-section {
+    margin-bottom: 20px;
+}
+
+.filter-section {
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+
+.search-container {
+    position: relative;
+    padding-bottom: 20px;
+    width: 100%;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 90%;
+}
+
+.search-input {
+    height: 50px;
+    border-radius: 30px;
+    padding-left: 50px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.search-input:focus {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) ;
+    border-color: #B3B3B3;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: #888;
+    pointer-events: none;
+}
