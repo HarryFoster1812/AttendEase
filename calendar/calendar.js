@@ -137,10 +137,24 @@ function populateDay(json_data, tableElements, dateFilter){
 
             time = Number(filtered_json[i][j]["start_time"].substring(0,2));
             index = time -8;
+            
+            if(filtered_json[i][j]["status"] === undefined){
+                // wrap everything into an anchor
+                let  aElement = document.createElement("a");
+                aElement.setAttribute("href", "../staff-event/?id="+filtered_json[i][j]["timeslot_id"]);
+                aElement.style.textDecoration = "none";
+                aElement.classList.add("my-2");
+                aElement.appendChild(event_item);
+                tableElements[index].appendChild(aElement);
+                return;
+            }
+
             tableElements[index].appendChild(event_item);
             event_item = tableElements[index].lastElementChild;
+           
             event_item.classList.add(filtered_json[i][j]["status"].toLowerCase());
             event_item.addEventListener('click',toggleAttend.bind(this,"calendar"));
+            
         }
     }   
     
@@ -181,9 +195,20 @@ function populateMonth(json_data, tableElements, start_date){
             event_date = Date.parse(event["date"]);
             // It is not that simple. I forgot to account for weekends.
             index = days_between(event_date, start_date);
+
+            if(event["status"] === undefined){
+                // wrap everything into an anchor
+                let  aElement = document.createElement("a");
+                aElement.setAttribute("href", "../staff-event/?id="+event["timeslot_id"]);
+                aElement.style.textDecoration = "none";
+                aElement.classList.add("my-2");
+                aElement.appendChild(event_item);
+                tableElements[index].appendChild(aElement);
+                return;
+            }
+
             tableElements[index].appendChild(event_item);
             event_item = tableElements[index].lastElementChild;
-            console.log(event["status"])
             event_item.classList.add(event["status"].toLowerCase());
             event_item.addEventListener('click',toggleAttend.bind(this,"calendar"));
         });
@@ -191,7 +216,6 @@ function populateMonth(json_data, tableElements, start_date){
 }
 
 function populateCalendar(json_data, period, start_date){
-    console.log(json_data);
     if (json_data.length == 0){
         return;
     }
@@ -368,7 +392,6 @@ function dateEvent(event){
             // update the calendar
             try{
                 json_data = JSON.parse(this.responseText);
-                console.log(json_data);
                 clearCalendar(time);
                 populateCalendar(json_data, time, start_date);
             }
