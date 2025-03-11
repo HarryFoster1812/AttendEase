@@ -1,6 +1,7 @@
 
 .smallpfp{
     width: 50%;
+    margin:auto;
 }
 
 
@@ -82,3 +83,6 @@ svg circle {
   fill: none;
 }
 
+.staff-icons{
+  font-size:2rem;
+}

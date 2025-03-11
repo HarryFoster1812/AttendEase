@@ -218,7 +218,7 @@ if(!isset($found)){
         </div>
 
 
-        <div class="d-flex bg-white justify-content-center align-items-center text-primary mt-2 sticky-top selected-count"><h2> Selected Users:&nbsp; <h2 id="selected_count">0</h2></h2></div>
+        <div class="d-flex bg-white justify-content-center align-items-center text-primary mt-5 mb-4 selected-count"><h2> Selected Users:&nbsp; <h2 id="selected_count">0</h2></h2></div>
 
 <div class="d-flex justify-content-center align-items-center flex-wrap">
     <?php 
@@ -230,16 +230,16 @@ if(!isset($found)){
 
         // Add user information 
         $temp_div = '
-        <div id="userContainer%s" class="card class-block my-2 mx-2" style="width: 18rem; cursor: pointer;" data-user-id="%s">
+        <div id="userContainer%s" class="card class-block my-4 mx-2" style="width: 18rem; cursor: pointer;" data-user-id="%s">
             <img src="%s" alt="%s" class="card-img-top smallpfp">
             <div class="card-body">
                 <h5 class="card-title text-center"><b>%s</b></h5>
                 <h6 class="card-subtitle mb-2 text-muted text-center">%s</h6>
                 <p class="card-text text-center status">%s</p>
-                <div class="btn-list">
-                     <button id="Attended" title="Mark as on time" class="btn btn-primary"><i class="fa fa-check" style="color:green;" aria-hidden="true"></i></button>
-                     <button id="Late" title="Mark as late" class="btn btn-primary"><i class="fa-solid fa-clock" style="color:orange;"></i></button>
-                     <button id="Missed" title="Mark as absent" class="btn btn-primary"><i class="fa fa-times" style="color:red;"></i></button>
+                <div class="btn-list d-flex justify-content-center gap-3">
+                     <button id="Attended" title="Mark as on time" class="btn btn-primary"><i class="fa fa-check staff-icons" style="color:#32cd32;" aria-hidden="true"></i></button>
+                     <button id="Late" title="Mark as late" class="btn btn-primary"><i class="fa-solid fa-clock staff-icons" style="color:orange;"></i></button>
+                     <button id="Missed" title="Mark as absent" class="btn btn-primary"><i class="fa fa-times staff-icons" style="color:red;"></i></button>
                 </div>
             </div>
         </div>
