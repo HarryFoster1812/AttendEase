@@ -14,6 +14,25 @@ class UrlHelper {
             exit;
         }
     }
+    public static function contructHref($record, $table, $keys){
+        $href = "../database-edit/?table=".$table;
+        if(sizeof($keys)>1){
+            $columns = [];
+            $ids = [];
+            foreach ($keys as $value) {
+                $keyName = $value["Column_name"];
+                array_push($columns, $keyName);
+                array_push($ids, $record[$keyName]);
+            }
+            $href .= '&filter='.urlencode(json_encode($columns)).'&id='.urlencode(json_encode($ids)).'&multi=1';
+        }
+        else{
+            $href .= '&filter='.$keys[0]["Column_name"].'&id='.$record[$keys[0]["Column_name"]];
+        }
+        return $href;
+}
+
+
 }
 
 ?>
