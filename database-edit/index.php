@@ -37,6 +37,7 @@ $multifilter = $_GET["multi"];
     <head>
         <title>Database Edit | AttendEase</title>
         <?php include("../php/template/header.php"); ?>
+        <link rel="stylesheet" href="./popup.css">
 
     </head>
     <body>
