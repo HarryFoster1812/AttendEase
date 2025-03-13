@@ -12,12 +12,14 @@ if($user->getRoleId() != 3){
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $query = $_POST["query"];
-    $searchManager = new SearchManager($db);
-    $results = $searchManager->getSearchResults($query);
+    $parameters = json_decode($_POST["params"], true);
 
-    echo json_encode($results);
-    
+    echo $query;
+    echo "<br><br>";
+    var_dump($parameters);
+
+    $response = $db->query($query, $parameters);
+    echo $response;
 }
-
 
 ?>

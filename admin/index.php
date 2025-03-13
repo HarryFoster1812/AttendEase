@@ -15,6 +15,10 @@ if($user->getRoleId() == 3){
 else{
     header("Location:../access-denied/");
 }
+
+
+$tables = $db->query("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA LIKE :dbName ORDER BY TABLE_NAME ;" , [":dbName" => $db->getDbname()]);
+
 ?>
 
 <!--
@@ -45,18 +49,14 @@ Database-Page (add new items / delete items)
         <link rel="stylesheet" href="../css/custom.css">
     </head>
     <body>
-        <template id="itemTemplate">
-            <a href="" style="text-decoration:none" target="_blank" rel="noopener noreferrer" class="">
-
+        <template id="itemTemplate"><a href="" style="text-decoration:none" target="_blank" rel="noopener noreferrer" class="">
                 <div class="course-container">
-                    <h3> COMP11120 - Mathematical Techniques for Computer Science</h3>
+                    <h3 id="text-shown"> COMP11120 - Mathematical Techniques for Computer Science</h3>
                     <button class="btn btn-primary expand-button">
                         <i class="fa-solid fa-up-right-from-square"></i>
                     </button>
                 </div>
-            </a>
-
-        </template>
+            </a></template>
 
         <?php include($nav_path);?>
         <div class="container mt-4">
@@ -73,54 +73,35 @@ Database-Page (add new items / delete items)
             </div>
         </div>
 
+        <div class="d-flex flex-column align-items-center justify-content-center mt-5">
+            <a class="btn btn-success " href="../database-edit/">Show Database</a>
+        </div>
+
         <div class="container my-5 courseList overflow-scroll accordion ">
 
-
-            <div id="usersContainers" class="my-4 accordion-item">
+            <?php 
+            // NOTE: do not remove the class searchResult from the collapse div. The js needs it
+            for($i=0;$i<sizeof($tables);$i++){
+            $tableName = $tables[$i]["TABLE_NAME"];
+            $content = '
+            <div id="'.$tableName.'Containers" class="my-4 accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#UserCollapse" aria-expanded="true" aria-controls="UserCollapse">
-                        Users 
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#'.$tableName.'Collapse" aria-expanded="false" aria-controls="'.$tableName.'Collapse">
+                        '.$tableName.' 
                     </button>
                 </h2>
 
-                <div id="UserCollapse" class="  collapse ">
+                <div id="'.$tableName.'Collapse" class="collapse searchResult">
                 </div>      
             </div>
+            ';
+            echo $content;
+            }
 
+            ?>
 
-            <div id="timeslotContainer" class="my-4 accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#TimeslotCollapse" aria-expanded="true" aria-controls="UserCollapse">
-                        Time Slots 
-                    </button>
-                </h2>
+            
 
-                <div id="TimeslotCollapse" class=" accordion-collapse collapse ">
-                </div>      
-            </div>
-
-
-            <div id="locationContainer" class="my-4 accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#LocationCollapse" aria-expanded="true" aria-controls="UserCollapse">
-                        Locations 
-                    </button>
-                </h2>
-
-                <div id="LocationCollapse" class=" accordion-collapse collapse ">
-                </div>      
-            </div>
-
-            <div id="courseContainers" class="my-4 accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#CourseCollapse" aria-expanded="true" aria-controls="UserCollapse">
-                        Course 
-                    </button>
-                </h2>
-
-                <div id="CourseCollapse" class=" accordion-collapse collapse ">
-                </div>      
-            </div>
         </div>
 
         <?php include("../php/template/footer.php"); ?>

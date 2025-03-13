@@ -47,15 +47,18 @@ $multifilter = $_GET["multi"];
         if(isset($table)){
             if(isset($filter)){
                 include("record_page.php");
+                echo '<script src="./record_page.js"></script>';
             }
 
             else{
                 include("table_page.php");
+                echo '<script src="./table_page.js"></script>';
             }
         }
 
         else{
             include("database_page.php");
+                echo '<script src="./database_page.js"></script>';
         }
 
         ?>

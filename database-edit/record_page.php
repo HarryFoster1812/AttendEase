@@ -1,4 +1,4 @@
-<div class='vh-100 vw-100 d-flex flex-column justify-content-center align-items-center'>
+<div class='min-vh-100 vw-100 d-flex flex-column justify-content-center align-items-center'>
 
     <h1>Record in <?php echo $table; ?></h1>
 
