@@ -23,7 +23,7 @@
         $query = "SELECT * FROM ".$table." WHERE ".$filter."=".$id;
     }
 
-    echo $query;
+    echo "<h3 id='query'>".$query."</h3>";
 
     $record = $db->query($query , [])[0];
     $columns = array_keys($record);
@@ -31,10 +31,11 @@
     for($i=0;$i<sizeof($columns);$i++){
     $content = '
     <h2>'.$columns[$i].'</h2>
-    <input value="'.$record[$columns[$i]].'"/>
+    <input value="'.$record[$columns[$i]].'" data-default="'.$record[$columns[$i]].'"/>
     ';
         echo $content;
     }
     ?>
-    <button class="btn btn-success">Change</button>
+    <button class="btn btn-warning" id="change">Change</button>
+    <button class="btn btn-success" id="reset">Reset</button>
 </div>

@@ -30,9 +30,7 @@ class UrlHelper {
             $href .= '&filter='.$keys[0]["Column_name"].'&id='.$record[$keys[0]["Column_name"]];
         }
         return $href;
-}
-
-
+    }
 }
 
 ?>

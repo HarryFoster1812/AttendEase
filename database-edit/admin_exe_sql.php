@@ -15,6 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $parameters = json_decode($_POST["params"], true);
 
     $response = $db->query($query, $parameters);
+
     echo json_encode(["response"=>$response]);
 }
 
