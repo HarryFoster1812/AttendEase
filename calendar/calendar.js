@@ -8,15 +8,9 @@ date_picker.addEventListener("change", dateEvent);
 date_header = document.getElementById("date");
 
 event_template = document.getElementById("class-ui");
+    
 
-const popoverHTML = `
-    <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action calendar-action">Create Absence Request</a>
-        <a href="#" class="list-group-item list-group-item-action calendar-action">Appeal Your Attendance</a>
-    </div>
-`       
-
-
+const popoverInstances = [];
 document.getElementById("date_forward").addEventListener("click", nextDate);
 document.getElementById("date_back").addEventListener("click", previousDate);
 
@@ -167,6 +161,18 @@ function populateDay(json_data, tableElements, dateFilter){
 
             tableElements[index].appendChild(event_item);
             event_item = tableElements[index].lastElementChild;
+            const popoverHTML = `
+            <ul class="list-group"
+                data-user-id="${filtered_json[i][j]["user_id"]}"
+                data-timeslot-id="${filtered_json[i][j]["timeslot_id"]}">
+                <li class="list-group-item list-group-item-action calendar-action absence-request">
+                    Create Absence Request
+                </li>
+                <li class="list-group-item list-group-item-action calendar-action attendance-appeal">
+                    Appeal Your Attendance
+                </li>
+            </ul>
+        `;
             const popover = new bootstrap.Popover(event_item,{
                 content: popoverHTML,
                 html: true,
@@ -176,6 +182,9 @@ function populateDay(json_data, tableElements, dateFilter){
             })
             popoverInstances.push({ event_item, popover });
             event_item.classList.add(filtered_json[i][j]["status"].toLowerCase());
+            event_item.dataset.userId = filtered_json[i][j]["user_id"];
+            event_item.dataset.timeslotId = filtered_json[i][j]["timeslot_id"];
+            event_item.dataset.status = filtered_json[i][j]["status"];
             
         }
     }   
@@ -213,7 +222,7 @@ function days_between(date1, date2) {
 }
 
 function populateMonth(json_data, tableElements, start_date){
-    const popoverInstances = [];
+
     Object.keys(json_data).forEach(element => {
         json_data[element].forEach(event => {
             
@@ -244,6 +253,16 @@ function populateMonth(json_data, tableElements, start_date){
 
             tableElements[index].appendChild(event_item);
             event_item = tableElements[index].lastElementChild;
+            const popoverHTML = `
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action calendar-action absence-request">
+                    Create Absence Request
+                </li>
+                <li class="list-group-item list-group-item-action calendar-action attendance-appeal">
+                    Appeal Your Attendance
+                </li>
+            </ul>
+        `;
             const popover = new bootstrap.Popover(event_item,{
                 content: popoverHTML,
                 html: true,
@@ -253,6 +272,9 @@ function populateMonth(json_data, tableElements, start_date){
             })
             popoverInstances.push({ event_item, popover });
             event_item.classList.add(event["status"].toLowerCase());
+            event_item.dataset.userId = event["user_id"];
+            event_item.dataset.timeslotId = event["timeslot_id"];
+            event_item.dataset.status = event["status"];
         });
     });    
     document.addEventListener("click", (event) => {
@@ -446,6 +468,7 @@ function dateEvent(event){
             // update the calendar
             try{
                 json_data = JSON.parse(this.responseText);
+                console.log(json_data)
                 clearCalendar(time);
                 populateCalendar(json_data, time, start_date);
             }
@@ -575,5 +598,27 @@ function displayTableDates(start_date){
         }
     }
 }
+document.addEventListener('click',popoverActions)
+function popoverActions(event){
+    if(event.target.closest(".absence-request")){
+        popoverInstances.forEach(instance =>{
+            if(instance.popover._element.hasAttribute('aria-describedby')){
+                const associatedEventItem = instance.popover._element;
+                if(associatedEventItem.dataset.status==="Upcoming"){
+                    showPopup("absence-popup");
+                }
+                else{
+                    const failBox = document.getElementById('request-fail');
+                    let failDOM = document.importNode(failBox,true).content;
+                    document.body.append(failDOM);
+                    failDOM = document.body.lastElementChild;
+                    const removeFail = setTimeout(()=>{
+                        failDOM.remove()
+                    },3500);
+                }
+            }
+            
+    })
+}}
 
 setDateToday();

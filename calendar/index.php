@@ -23,6 +23,7 @@ else{
     <?php include("../php/template/header.php"); ?>
     <link rel="stylesheet" href="../css/calendar.css">
     <link rel="stylesheet" href="../css/attend.css">
+    <link rel="stylesheet" href="../staff-event/staffEvent.css">
 <?php    
 if(isset($_COOKIE["darkMode"])){
     echo '<link rel="stylesheet" id="darkstylesheet" href="../css/calendar_dark.css">';
@@ -47,6 +48,44 @@ if(isset($_COOKIE["darkMode"])){
             </div>
         </div>
     </template>
+    <template id="request-fail">
+            <div class="nav-box-fail p-2 m-1 border border-2 border-danger rounded-3">
+                <h5 class="text-danger fw-bold" id="title">Can not make an absence request!</h5>
+                    <p class="text-danger" id="message">Unable to create an absence request. This is because you have already marked your attendance for this session.</p>
+            </div>
+        </template>
+    <template id="request-success">
+        <div class="nav-box-success p-2 m-1 border border-2 border-success rounded-3">
+            <h5 class="text-success fw-bold">Succesfully created an absence request!</h4>
+                <p class="text-success">You have been marked as absent for this session. If you do attend this session, please contact your lecturer!</p>
+        </div>
+    </template>
+
+    <div id="overlay" class="overlay hidden">
+            
+            <div class="popup flex-column" id="absence-popup">
+                <h4 class="text-center mt-3 text-black code-title mb-4 border-bottom border-2 pb-2">Confirm absence request?</h4>
+                <h5 class="text-black pb-3 text-start"><b class="text-danger">Warning:</b> You will not be able to check in to your session if you do attend. If you do attend this session, either contact your lecturer directly or make an appeal after the session.</h5>
+                <div class="d-flex justify-content-end border-top border-2 mt-4 gap-2 pt-3">
+                    <button class="btn btn-danger" onclick="hidePopup()">Cancel</button>
+                    <button class="btn btn-success">Proceed</button>
+                </div>
+                </div>
+            </div>
+
+            <div class="popup flex-column" id="attendance-popup">
+                <h4 class="text-center text-primary mb-4">Change Attendance Status</h4>
+                <select id="TypeDropdown" class="form-select w-auto">
+                    <option selected>Attended</option>
+                    <option>Late</option>
+                    <option>Missed</option>
+                </select>
+                <div class="button-container mt-4">
+                    <button class="btn btn-danger cancel" >Cancel</button>
+                    <button class="btn btn-success" id="attendYesBtn">Change</button>
+                </div>
+            </div>
+        </div>
 
     <?php
         include($nav_path);
@@ -384,6 +423,7 @@ if(isset($_COOKIE["darkMode"])){
     <?php include("../php/template/footer.php"); ?>
     <script src="../js/date.js"></script>
     <script src="./calendar.js"></script>
+    <script src="../staff-event/staffEvent.js"></script>
 
 </body>
 </html>

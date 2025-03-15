@@ -5,7 +5,7 @@ const cancelBtns = Array.from(document.getElementsByClassName("cancel"));
 var selected_users = [];
 
 const timeslot_id = document.body.dataset.timeslotid;
-
+const overlay = document.getElementById("overlay");
 var currentPopup = null;
 
 function showError(title, message){
@@ -292,5 +292,5 @@ function sendEditAjax(data){
     xmlhttp.send("id="+timeslot_id+"&changedFields="+JSON.stringify(data));
 }
 
-const overlay = document.getElementById("overlay");
+
 
