@@ -32,7 +32,7 @@ if(isset($_COOKIE["darkMode"])){
 </head>
 <body>
     <template id="class-ui">
-        <div class="class-block my-2">
+        <div class="class-block my-2" data-bs-toggle="popover">
             <div class="class-head">
                 <div class="class-time-icon">
                     <i class="fa-regular fa-clock"></i>
@@ -384,7 +384,6 @@ if(isset($_COOKIE["darkMode"])){
     <?php include("../php/template/footer.php"); ?>
     <script src="../js/date.js"></script>
     <script src="./calendar.js"></script>
-    <script src="../js/attend.js"></script>
 
 </body>
 </html>

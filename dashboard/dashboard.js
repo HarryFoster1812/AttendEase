@@ -277,10 +277,19 @@ xmlhttp.onreadystatechange = function() {
                 percentText.style.fontSize = "50px";
                 
                 let additionalText = document.createElement("p");
-                additionalText.innerText = "(Difference from last week)"
-                additionalText.classList.add("text-muted");
-                additionalText.style.fontSize = "20px";
+                additionalText.innerText = "Attendance Delta";
+                if(percentageDiff>0){
+                    percentText.insertAdjacentHTML('beforeend','<i class="fa-solid fa-chevron-up mx-2"></i>')
+                }
+                else if(percentageDiff<0){
+                    percentText.insertAdjacentHTML('beforeend','<i class="fa-solid fa-chevron-down mx-2"></i>')
+                }
+                else{
+                    percentText.insertAdjacentHTML('beforeend','<i class="fa-solid fa-minus mx-2"></i>')
+                }
+                additionalText.style.fontSize = "24px";
 
+                additionalText.style.color = "#660099";
                 parentTextDiv.appendChild(percentText);
                 parentTextDiv.appendChild(additionalText);
                 timeDiv.appendChild(parentTextDiv);

@@ -9,6 +9,13 @@ date_header = document.getElementById("date");
 
 event_template = document.getElementById("class-ui");
 
+const popoverHTML = `
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action calendar-action">Create Absence Request</a>
+        <a href="#" class="list-group-item list-group-item-action calendar-action">Appeal Your Attendance</a>
+    </div>
+`       
+
 
 document.getElementById("date_forward").addEventListener("click", nextDate);
 document.getElementById("date_back").addEventListener("click", previousDate);
@@ -109,6 +116,13 @@ function clearCalendar(period){
 }
 
 function populateDay(json_data, tableElements, dateFilter){
+    const popoverInstances = [];
+
+
+
+
+// Close any open popover when clicking outside
+
     // create a function which maps the time to an index in the table
     // starts at 8  (index[0] = 8:00)
     // last element is 18:00
@@ -126,6 +140,8 @@ function populateDay(json_data, tableElements, dateFilter){
     for (let i=0;i<filtered_json.length;i++){
         for(let j=0;j<filtered_json[i].length;j++){
             let event_item = event_template.content.cloneNode(true);
+
+
             
             // change node content
             // need to add something so that student and lecturer events can be distinct (maybe a class?)
@@ -151,13 +167,30 @@ function populateDay(json_data, tableElements, dateFilter){
 
             tableElements[index].appendChild(event_item);
             event_item = tableElements[index].lastElementChild;
-           
+            const popover = new bootstrap.Popover(event_item,{
+                content: popoverHTML,
+                html: true,
+                placement: "bottom",
+                trigger:"click",
+                customClass: "custom-popover"
+            })
+            popoverInstances.push({ event_item, popover });
             event_item.classList.add(filtered_json[i][j]["status"].toLowerCase());
-            event_item.addEventListener('click',toggleAttend.bind(this,"calendar"));
             
         }
     }   
-    
+    document.addEventListener("click", (event) => {
+        popoverInstances.forEach(({ trigger, popover }) => {
+          const isClickInside =
+            trigger.contains(event.target) ||
+            (document.querySelector(".popover") &&
+              document.querySelector(".popover").contains(event.target));
+      
+          if (!isClickInside) {
+            popover.hide();
+          }
+        });
+      });
  
     // in each template change the time
     // change the Title  of the 
@@ -180,10 +213,12 @@ function days_between(date1, date2) {
 }
 
 function populateMonth(json_data, tableElements, start_date){
+    const popoverInstances = [];
     Object.keys(json_data).forEach(element => {
         json_data[element].forEach(event => {
             
             let event_item = event_template.content.cloneNode(true);
+
             // change node content
             // need to add something so that student and lecturer events can be distinct (maybe a class?)
             
@@ -209,10 +244,29 @@ function populateMonth(json_data, tableElements, start_date){
 
             tableElements[index].appendChild(event_item);
             event_item = tableElements[index].lastElementChild;
+            const popover = new bootstrap.Popover(event_item,{
+                content: popoverHTML,
+                html: true,
+                placement: "bottom",
+                trigger:"click",
+                customClass: "custom-popover"
+            })
+            popoverInstances.push({ event_item, popover });
             event_item.classList.add(event["status"].toLowerCase());
-            event_item.addEventListener('click',toggleAttend.bind(this,"calendar"));
         });
-    });        
+    });    
+    document.addEventListener("click", (event) => {
+        popoverInstances.forEach(({ event_item, popover }) => {
+          const isClickInside =
+            event_item.contains(event.target) ||
+            (document.querySelector(".popover") &&
+              document.querySelector(".popover").contains(event.target));
+      
+          if (!isClickInside) {
+            popover.hide();
+          }
+        });
+      });    
 }
 
 function populateCalendar(json_data, period, start_date){

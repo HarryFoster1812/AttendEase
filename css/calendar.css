@@ -136,6 +136,20 @@ td{
   .calendar-date{
     color: #ffcc33;
   }
+  .calendar-action{
+    font-family: "Convergence", sans-serif !important;
+    font-size:1rem;
+  }
+  .calendar-action:hover{
+    background-color:#219460;
+    color:#fff;
+    transition: all 0.6s;
+
+  }
+  .custom-popover{
+    box-shadow: 0px 0px 15px 5px #ccc;
+    border:0;
+  }
 @media(max-width:1200px){
   .table-title{
     width:25%;
