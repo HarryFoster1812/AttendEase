@@ -60,6 +60,24 @@ if(isset($_COOKIE["darkMode"])){
                 <p class="text-success">You have been marked as absent for this session. If you do attend this session, please contact your lecturer!</p>
         </div>
     </template>
+    <template id="appeal-fail">
+            <div class="nav-box-fail p-2 m-1 border border-2 border-danger rounded-3">
+                <h5 class="text-danger fw-bold" id="title">Can not appeal this attendance session!</h5>
+                    <p class="text-danger" id="message">You can not appeal your attendance if you have attended the session or have already sent an appeal!</p>
+            </div>
+    </template>
+    <template id="appeal-success">
+        <div class="nav-box-success p-2 m-1 border border-2 border-success rounded-3">
+            <h5 class="text-success fw-bold">Succesfully sent the attendance appeal!</h4>
+                <p class="text-success">Your lecturer will review your appeal shortly and make a decision.</p>
+        </div>
+    </template>
+    <template id="appeal-empty">
+            <div class="nav-box-fail p-2 m-1 border border-2 border-danger rounded-3">
+                <h5 class="text-danger fw-bold" id="title">Unable to send appeal!</h5>
+                    <p class="text-danger" id="message">This may be becuase you have not included any content in your appeal reason. Try adding some information to your appeal before sending it.</p>
+            </div>
+    </template>
 
     <div id="overlay" class="overlay hidden">
             
@@ -70,22 +88,21 @@ if(isset($_COOKIE["darkMode"])){
                     <button class="btn btn-danger" onclick="hidePopup()">Cancel</button>
                     <button class="btn btn-success" onclick="publishAbsence()">Proceed</button>
                 </div>
-                </div>
             </div>
 
-            <div class="popup flex-column" id="attendance-popup">
-                <h4 class="text-center text-primary mb-4">Change Attendance Status</h4>
-                <select id="TypeDropdown" class="form-select w-auto">
-                    <option selected>Attended</option>
-                    <option>Late</option>
-                    <option>Missed</option>
-                </select>
-                <div class="button-container mt-4">
-                    <button class="btn btn-danger cancel" >Cancel</button>
-                    <button class="btn btn-success" id="attendYesBtn">Change</button>
+            <div class="popup flex-column" id="appeal-popup">
+                <h4 class="text-center mt-3 text-black code-title mb-4 border-bottom border-2 pb-2">Make an appeal</h4>
+                <h5 class="text-black pb-3 text-start">Please provide a detailed explanation of why you are making this appeal. Make sure to include relevant information so that your lecturer can understand the issue clearly and assess your appeal effectively.</h5>
+                <div class="mb-3 appeal-form-box">
+                    <label for="appeal-form" class="form-label text-black"><b>Appeal Reason</b></label>
+                    <textarea class="form-control" id="appeal-form" rows="3"></textarea>
+                </div>
+                <div class="d-flex justify-content-end border-top border-2 mt-4 gap-2 pt-3">
+                    <button class="btn btn-danger" onclick="hidePopup()">Cancel</button>
+                    <button class="btn btn-success" onclick="sendAppeal()">Proceed</button>
                 </div>
             </div>
-        </div>
+    </div>
 
     <?php
         include($nav_path);

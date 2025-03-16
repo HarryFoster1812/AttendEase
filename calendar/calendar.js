@@ -186,6 +186,7 @@ function populateDay(json_data, tableElements, dateFilter){
             event_item.dataset.userId = filtered_json[i][j]["user_id"];
             event_item.dataset.timeslotId = filtered_json[i][j]["timeslot_id"];
             event_item.dataset.status = filtered_json[i][j]["status"];
+            event_item.dataset.appeal = filtered_json[i][j]["appeal"]
             
         }
     }   
@@ -276,6 +277,7 @@ function populateMonth(json_data, tableElements, start_date){
             event_item.dataset.userId = event["user_id"];
             event_item.dataset.timeslotId = event["timeslot_id"];
             event_item.dataset.status = event["status"];
+            event_item.dataset.appeal = event["appeal"]
         });
     });    
     document.addEventListener("click", (event) => {
@@ -606,6 +608,7 @@ function popoverActions(event){
             if(instance.popover._element.hasAttribute('aria-describedby')){
                 const associatedEventItem = instance.popover._element;
                 if(associatedEventItem.dataset.status==="Upcoming"){
+                    instance.popover.hide();
                     showPopup("absence-popup");
                     currUser = parseInt(associatedEventItem.dataset.userId);
                     currTimeSlot = parseInt(associatedEventItem.dataset.timeslotId);
@@ -616,14 +619,38 @@ function popoverActions(event){
                     document.body.append(failDOM);
                     failDOM = document.body.lastElementChild;
                     const removeFail = setTimeout(()=>{
-                        failDOM.remove()
+                        failDOM.remove();
                     },3500);
                 }
             }
             
     })
-}}
 
+    }
+    else if(event.target.closest(".attendance-appeal")){
+        popoverInstances.forEach(instance=>{
+            if(instance.popover._element.hasAttribute('aria-describedby')){{
+                const associatedEventItem = instance.popover._element;
+                console.log(parseInt(associatedEventItem.dataset.appeal))
+                if(parseInt(associatedEventItem.dataset.appeal)===0 && associatedEventItem.dataset.status==="Missed"){
+                    instance.popover.hide();
+                    showPopup("appeal-popup");
+                    currUser = parseInt(associatedEventItem.dataset.userId);
+                    currTimeSlot = parseInt(associatedEventItem.dataset.timeslotId);
+                }
+                else{
+                    const failBox = document.getElementById('appeal-fail');
+                    let failDOM = document.importNode(failBox,true).content;
+                    document.body.append(failDOM);
+                    failDOM = document.body.lastElementChild;
+                    const removeFail = setTimeout(()=>{
+                        failDOM.remove();
+                    },3500);
+                }
+            }
+        }
+    })}
+}
 function publishAbsence(){
     const data = { userid: currUser, timeslotid: currTimeSlot, status: "Missed" };
     fetch("../dashboard/set-attendance-data.php", {
@@ -646,7 +673,44 @@ function displayAbsenceSuccess(){
     document.body.append(succDOM);
     succDOM = document.body.lastElementChild;
     const removeSucc = setTimeout(()=>{
-        failDOM.remove()
+        succDOM.remove()
+    },3500);
+}
+function sendAppeal(){
+    const appealContent = document.getElementById("appeal-form").value;
+    if(!appealContent.trim()){
+        const failBox = document.getElementById('appeal-empty');
+        let failDOM = document.importNode(failBox,true).content;
+        document.body.append(failDOM);
+        failDOM = document.body.lastElementChild;
+        const removeFail = setTimeout(()=>{
+            failDOM.remove();
+        },3500);
+    }
+    else{
+        const message = appealContent.trim();
+        const data = {userid: currUser, timeslotid: currTimeSlot, message: message};
+        fetch("./set-appeal-data.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.text())  // Get response from PHP
+            .then(result => console.log(result))
+            .catch(error => console.error("Error:", error))
+            .then(hidePopup())
+            .then(displayAppealSuccess())
+    }
+}
+function displayAppealSuccess(){
+    const succBox = document.getElementById('appeal-success');
+    let succDOM = document.importNode(succBox,true).content;
+    document.body.append(succDOM);
+    succDOM = document.body.lastElementChild;
+    const removeSucc = setTimeout(()=>{
+        succDOM.remove()
     },3500);
 }
 setDateToday();
