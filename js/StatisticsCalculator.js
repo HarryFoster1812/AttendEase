@@ -2,6 +2,7 @@ import "../js/date.js";
 
 export default class StatisticsCalculator { data;
     totalAttended;
+    totalAssigned;
     totalOnTime;
     totalEvents;
     hightAttended;
@@ -15,6 +16,7 @@ export default class StatisticsCalculator { data;
 
     constructor(json_data) {
         this.data = json_data;
+        this.totalAssigned = 0;
         this.totalAttended=0;
         this.totalOnTime=0;
         this.hightAttended=0;
@@ -373,6 +375,10 @@ export default class StatisticsCalculator { data;
 
     get attendedCount(){
         return this.totalAttended;
+    }
+
+    get assignedCount(){
+        return this.totalAssigned;
     }
 
     get onTimeCount(){

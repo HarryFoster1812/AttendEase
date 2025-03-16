@@ -261,7 +261,7 @@ xmlhttp.onreadystatechange = function() {
             if(roleId == 2 || roleId == 3){ 
                 statistics.processStaffData();
                 let totalAttended = statistics.attendedCount;
-                let totalEvents = statistics.totalEventCount;
+                let totalEvents = statistics.assignedCount;
                 let percentageDiff = statistics.getWeekDifference();
                 
                 let timeDiv = timeChart.parentElement;
