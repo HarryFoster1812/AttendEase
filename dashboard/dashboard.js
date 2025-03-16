@@ -254,7 +254,7 @@ xmlhttp.onreadystatechange = function() {
             console.log(this.responseText);
             let jsonData = JSON.parse(this.responseText);
 
-            let chartNames = ["Attendance", "On Time", "Ranking"];
+            let chartNames = ["Attendance", "On Time"];
 
             // send this data to a function to calculate statistics
             var statistics = new StatisticsCalculator(jsonData);
@@ -297,12 +297,10 @@ xmlhttp.onreadystatechange = function() {
 
                 if (totalEvents == 0){
                     createDoughnutChart(attendanceChart, [0 ,100], `0%`, chartNames[0]);
-                    createDoughnutChart(rankChart, [0,100],`0%`, chartNames[2]);
                 }
 
                 else{
                     createDoughnutChart(attendanceChart, [totalAttended/totalEvents ,1- totalAttended/totalEvents], `${Math.round((totalAttended/totalEvents)*100)}%`, chartNames[0]);
-                    createDoughnutChart(rankChart, [100,0],`0%`, chartNames[2]);
                 }
             }
             else{
@@ -314,13 +312,11 @@ xmlhttp.onreadystatechange = function() {
                 if (totalEvents == 0){
                     createDoughnutChart(attendanceChart, [0 ,100], `0%`, chartNames[0]);
                     createDoughnutChart(timeChart, [0 , 100], `0%`, chartNames[1] );
-                    createDoughnutChart(rankChart, [0,100],`0%`, chartNames[2]);
                 }
 
                 else{
                     createDoughnutChart(attendanceChart, [totalAttended/totalEvents ,1- totalAttended/totalEvents], `${Math.round((totalAttended/totalEvents)*100)}%`, chartNames[0]);
                     createDoughnutChart(timeChart, [totalOnTime/totalEvents ,1- totalOnTime/totalEvents], `${Math.round((totalOnTime/totalEvents)*100)}%`, chartNames[1] );
-                    createDoughnutChart(rankChart, [100,0],`0%`, chartNames[2]);
                 }
             }
         }
@@ -344,7 +340,6 @@ document.addEventListener("DOMContentLoaded", function () {
     
     const attendanceChart = document.getElementById("attendanceChart").getContext("2d");
     const timeChart = document.getElementById("timeChart").getContext("2d");
-    const rankChart = document.getElementById("rankChart").getContext("2d");
 
 });
 

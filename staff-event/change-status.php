@@ -69,8 +69,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     try{
         $db->query(
-            "UPDATE Attendance set status=:status WHERE user_id IN (:values) AND timeslot_id=:id", 
-            [":status"=>$new_status, ":values"=>$userList, ":id"=>$timeSlot_id]
+            "UPDATE Attendance set status=:status WHERE user_id IN (".$userList.") AND timeslot_id=:id", 
+            [":status"=>$new_status , ":id"=>$timeSlot_id]
         );
         echo "Success";
     }
