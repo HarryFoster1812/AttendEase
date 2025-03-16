@@ -15,6 +15,7 @@ if(!isset($_SESSION["user"])){
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $userData = unserialize($_SESSION["user"]);
     $timeslotManager = new TimeslotManager($db, $userData);
+    header('Content-Type: application/json');
     $data = $timeslotManager->getLeaderboardStatistics();
     echo json_encode($data);
 

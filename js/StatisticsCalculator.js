@@ -59,12 +59,27 @@ export default class StatisticsCalculator { data;
             this.leaderboard_data.get(element.user_id).streak = Math.max(this.leaderboard_data.get(element.user_id).streak,this.leaderboard_data.get(element.user_id).tempStreak);
             this.leaderboard_data.get(element.user_id).classes+=1;
         });
-        this.leaderboard_data = new Map([...this.leaderboard_data].sort((a,b) => {
-            if(a.value>b.value){
-                return 1;
-            }
-            return -1;
-        }))
+        this.leaderboard_data = new Map([...this.leaderboard_data].sort((a, b) => {
+            const aValue = a[1]; 
+            const bValue = b[1]; 
+        
+            // Compare streaks
+            if (aValue.streak > bValue.streak) return -1;
+            if (aValue.streak < bValue.streak) return 1;
+        
+            // Compare onTime
+            if (aValue.onTime > bValue.onTime) return -1;
+            if (aValue.onTime < bValue.onTime) return 1;
+        
+            // Compare attendance ratio
+            const aAttendanceRatio = aValue.attendance / aValue.classes;
+            const bAttendanceRatio = bValue.attendance / bValue.classes;
+            if (aAttendanceRatio > bAttendanceRatio) return -1;
+            if (aAttendanceRatio < bAttendanceRatio) return 1;
+        
+            return 0;
+        }));
+        
     }
 
     processData(){ 
