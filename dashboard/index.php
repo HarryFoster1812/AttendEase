@@ -52,7 +52,7 @@ if(isset($_COOKIE["darkMode"])){
                         <h4 class="text-black"><?php echo $userData->getAcademic() ?></h3>
                         <h4 class="text-black">ID: <?php echo $userData->getUserId() ?></h3>
                         <?php if ($userData->getRoleId() > 0): ?>
-                                <button class="btn btn-lg btn-primary check-requests">Check Appeals</button>
+                                <a class="btn btn-lg btn-primary check-requests" href="../appeals/?id=<?php echo $userData->getUserId() ?>">Check Appeals</a>
                         <?php endif; ?>
                         </div>
                     </div>
