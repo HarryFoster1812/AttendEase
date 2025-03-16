@@ -25,7 +25,45 @@ export default class StatisticsCalculator { data;
         this.graphDataThisWeek=0;
         this.graphDataAllWeeks=0;
         this.totalEvents = this.data.length;
+        this.leaderboard_data = new Map()
     } 
+
+    processLeaderboardData(){ 
+        this.data.forEach(element => { // check if course is in attendanceCounts 
+            if(!this.leaderboard_data.has(element.user_id)){
+                this.leaderboard_data.set(element.user_id,{
+                    streak: 0,
+                    attendance: 0,
+                    onTime: 0,
+                    classes: 0,
+                    name: element.name,
+                    tempStreak: 0
+                })
+            }
+            if (element.status == "Attended"){ 
+                this.leaderboard_data.get(element.user_id).attendance+=1;
+                this.leaderboard_data.get(element.user_id).onTime+=1;
+                this.leaderboard_data.get(element.user_id).tempStreak+=1;
+            } 
+            else if (element.status == "Late"){ 
+                this.leaderboard_data.get(element.user_id).attendance+=1;
+                this.leaderboard_data.get(element.user_id).tempStreak+=1;
+            } 
+
+            else{ 
+                this.leaderboard_data.get(element.user_id).tempStreak=0;
+            } 
+
+            this.leaderboard_data.get(element.user_id).streak = Math.max(this.leaderboard_data.get(element.user_id).streak,this.leaderboard_data.get(element.user_id).tempStreak);
+            this.leaderboard_data.get(element.user_id).classes+=1;
+        });
+        this.leaderboard_data = new Map([...this.leaderboard_data].sort((a,b) => {
+            if(a.value>b.value){
+                return 1;
+            }
+            return -1;
+        }))
+    }
 
     processData(){ 
         let tmpStreak = 0;

@@ -87,7 +87,20 @@ class TimeslotManager {
         ]);
     
     } 
-
+    public function getLeaderboardStatistics(){
+        // the user should be authenticated
+        $query = "SELECT * 
+            FROM Attendance 
+            INNER JOIN TimeSlot ON Attendance.timeslot_id = TimeSlot.timeslot_id
+            INNER JOIN Course ON TimeSlot.course_id = Course.course_id
+            INNER JOIN User on Attendance.user_id = User.user_id
+            WHERE User.leaderboard_opt_in = 1 AND User.role_id<=1
+            ORDER BY User.user_id,TimeSlot.date,TimeSlot.start_time
+            ";
+        
+        return $this->db->query($query);
+    
+    } 
 
     public function getStaffStatistics(){
         // need to edit to also return the type of class when the database is updated
