@@ -9,7 +9,8 @@ date_header = document.getElementById("date");
 
 event_template = document.getElementById("class-ui");
     
-
+let currUser = null;
+let currTimeSlot = null;
 const popoverInstances = [];
 document.getElementById("date_forward").addEventListener("click", nextDate);
 document.getElementById("date_back").addEventListener("click", previousDate);
@@ -606,6 +607,8 @@ function popoverActions(event){
                 const associatedEventItem = instance.popover._element;
                 if(associatedEventItem.dataset.status==="Upcoming"){
                     showPopup("absence-popup");
+                    currUser = parseInt(associatedEventItem.dataset.userId);
+                    currTimeSlot = parseInt(associatedEventItem.dataset.timeslotId);
                 }
                 else{
                     const failBox = document.getElementById('request-fail');
@@ -621,4 +624,29 @@ function popoverActions(event){
     })
 }}
 
+function publishAbsence(){
+    const data = { userid: currUser, timeslotid: currTimeSlot, status: "Missed" };
+    fetch("../dashboard/set-attendance-data.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.text())  // Get response from PHP
+        .then(result => console.log(result))
+        .catch(error => console.error("Error:", error))
+        .then(hidePopup())
+        .then(displayAbsenceSuccess())
+
+}
+function displayAbsenceSuccess(){
+    const succBox = document.getElementById('request-success');
+    let succDOM = document.importNode(succBox,true).content;
+    document.body.append(succDOM);
+    succDOM = document.body.lastElementChild;
+    const removeSucc = setTimeout(()=>{
+        failDOM.remove()
+    },3500);
+}
 setDateToday();

@@ -15,7 +15,7 @@ if ($decodedData === null) {
 if ($decodedData) {
     echo $decodedData["userid"] . " " . $decodedData["timeslotid"];
     $params = [
-        "status" => "Attended",
+        "status" => $decodedData["status"],
         "userID" => (int) $decodedData["userid"],
         "timeslotID" => (int) $decodedData["timeslotid"]
     ];

@@ -68,7 +68,7 @@ if(isset($_COOKIE["darkMode"])){
                 <h5 class="text-black pb-3 text-start"><b class="text-danger">Warning:</b> You will not be able to check in to your session if you do attend. If you do attend this session, either contact your lecturer directly or make an appeal after the session.</h5>
                 <div class="d-flex justify-content-end border-top border-2 mt-4 gap-2 pt-3">
                     <button class="btn btn-danger" onclick="hidePopup()">Cancel</button>
-                    <button class="btn btn-success">Proceed</button>
+                    <button class="btn btn-success" onclick="publishAbsence()">Proceed</button>
                 </div>
                 </div>
             </div>

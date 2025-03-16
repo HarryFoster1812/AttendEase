@@ -144,7 +144,7 @@ function compareLocData(lat,long, loc){
     }
 }
 const publishAttendance = (userID, timeslotID) => {         //Use the TimeSlotID and UserID to update the attendance to the database
-    const data = { userid: userID, timeslotid: timeslotID };
+    const data = { userid: userID, timeslotid: timeslotID, status: "Attended" };
     fetch("../dashboard/set-attendance-data.php", {
         method: "POST",
         headers: {
