@@ -501,11 +501,11 @@ function dateEvent(event){
 
 function cleanData(json_data){
     let today = Date.today();
-    Date.today().setTimeToNow();
+    today.setTimeToNow();
     Object.keys(json_data).forEach(user => {
         json_data[user].forEach(timeslot => {
             let timeslot_date_end = Date.parse(timeslot["date"]); 
-            timeslot_date_end.at(timeslot["end_time"]);
+            timeslot_date_end = timeslot_date_end.at(timeslot["end_time"]);
             let result = today.compareTo(timeslot_date_end);
             if(today.compareTo(timeslot_date_end) == -1 && timeslot["status"] == "Missed"){
                 timeslot["status"] = "Upcoming";

@@ -354,6 +354,7 @@ calendarAjax.onreadystatechange = function() {
         try{
             let json_data = JSON.parse(this.responseText);
             console.log("TTJSON",json_data)
+            json_data = cleanData(json_data);
             if (Object.keys(json_data).includes("student")){
 
                 json_data["student"].forEach(element => {
@@ -393,6 +394,23 @@ calendarAjax.onreadystatechange = function() {
 calendarAjax.open("POST", "../calendar/get-calendar-data.php", true);
 calendarAjax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 calendarAjax.send("start_date="+Date.today().toString("yyyy-MM-dd")+"&end_date="+Date.today().toString("yyyy-MM-dd"));
+
+function cleanData(json_data){
+    let today = Date.today();
+    today.setTimeToNow();
+    Object.keys(json_data).forEach(user => {
+        json_data[user].forEach(timeslot => {
+            let timeslot_date_end = Date.parse(timeslot["date"]); 
+            timeslot_date_end = timeslot_date_end.at(timeslot["end_time"]);
+            let result = today.compareTo(timeslot_date_end);
+            if(today.compareTo(timeslot_date_end) == -1 && timeslot["status"] == "Missed"){
+                timeslot["status"] = "Upcoming";
+            }
+        });
+    });
+   return json_data; 
+    
+}
 
 async function runLeaderboard(){
     try{
