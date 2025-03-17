@@ -2,7 +2,7 @@
 
     <div class="popup flex-column h-50" id="sql-popup">
         <h4>Run an SQL Query</h4>
-        <input id="commandInput" class="w-80 h-50"/>
+        <textarea id="commandInput" class="w-80 h-50"></textarea>
         <h5 class="my-2">Response:</h5>
         <span id="response" class="w-80 overflow-scroll"></span>
         <div class="button-container mt-4">

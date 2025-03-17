@@ -40,11 +40,10 @@ $tableInfo = $db->query("SELECT COLUMN_NAME AS 'Field', COLUMN_KEY AS 'Key', COL
         <table border=1 >
             <tr>
                 <?php
-                $columns = array_keys($records[0]);
-                for($i=0;$i<sizeof($columns);$i++){
-                    $columnName = $columns[$i];
+                for($i=0;$i<sizeof($tableInfo);$i++){
+                    $columnName = $tableInfo[$i]["Field"];
                     $content = '
-                    <th>'.$columnName.'</th>';
+                    <th class="px-3">'.$columnName.'</th>';
                     echo $content;
                 }
                 ?>
@@ -53,14 +52,15 @@ $tableInfo = $db->query("SELECT COLUMN_NAME AS 'Field', COLUMN_KEY AS 'Key', COL
             <?php 
             for($i=0;$i<sizeof($records);$i++){
             $content = '<tr class="clickable-row">';
-                for($j=0;$j<sizeof($columns);$j++){
-                    $data = $records[$i][$columns[$j]];
+                for($j=0;$j<sizeof($tableInfo);$j++){
+                    $columnName = $tableInfo[$j]["Field"];
+                    $data = $records[$i][$columnName];
                     $content .= '
-                    <td>'.$data.'</td>';
+                    <td class="px-3">'.$data.'</td>';
                 }
 
                 $content .= '
-                    <td>
+                    <td class="px-3">
                         <a href="'.UrlHelper::contructHref($records[$i], $table, $keys).'" style="text-decoration:none">
                             <button class="btn btn-warning">Edit</button>
                         </a>

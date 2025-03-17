@@ -13,10 +13,14 @@ if($user->getRoleId() != 3){
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $query = $_POST["query"];
     $parameters = json_decode($_POST["params"], true);
-
-    $response = $db->query($query, $parameters);
-
-    echo json_encode(["response"=>$response]);
+    
+    try{
+        $response = $db->query($query, $parameters);
+        echo json_encode(["response"=>$response]);
+    }
+    catch (Exception $e){
+        echo json_encode(["response"=>0, "message"=>$e->getMessage()]);
+    }
 }
 
 ?>

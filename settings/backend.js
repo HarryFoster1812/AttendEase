@@ -167,11 +167,60 @@ function sendChangeSettingsAJAX(changedFields, newValues){
     xmlhttp.send("modCount="+ changedFields.length.toString() +"&changedFields="+JSON.stringify(changedFields)+"&newValues="+JSON.stringify(newValues));
 }
 
+// CHANGE REQUEST 
+
+const requestBtn = document.getElementById("requestAdminChange");
+const sendRequest = document.getElementById("request"); 
+const cancelRequest = document.getElementById("cancel");
+const requestPopup = document.getElementById("requestChange");
+
+cancelRequest.addEventListener("click", () => {
+    overlay.style.display = 'none'; // Show the overlay
+    requestPopup.style.display = "none";
+});
+
+sendRequest.addEventListener("click", () => {
+    // do ajax
+    let message = document.getElementById("message").value;
+    var xhr = new XMLHttpRequest();
+
+    // Set up the request type and URL (POST request to upload.php)
+    xhr.open('POST', './addRequest.php', true);
+
+    // Set the content-type to JSON (since we're sending a JSON object)
+
+    // Define what to do when the request completes
+    xhr.onreadystatechange = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            console.log(this.responseText);
+            // close popup
+            requestPopup.style.display = "none";
+            overlay.style.display = "none";
+        }
+        else if(xhr.startus == 400){
+            console.log(this.responseText);
+        }
+    };
+
+    // Define what to do in case of an error (like a network failure)
+    xhr.onerror = function () {
+        console.error('Request failed.');
+        console.log(JSON.parse(xhr.responseText));
+    };
+
+    // Send the data as a JSON string
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("message="+encodeURI(message));
+});
+
+requestBtn.addEventListener("click", () => {
+    overlay.style.display = 'flex'; // Show the overlay
+    requestPopup.style.display = "flex";
+});
 
 //-------------------- ACCOUNT SETTINGS--------------------
 deleteButton = document.getElementById("deleteAccount");
 signOutButton = document.getElementById("signOutBtn");
-requestDataButton = document.getElementById("requestDataBtn");
 
 const deleteOverlay = document.getElementById("deleteOverlay");
 const deletepopup = document.getElementById("deletepopup");
@@ -180,6 +229,7 @@ const noButton = document.getElementById("noBtn");
 
 noButton.addEventListener("click", () => {
     overlay.style.display = 'none'; // Show the overlay
+    deletepopup.style.display = "none";
 });
 
 yesButton.addEventListener("click", () => {
@@ -198,21 +248,6 @@ signOutBtn.addEventListener('click', () => {
     window.location.replace("../signout/"); 
 });
 
-requestDataButton.addEventListener("click", ()=> {
-    // add ajax for the request data php
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // display success messages
-            console.log(this.responseText);
-        }
-    };
-
-    xmlhttp.open("POST", "./requestData.php", true);
-    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xmlhttp.send();
-});
 
 // ------------ PREFERENCES --------------------
 darkMode = document.getElementById("darkModeInput");
@@ -341,7 +376,5 @@ document.body.onload = (() => {
 });
 
 // NEED TO DO
-//
-// ADD REQUEST ALL DATA
 // ADD LINE TO PROFILE DATA TO SHOW DEGREE
 // MAKE DARKMODE WORK

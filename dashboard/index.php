@@ -49,8 +49,8 @@ if(isset($_COOKIE["darkMode"])){
                         <div class="col-xxl-9 justify-content-center text-center text-xxl-start d-xl-block">
                         <h2 class="text-black"><b>Welcome, <?php echo $userData->getName() ?> </b></h2>
                         <h5 class="text-muted"><?php echo $userData->getEmail() ?></h5>
-                        <h4 class="text-black"><?php echo $userData->getAcademic() ?></h3>
-                        <h4 class="text-black">ID: <?php echo $userData->getUserId() ?></h3>
+                        <h4 class="text-black"><?php echo $userData->getAcademic() ?></h4>
+                        <h4 class="text-black">ID: <?php echo $userData->getUserId() ?></h4>
                         <?php if ($userData->getRoleId() > 0): ?>
                                 <button class="btn btn-lg btn-primary check-requests">Check Appeals</button>
                         <?php endif; ?>

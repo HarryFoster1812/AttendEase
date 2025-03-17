@@ -104,6 +104,11 @@ Database-Page (add new items / delete items)
 
         </div>
 
+        <div class="d-flex flex-column align-items-center justify-content-center my-5">
+            <a class="btn btn-success " href="../database-edit/?table=ChangeRequests">Show Change Requests</a>
+        </div>
+
+
         <?php include("../php/template/footer.php"); ?>
         <script src="./admin.js"></script>
     </body>
