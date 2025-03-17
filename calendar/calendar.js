@@ -473,6 +473,7 @@ function dateEvent(event){
                 json_data = JSON.parse(this.responseText);
                 console.log(json_data)
                 clearCalendar(time);
+                json_data = cleanData(json_data);
                 populateCalendar(json_data, time, start_date);
             }
             catch(e){
@@ -496,9 +497,23 @@ function dateEvent(event){
     xmlhttp.open("POST", "./get-calendar-data.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send("start_date="+start_date+"&end_date="+end_date);
+}
 
-
-
+function cleanData(json_data){
+    let today = Date.today();
+    Date.today().setTimeToNow();
+    Object.keys(json_data).forEach(user => {
+        json_data[user].forEach(timeslot => {
+            let timeslot_date_end = Date.parse(timeslot["date"]); 
+            timeslot_date_end.at(timeslot["end_time"]);
+            let result = today.compareTo(timeslot_date_end);
+            if(today.compareTo(timeslot_date_end) == -1 && timeslot["status"] == "Missed"){
+                timeslot["status"] = "Upcoming";
+            }
+        });
+    });
+   return json_data; 
+    
 }
 
 function setDateToday(){
