@@ -5,6 +5,60 @@ UrlHelper::enforceTrailingSlash();
 
 session_start();
 
+$msg = '';
+
+// Handle form submission if method is POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Parse the non-file form data
+
+    // Handle the file upload (if any)
+    if (isset($_FILES['attachments']) && $_FILES['attachments']['error'] == 0) {
+        $uploadsDir = './uploads/';  // Directory where files will be saved
+        if (!is_dir($uploadsDir)) {
+            mkdir($uploadsDir, 0777, true);  // Create the uploads directory if it doesn't exist
+        }
+
+        // Get the uploaded file info
+        $fileTmpPath = $_FILES['attachments']['tmp_name'];
+        $fileName = $_FILES['attachments']['name'];
+        $fileSize = $_FILES['attachments']['size'];
+        $fileType = $_FILES['attachments']['type'];
+
+        // Generate a unique filename to avoid collisions
+        $fileNewName = time() . '-' . basename($fileName);
+        $destination = $uploadsDir . $fileNewName;
+
+        // Move the uploaded file to the target directory
+        if (move_uploaded_file($fileTmpPath, $destination)) {
+            $uploadedFilePath = $destination;
+        } else {
+            $uploadedFilePath = 'Error uploading file.';
+        }
+    } else {
+        $uploadedFilePath = 'No file uploaded.';
+    }
+
+    // Prepare the bug report data
+    $timestamp = date("Y-m-d H:i:s");
+    $reportData = [
+        'timestamp' => $timestamp,
+        'description' => $_POST['description'] ?? '',
+        'steps' => $_POST['steps'] ?? '',
+        'expected_actual' => $_POST['expected-actual'] ?? '',
+        'device' => $_POST['device'] ?? '',
+        'os' => $_POST['os'] ?? '',
+        'app_version' => $_POST['app-version'] ?? '',
+        'browser' => $_POST['browser'] ?? '',
+        'comments' => $_POST['comments'] ?? '',
+        'attachment' => $uploadedFilePath
+    ];
+
+    // Log the bug report data to a file
+    file_put_contents("./bugs.txt", print_r($reportData, true) . "\n\n", FILE_APPEND | LOCK_EX);
+
+    // Success message for the user
+    $msg = '<div class="alert alert-success alert-dismissible fade show my-0" role="alert">Feedback sent successfully! Thank you for your time.<button type="button" class="close" data-dismiss="alert" aria-label="Close">  <span aria-hidden="true">&times;</span></button></div>';
+}
 ?>
 
 <html lang="en">
@@ -12,23 +66,28 @@ session_start();
     <title>Report a Bug | AttendEase</title>
     <?php 
         include("../php/template/header.php");
-        
-        ?>
+    ?>
     <link rel="stylesheet" href="./styles.css">
 </head>
-<body>
-    <?php 
-        include("../php/template/navbar.php");
-    ?>
 
-    <div class="container mt-5 formbackground">
-        <header class="text-center mb-4">
-            <h1>Bug Report</h1>
-            <p>We're sorry to hear you encountered a bug! Please provide the details below to help us investigate and resolve the issue.</p>
-        </header>
+<body>
+     <!-- Display success or error message -->
+        <?php if ($msg): ?>
+        <?php echo $msg; ?>
+        <?php endif; ?>
+
+        <?php 
+        include("../php/template/navbar.php");
+        ?>
+
+        <div class="container mt-5 formbackground">
+            <header class="text-center mb-4">
+                <h1>Bug Report</h1>
+                <p>We're sorry to hear you encountered a bug! Please provide the details below to help us investigate and resolve the issue.</p>
+            </header>
 
         <main>
-            <form action="submit-bug-report.php" method="POST" enctype="multipart/form-data">
+            <form action="./" method="POST" enctype="multipart/form-data">
                 <!-- Bug Description -->
                 <div class="mb-4">
                     <h4>Description of the Issue</h4>
@@ -58,12 +117,9 @@ session_start();
                         <label for="os" class="form-label">Operating System</label>
                         <input type="text" class="form-control" id="os" name="os" placeholder="e.g., iOS 16, Android 13" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="app-version" class="form-label">App Version</label>
-                        <input type="text" class="form-control" id="app-version" name="app-version" placeholder="e.g., v1.2.3" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="browser" class="form-label">Browser (if using web app)</label>
+                        <label for="browser" class="form-label">Browser</label>
                         <input type="text" class="form-control" id="browser" name="browser" placeholder="e.g., Chrome 117, Safari 16">
                     </div>
                 </div>
@@ -93,10 +149,10 @@ session_start();
         </footer>
     </div>
 
-
-<?php 
+    <?php 
         include("../php/template/footer.php");
     ?>
 
 </body>
 </html>
+

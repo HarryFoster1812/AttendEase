@@ -6,9 +6,10 @@ UrlHelper::enforceTrailingSlash();
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // if we receive feedback delete it because no one wants to hear your opinion.
-    unset($_POST);
-            $msg = '<div class="alert alert-success alert-dismissible fade show" role="alert">Feedback sent successfully! Thank you for your time.<button type="button" class="close" data-dismiss="alert" aria-label="Close">  <span aria-hidden="true">&times;</span></button></div>';
+    $data = (string) file_get_contents("php://input");
+    parse_str($data, $parsedData);
+    file_put_contents("./feedback.txt", date("Y-m-d H:i:s")."\n".print_r($parsedData, true)."\n\n", FILE_APPEND | LOCK_EX);
+    $msg = '<div class="alert alert-success alert-dismissible fade show" role="alert">Feedback sent successfully! Thank you for your time.<button type="button" class="close" data-dismiss="alert" aria-label="Close">  <span aria-hidden="true">&times;</span></button></div>';
 }
 
 ?>
