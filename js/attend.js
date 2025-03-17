@@ -60,6 +60,11 @@ function toggleAttend(block){
     if(backdrop.classList.contains('d-flex')){
         showPopup();
     }
+    
+    if(locButton.getAttribute("disabled") === "true"){
+        let clickEvt = new Event("click");
+        codeButton.dispatchEvent(clickEvt);
+    }
 }
 
 function openCode(){
@@ -239,7 +244,3 @@ locButton.addEventListener('click', openLoc);
 cancelButton.addEventListener('click',hidePopup);
 acceptButton.addEventListener('click', getUserLoc);
 codeInput.addEventListener('input', submitCode);
-/*
-TODO:
-Need to auto change to code when the location option is disabled
-*/
