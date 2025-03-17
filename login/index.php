@@ -127,9 +127,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <hr class="my-4 border-3 border-secondary signup-divider">
                             <div class="row my-4">
                                 <div class="col-xl-6 my-3">
-                                    <div class="col-11 mx-auto d-grid">
-                                        <button class="btn misc-buttons border-secondary">Forgot Password</button>
-                                    </div>
+                                        <div class="col-11 mx-auto d-grid">
+                                            <a href="../forgot-password/" class="logup d-grid">
+                                                <button class="btn misc-buttons border-secondary">Forgot Password</button>
+                                            </a>
+                                        </div>
                                 </div>
                                 <div class="col-xl-6 my-3">
                                     <div class="col-11 mx-auto d-grid">
