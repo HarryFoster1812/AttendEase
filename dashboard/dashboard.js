@@ -3,9 +3,10 @@ import StatisticsCalculator from "../js/StatisticsCalculator.js";
 
 const classLists = document.querySelectorAll('.class-block-list');
 const roleId  = Number(document.body.dataset.roleId);
-
+let userId;
 const rows = document.querySelectorAll('.outer');
 var dashStyles;
+let chartNames = ["Attendance", "On Time","Ranking"];
 if(Cookies.get("darkMode") != undefined){
     dashStyles = ["#ffcc33",'#eaab00','#333333'];
 }
@@ -248,13 +249,14 @@ function createDoughnutChart(ctx, data, label1, label2) {
 let xmlhttp = new XMLHttpRequest(); 
 
 xmlhttp.onreadystatechange = function() {
+    
     if (this.readyState == 4 && this.status == 200) {
 
         try{
             console.log(this.responseText);
             let jsonData = JSON.parse(this.responseText);
+            userId = parseInt(jsonData[0]["user_id"])
 
-            let chartNames = ["Attendance", "On Time"];
 
             // send this data to a function to calculate statistics
             var statistics = new StatisticsCalculator(jsonData);
@@ -340,6 +342,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     const attendanceChart = document.getElementById("attendanceChart").getContext("2d");
     const timeChart = document.getElementById("timeChart").getContext("2d");
+    const rankChart = document.getElementById("rankChart").getContext("2d");
 
 });
 
@@ -390,3 +393,34 @@ calendarAjax.onreadystatechange = function() {
 calendarAjax.open("POST", "../calendar/get-calendar-data.php", true);
 calendarAjax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 calendarAjax.send("start_date="+Date.today().toString("yyyy-MM-dd")+"&end_date="+Date.today().toString("yyyy-MM-dd"));
+
+async function runLeaderboard(){
+    try{
+        const response = await fetch("../leaderboard/get-leaderboard-data.php",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if(!response.ok){
+            throw new error(`Response status ${response.status}`);
+        }
+        const json_data = await response.json();
+        console.log(json_data)
+        const lstatistics = new StatisticsCalculator(json_data);
+        lstatistics.processLeaderboardData();
+        const userIndex = [...lstatistics.leaderboard_data].findIndex(element=>element[0]==userId);
+        if(lstatistics.leaderboard_data.get(userId).classes===0){
+            createDoughnutChart(rankChart, [0,100], "100%", chartNames[2]);
+        }
+        else{
+            const rank = ((userIndex+1)/[...lstatistics.leaderboard_data].length)*100;
+            createDoughnutChart(rankChart, [rank , 100-rank], rank+"%", chartNames[2]);
+        }
+       
+    }
+    catch(error){
+        console.error(error.message);
+    }
+}
+runLeaderboard()
