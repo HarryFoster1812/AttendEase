@@ -138,8 +138,8 @@ if(!isset($found)){
 
 <div class="d-flex justify-content-center align-items-center flex-wrap">
     <?php 
-    for($i=0;$i<sizeof($result);$i++){
-        if($result[$i]["status"] == "Staff"){
+    for($i=0;$i<sizeof($appeals);$i++){
+        if($appeals[$i]["status"] == "Staff"){
             // We have reached the staff so there are no more students to show
             break;
         }
