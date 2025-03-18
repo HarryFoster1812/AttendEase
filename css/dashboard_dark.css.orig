@@ -1,0 +1,13 @@
+body{
+    background-color: #333;
+}
+.text-black, .text-muted, .no-dash-class{
+    color:#ffcc33 !important;
+}
+.check-requests{
+    background-color:#ffcc33 !important;
+    color:#660099 !important;
+}
+.attendance-delta{
+    color: #ffcc33;
+  }

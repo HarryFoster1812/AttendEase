@@ -24,7 +24,8 @@ $user = unserialize($_SESSION["user"]);
         <?php include("../php/template/header.php"); ?>
         <link rel="stylesheet" href="./settings.css">
         <link rel="stylesheet" id="darkStyleSheet" href="../css/settings_dark.css">
-        <link rel="stylesheet" href="../node_modules/cropme/dist/cropme.css"> </head>
+        <link rel="stylesheet" href="../node_modules/cropme/dist/cropme.css">
+    </head>
     <body>
 
         <div id="overlay" class="overlay hidden">
@@ -75,7 +76,10 @@ $user = unserialize($_SESSION["user"]);
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
             <button id="requestAdminChange" class="btn btn-success mt-2 mb-3">Request Changes</button> 
+>>>>>>> appeal
         </div>
         <!-- -------------------------------------PROFILE PAGE---------------------------------------------- -->
         <!-- ----------------------------------------Main Content-------------------------------------------------- -->
@@ -94,7 +98,7 @@ $user = unserialize($_SESSION["user"]);
                     <input type="file" 
                         id="fileUpload" 
                         class="form-control border-primary mw-100 w-100" 
-                        accept=".jpeg, .jpg, .png, .tif,.webp">
+                        accept=".jpeg, .jpg, .png, .tifWe will send you an email that will contain all of the data that we hold about your account., .webp">
                     <small id="errormsg" style="color:red"></small>
                 </div>
                 <button id="uploadBtn" class="btn btn-light border-dark px-3">Upload</button> 

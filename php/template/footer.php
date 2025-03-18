@@ -8,7 +8,7 @@
 <script src="../php/debugging-tools/debug.js"></script>
 
 
-<footer style="background-color: #333; color: white; padding: 20px; text-align: center; font-size: 14px;">
+<footer style="background-color: #333; color: white; padding: 20px; text-align: center; font-size: 14px; border-top:solid 1px #fff;">
     <div>
     <p>© 2024 - <?php echo date("Y"); ?> AttendEase, University of Manchester. All rights reserved.</p>
     </div>

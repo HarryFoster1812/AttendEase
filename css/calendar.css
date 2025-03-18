@@ -157,6 +157,9 @@ td{
     font-size:1.15rem;
     text-align: start;
   }
+  .calendar-picker{
+    color:#660099 !important;
+  }
 @media(max-width:1200px){
   .table-title{
     width:25%;

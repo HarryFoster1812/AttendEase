@@ -25,7 +25,12 @@ else{
     <title>Statistics | AttendEase</title>
     <?php include("../php/template/header.php"); ?>
     <link rel="stylesheet" href="../css/student_statistics.css">
+    <?php    
+if(isset($_COOKIE["darkMode"])){
+    echo '<link rel="stylesheet" id="darkstylesheet" href="../css/statistics_dark.css">';
+}
 
+?>
 </head>
 <body>
     <?php include($nav_path); ?>
