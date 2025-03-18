@@ -41,7 +41,7 @@ function sendQuery(){
         if (this.readyState == 4 && this.status == 200) {
             let json_data = JSON.parse(this.responseText);            
             let highlighted_data = syntaxHighlight(json_data);
-            console.log(highlighted_data);
+            // console.log(highlighted_data);
             responseElm.innerHTML = highlighted_data;
 
         }

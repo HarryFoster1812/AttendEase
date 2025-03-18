@@ -48,7 +48,7 @@ function toggleSelection(elementClicked, cardDiv){
             if(base_link==="../staff-event/"){
                 timeslot_id= parseInt(elementClicked.closest('.card').dataset.tsId);
                 const data = {userid: cardDiv.dataset.userId, timeslotid: timeslot_id};
-                console.log(data)
+                // console.log(data)
                 fetch("../appeals/set-appeal-data.php", {
                     method: "POST",
                     headers: {
@@ -112,7 +112,7 @@ const dropdown = document.getElementById("TypeDropdown");
 
 async function sendNewStatus(userIdList, new_status, userElementlist){
     var xmlhttp = new XMLHttpRequest();
-    console.log(userIdList)
+    // console.log(userIdList)
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             try{

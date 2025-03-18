@@ -342,7 +342,7 @@ changePass.addEventListener("click", () => {
         // Define what to do when the request completes
         xhr.onreadystatechange = function () {
             if (xhr.status >= 200 && xhr.status < 300) {
-                console.log(this.responseText);
+                // console.log(this.responseText);
                 window.location.replace("../login/")
             }
             else if(xhr.startus == 400){

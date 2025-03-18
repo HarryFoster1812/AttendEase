@@ -32,7 +32,7 @@ async function getLeaderboardData(){
             pos+=1;
             leaderboardWrapper.appendChild(leaderboardBlock);
         });
-        console.log([...statistics.leaderboard_data])
+        // console.log([...statistics.leaderboard_data])
     }
     catch(error){
         console.error(error.message);

@@ -58,7 +58,7 @@ const observer = new IntersectionObserver(entries => {
     }
 );
 rows.forEach((row,idx) =>{
-    console.log(row,idx)
+    // console.log(row,idx)
     if(idx%2){
         row.style.transform = 'translateX(10vh)';
     }
@@ -91,7 +91,7 @@ const toggleClassClick = function(event){
 
 
 function addEvent(event_info){
-    console.log(event_info);
+    // console.log(event_info);
     const classBlock = `<div class="col-md-6 col-xl-4 class-block-container gap-3">
                             <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}" data-ae-user="${event_info["user_id"]}" data-ae-timeslot="${event_info["timeslot_id"]}">
                                 <div class="p-4">
@@ -125,7 +125,7 @@ function addEvent(event_info){
     classLists[0].insertAdjacentHTML('beforeend',classBlock);
     
     const classElement = classLists[0].lastElementChild.querySelector('.class-block');
-    console.log(classElement,classElement.dataset);
+    // console.log(classElement,classElement.dataset);
     if(event_info["status"]==="Upcoming"){
         const upcomingCode = `
         <div class="col-6 class-status">
@@ -136,10 +136,10 @@ function addEvent(event_info){
         const startTime = new Date(event_info["date"]+"T"+event_info["start_time"]);
         const endTime = new Date(event_info["date"]+"T"+event_info["end_time"]);
         const currTime = Date.now()
-        console.log(startTime,currTime,endTime);
+        // console.log(startTime,currTime,endTime);
         if(startTime<=currTime && currTime<=endTime){
             classElement.addEventListener('click', toggleClassClick);
-            console.log("SUCCESS")
+            // console.log("SUCCESS")
         }
         
     }
@@ -156,7 +156,7 @@ function addEvent(event_info){
 
 
 function addStaffEvent(event_info){
-    console.log(event_info);
+    // console.log(event_info);
     const classBlock = `<a href="../staff-event/?id=${event_info["timeslot_id"]}" style="text-decoration:none;" class="col-md-6 col-xl-4 class-block-container gap-3">
                                 <div class="class-block bg-primary mb-4 text-secondary shrink" data-ae-name="${event_info["name"]}" data-ae-user="${event_info["user_id"]}" data-ae-timeslot="${event_info["timeslot_id"]}">
                                     <div class="p-4">
@@ -185,7 +185,7 @@ function addStaffEvent(event_info){
     classLists[0].insertAdjacentHTML('beforeend',classBlock);
     
     const classElement = classLists[0].lastElementChild.querySelector('.class-block');
-    console.log(classElement,classElement.dataset);
+    // console.log(classElement,classElement.dataset);
     classElement.addEventListener('click', toggleClassClick);
 }
 
@@ -253,7 +253,7 @@ xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 
         try{
-            console.log(this.responseText);
+            // console.log(this.responseText);
             let jsonData = JSON.parse(this.responseText);
             userId = parseInt(jsonData[0]["user_id"])
 
@@ -354,7 +354,7 @@ calendarAjax.onreadystatechange = function() {
         // update the calendar
         try{
             let json_data = JSON.parse(this.responseText);
-            console.log("TTJSON",json_data)
+            // console.log("TTJSON",json_data)
             json_data = cleanData(json_data);
             if (Object.keys(json_data).includes("student")){
 
@@ -425,7 +425,7 @@ async function runLeaderboard(){
             throw new error(`Response status ${response.status}`);
         }
         const json_data = await response.json();
-        console.log(json_data)
+        // console.log(json_data)
         const lstatistics = new StatisticsCalculator(json_data);
         lstatistics.processLeaderboardData();
         const userIndex = [...lstatistics.leaderboard_data].findIndex(element=>element[0]==userId);

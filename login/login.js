@@ -23,11 +23,11 @@ function linker(page){
 function showError(element, message, longMessage = false){
     small_element = element.parentElement.children[2];
     if(small_element.innerText == ""){
-        console.log("BEFORE: "+ background.style.height);
+        // console.log("BEFORE: "+ background.style.height);
         height = parseInt(background.style.height.split("px")[0]);
-        console.log("HEIGHT: " + height)
+        // console.log("HEIGHT: " + height)
         background.style.height = (height+ (longMessage ? 300 : 100)).toString() + "px";
-        console.log(background.style.height);
+        // console.log(background.style.height);
     }
 
     element.classList.remove('success');

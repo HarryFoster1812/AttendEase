@@ -41,9 +41,9 @@ document.addEventListener('DOMContentLoaded', async function(){
 });
 
 function toggleAttend(block){
-    console.log("ifj")
+    // console.log("ifj")
     if(block){
-        console.log(block);
+        // console.log(block);
         const instructor = block.dataset.aeName;
         const location = block.querySelector('.class-venue h4').textContent;
         const classCode = block.querySelector('.class-code h4').textContent;

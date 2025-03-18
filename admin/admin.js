@@ -14,7 +14,7 @@ function getSearchResults(){
     searchAjax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             let jsonResponse = JSON.parse(this.responseText);
-            console.log(jsonResponse);
+            // console.log(jsonResponse);
             processSearchResults(jsonResponse);
         }
     }

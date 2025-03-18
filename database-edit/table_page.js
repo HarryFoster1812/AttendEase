@@ -45,8 +45,8 @@ function sendDelete(edit_href, rowElement){
         params[`:${column}`] = id_value;
     }
     // we know that we are deleting a record so we can contruct the query
-    console.log(sqlQuery);
-    console.log(params);
+    // console.log(sqlQuery);
+    // console.log(params);
 
     // send ajax
     let databaseAjax = new XMLHttpRequest();

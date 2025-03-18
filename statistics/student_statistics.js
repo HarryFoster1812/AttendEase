@@ -101,7 +101,7 @@ xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 
         try{
-            console.log(this.responseText);
+            // console.log(this.responseText);
             let jsonData = JSON.parse(this.responseText);
 
             // send this data to a function to calculate statistics

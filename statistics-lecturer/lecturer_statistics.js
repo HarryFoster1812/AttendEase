@@ -13,7 +13,7 @@ var chart;
 
 function addChart(labels, data, type){
 
-    console.log(canvas);
+    // console.log(canvas);
     chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -118,7 +118,7 @@ function onTypeChange(){
     }
 
     else{
-        console.log(typeSelect.va);
+        // console.log(typeSelect.va);
         chart.data.labels = graph_data[0];
         chart.data.datasets[0].data = graph_data[1];
         chart.data.datasets[0].label = typeSelect.value;
@@ -133,10 +133,10 @@ xmlhttp.onreadystatechange = function() {
 
         try{
             let jsonData = JSON.parse(this.responseText);
-            console.log(jsonData);
+            // console.log(jsonData);
             statistics = new StatisticsCalculator(jsonData);
             statistics.processStaffData();
-            console.log(statistics.getModuleList());
+            // console.log(statistics.getModuleList());
             addModules(statistics.getModuleList());
        }
         catch(e){

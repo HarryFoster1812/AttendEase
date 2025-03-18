@@ -26,14 +26,14 @@ function sendChange(){
     }
 
     query += setStatements.join(',') + " WHERE "+ conditions;
-    console.log(query);
+    // console.log(query);
 
     // send ajax
     let databaseAjax = new XMLHttpRequest();
     databaseAjax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             let json_data = JSON.parse(this.responseText);            
-            console.log(json_data);
+            // console.log(json_data);
 
         }
     }
