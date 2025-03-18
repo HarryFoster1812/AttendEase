@@ -10,7 +10,7 @@ body{
 
 .bg-custom{
     background: #ca5cff;
-    z-index: 998; /*Needs to be below the error popup*/
+    z-index: 997; /*Needs to be below the error popup*/
 }
 
 .selected-count{

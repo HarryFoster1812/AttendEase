@@ -1,10 +1,10 @@
 const users = Array.from(document.getElementsByClassName("card"));
 const selected_count = document.getElementById("selected_count");
 const cancelBtns = Array.from(document.getElementsByClassName("cancel"));
-
+let base_link = "";
 var selected_users = [];
 
-const timeslot_id = document.body.dataset.timeslotid;
+let timeslot_id = document.body.dataset.timeslotid;
 const overlay = document.getElementById("overlay");
 var currentPopup = null;
 
@@ -37,35 +37,53 @@ function hidePopup(){
 
 function toggleSelection(elementClicked, cardDiv){
 
-    if (elementClicked){
+    if (elementClicked && (!elementClicked.target.classList.contains("reason-check"))){
+        
         const buttonTags = ["BUTTON", "I"];
         if(buttonTags.includes(elementClicked.target.tagName)){
             elementClicked = elementClicked.target;
             if(elementClicked.tagName == "I"){
                 elementClicked = elementClicked.parentElement; 
             }  
+            if(base_link==="../staff-event/"){
+                timeslot_id= parseInt(elementClicked.closest('.card').dataset.tsId);
+                const data = {userid: cardDiv.dataset.userId, timeslotid: timeslot_id};
+                console.log(data)
+                fetch("../appeals/set-appeal-data.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => response.text())  // Get response from PHP
+                    .then(result => console.log(result))
+                    .catch(error => console.error("Error:", error))
+                    }
 
             sendNewStatus([Number(cardDiv.dataset.userId)], elementClicked.id, [cardDiv]);
             return;
         }
     }
 
-    if(cardDiv.classList.contains("selectedUser")){
-        let index = selected_users.indexOf(cardDiv);
-        if (index > -1) { // only splice array when item is found
-            selected_users.splice(index, 1); // 2nd parameter means remove one item only
+    if(!elementClicked || !elementClicked.target.classList.contains("reason-check")){
+        if(cardDiv.classList.contains("selectedUser")){
+            let index = selected_users.indexOf(cardDiv);
+            if (index > -1) { // only splice array when item is found
+                selected_users.splice(index, 1); // 2nd parameter means remove one item only
+            }
+            cardDiv.classList.remove("selectedUser");
+            let newVal = selected_count.innerText = Number(selected_count.innerText)-1;
+    
+            selected_count.innerText = newVal;
         }
-        cardDiv.classList.remove("selectedUser");
-        let newVal = selected_count.innerText = Number(selected_count.innerText)-1;
-
-        selected_count.innerText = newVal;
-    }
-    else{
-        cardDiv.classList.add("selectedUser");
-        selected_users.push(cardDiv);
-        let newVal = Number(selected_count.innerText)+1;
-
-        selected_count.innerText = newVal;
+        else{
+            cardDiv.classList.add("selectedUser");
+            selected_users.push(cardDiv);
+            let newVal = Number(selected_count.innerText)+1;
+    
+            selected_count.innerText = newVal;
+        }
     }
 }
 
@@ -94,7 +112,7 @@ const dropdown = document.getElementById("TypeDropdown");
 
 async function sendNewStatus(userIdList, new_status, userElementlist){
     var xmlhttp = new XMLHttpRequest();
-
+    console.log(userIdList)
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             try{
@@ -124,7 +142,7 @@ async function sendNewStatus(userIdList, new_status, userElementlist){
         }
     };
 
-    xmlhttp.open("POST", "./change-status.php", true);
+    xmlhttp.open("POST", base_link+"change-status.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send("id="+timeslot_id+"&users="+JSON.stringify(userIdList) + "&new_status=" + new_status);
 }
@@ -161,6 +179,7 @@ change_btn.addEventListener("click", async () => {
     selected_users.forEach(element => {
         tempIdList.push(Number(element.dataset.userId));
     });
+    console.log(tempIdList, dropdown.value, selected_users);
     await sendNewStatus(tempIdList, dropdown.value, selected_users);
     hidePopup();
 })
