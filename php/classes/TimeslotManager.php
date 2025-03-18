@@ -89,7 +89,7 @@ class TimeslotManager {
     } 
     public function getLeaderboardStatistics(){
         // the user should be authenticated
-        $query = "SELECT * 
+        $query = "SELECT Attendance.user_id, name, status 
             FROM Attendance 
             INNER JOIN TimeSlot ON Attendance.timeslot_id = TimeSlot.timeslot_id
             INNER JOIN Course ON TimeSlot.course_id = Course.course_id
