@@ -323,6 +323,9 @@ xmlhttp.onreadystatechange = function() {
         catch(e){
             // display error message
             console.log(e.message);
+            createDoughnutChart(attendanceChart, [0 ,100], `N/A`, chartNames[0]);
+            createDoughnutChart(timeChart, [0 , 100], `N/A`, chartNames[1] );
+            createDoughnutChart(rankChart, [0 , 100], ` N/A`, chartNames[2] );
         }
     }
     else if (this.status==400){

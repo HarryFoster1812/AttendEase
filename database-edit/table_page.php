@@ -36,7 +36,7 @@ $tableInfo = $db->query("SELECT COLUMN_NAME AS 'Field', COLUMN_KEY AS 'Key', COL
     <h1 id="tableHead"><?php echo $table; ?> Table</h1>
 
 
-    <div class="w-75 overflow-scroll py-2 d-flex align-items-center justify-content-center">
+    <div class="max-w-75 overflow-scroll py-2 d-flex align-items-center">
         <table border=1 >
             <tr>
                 <?php
