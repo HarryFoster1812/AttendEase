@@ -101,7 +101,12 @@ if(!isset($found)){
         <link rel="stylesheet" href="../css/calendar.css">
         <link rel="stylesheet" href="../css/attend.css">
         <link rel="stylesheet" href="./staffEvent.css">
+        <?php    
+        if(isset($_COOKIE["darkMode"])){
+            echo '<link rel="stylesheet" id="darkstylesheet" href="../css/staffEvent_dark.css">';
+        }
 
+        ?>
     </head>
     <body data-timeslotid="<?php echo $timeSlot_id ?>">
 

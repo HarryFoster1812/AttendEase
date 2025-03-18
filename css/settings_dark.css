@@ -5,6 +5,17 @@ body{
 .main-content{
     color: #ffcc33; 
 }
+input, select{
+    background-color:#444 !important;
+    color: #fff !important;
+}
+.form-control, .form-select{
+    border-color:#ffcc33 !important;
+}
+#uploadBtn{
+    background-color: #ffcc33 !important;
+    color: #660099 !important;
+}
 /* .sidebar-container{
     background-color:#444;
 }

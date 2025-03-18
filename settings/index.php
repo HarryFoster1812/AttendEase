@@ -136,7 +136,7 @@ $user = unserialize($_SESSION["user"]);
                 <button id="saveChangesProfile" class="btn btn-success">Save Changes</button> 
                 </div>
             </div>
-            <button id="requestAdminChange" class="btn btn-success">Request Changes</button> 
+            <button id="requestAdminChange" class="btn btn-success mt-2 mb-3">Request Changes</button> 
         </div>
     </div>
     <!-- ----------------------------------------Main Content-------------------------------------------------- -->

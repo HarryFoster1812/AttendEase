@@ -121,7 +121,12 @@ if(!isset($found)){
         <link rel="stylesheet" href="../css/calendar.css">
         <link rel="stylesheet" href="../css/attend.css">
         <link rel="stylesheet" href="../staff-event/staffEvent.css">
+        <?php    
+        if(isset($_COOKIE["darkMode"])){
+            echo '<link rel="stylesheet" id="darkstylesheet" href="../css/staffEvent_dark.css">';
+        }
 
+        ?>
     </head>
     <body data-user-id="<?php echo $user_id ?>">
     <template id="nav-fail">
