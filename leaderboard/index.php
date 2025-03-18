@@ -23,7 +23,11 @@ else{
     <?php include("../php/template/header.php"); ?>
     <link rel="stylesheet" href="../css/calendar.css">
     <link rel="stylesheet" href="leaderboard.css">
-
+    <?php    
+        if(isset($_COOKIE["darkMode"])){
+            echo '<link rel="stylesheet" id="darkstylesheet" href="../css/leaderboard_dark.css">';
+        }
+    ?>
 </head>
 <body>
     <template id="leaderboard-block">
