@@ -273,7 +273,7 @@ xmlhttp.onreadystatechange = function() {
                 timeDiv.classList.add("d-flex","justify-content-center","align-items-center");
 
                 percentText.innerText = percentageDiff + "%";
-                percentText.style.color = percentageDiff > -1 ? "green" : "red";
+                percentText.style.color = percentageDiff > -1 ? "#32cd32" : "#ff0000";
                 percentText.style.fontSize = "50px";
                 
                 let additionalText = document.createElement("p");
@@ -287,9 +287,7 @@ xmlhttp.onreadystatechange = function() {
                 else{
                     percentText.insertAdjacentHTML('beforeend','<i class="fa-solid fa-minus mx-2"></i>')
                 }
-                additionalText.style.fontSize = "24px";
-
-                additionalText.style.color = "#660099";
+                additionalText.classList.add("attendance-delta")
                 parentTextDiv.appendChild(percentText);
                 parentTextDiv.appendChild(additionalText);
                 timeDiv.appendChild(parentTextDiv);
@@ -370,7 +368,7 @@ calendarAjax.onreadystatechange = function() {
             }
             if (classLists[0].childElementCount == 0){
                 // add a message: no events today
-                classLists[0].innerHTML = `<p class="text-primary" style="text-align:center">You have no events scheduled for today.</p>`;
+                classLists[0].innerHTML = `<p class="text-primary no-dash-class" style="text-align:center">You have no events scheduled for today.</p>`;
             }
 
         }

@@ -44,7 +44,7 @@ if(isset($_COOKIE["darkMode"])){
                 <div class="col-xxl-6 mb-5">
                     <div class="row pt-5 outer">
                         <div class="col-xxl-3 user-img justify-content-center d-flex d-xxl-block">
-                        <img src="<?php echo $userData->getPfpPath(); ?>" alt="">
+                        <img src="<?php echo $userData->getPfpPath(); ?>" alt="" class="user-pfp">
                         </div>
                         <div class="col-xxl-9 justify-content-center text-center text-xxl-start d-xl-block">
                         <h2 class="text-black"><b>Welcome, <?php echo $userData->getName() ?> </b></h2>

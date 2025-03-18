@@ -10,4 +10,19 @@ h2{
 .selectedUser{
     border-color: #660099;
     box-shadow: 0 0 20px 8px #660099;
-  }
+}
+.popup{
+    background-color: #333 !important;
+    color:#ffcc33 !important;
+}
+.form-select, .form-control{
+    background-color: #666 !important;
+    border-color: #ffcc33 !important;
+    color:#fff !important;
+}
+.popup h5, .popup h4, .popup h3, b{
+    color:#ffcc33 !important;
+}
+.selected-count{
+    color: #ffcc33 !important;
+}

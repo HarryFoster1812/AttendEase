@@ -149,16 +149,6 @@ if(!isset($found)){
                     <button class="btn btn-danger" onclick="hidePopup()">Close</button>
                 </div>
             </div>
-        </div>
-        <div class="popup flex-column" id="warning-popup">
-                <h4 class="text-center mt-3 text-black code-title mb-4 border-bottom border-2 pb-2">Marking Confirmation</h4>
-                <h5 class="text-black pb-3 text-start" id="warning-content">Are you sure that you want to mark this user as <b id="warning-status">Test</b> for this session?</h5>
-                <div class="d-flex justify-content-end border-top border-2 mt-4 gap-2 pt-3">
-                    <button class="btn btn-danger" onclick="hidePopup()">Close</button>
-                    <button class="btn btn-success" onclick="hidePopup()">Proceed</button>
-                </div>
-            </div>
-        </div>
         <div class="popup flex-column" id="attendance-popup">
                 <h4 class="text-center text-primary mb-4">Change Attendance Status</h4>
                 <select id="TypeDropdown" class="form-select w-auto">
@@ -170,7 +160,8 @@ if(!isset($found)){
                     <button class="btn btn-danger cancel" >Cancel</button>
                     <button class="btn btn-success" id="attendYesBtn">Change</button>
                 </div>
-            </div>
+        </div>
+    </div>
         <?php include($nav_path); ?>
 
 

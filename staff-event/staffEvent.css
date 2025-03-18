@@ -5,6 +5,7 @@ body{
 .smallpfp{
     width: 50%;
     margin:auto;
+    border-radius:50%;
 }
 
 
@@ -118,4 +119,7 @@ svg circle {
   .edit-btn{
     margin-right: 0;
   }
+}
+.selected-count{
+  font-size:1.75rem !important;
 }

@@ -6,7 +6,7 @@ body{
     color: #ffcc33; 
 }
 input, select{
-    background-color:#444 !important;
+    background-color:#666 !important;
     color: #fff !important;
 }
 .form-control, .form-select{

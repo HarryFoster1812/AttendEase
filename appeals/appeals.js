@@ -1,4 +1,7 @@
 console.log(appeals);
+if(appeals.length===0){
+    document.querySelector(".selected-count").innerHTML = "There are no appeals!"
+}
 const checkButtons = document.querySelectorAll(".reason-check");
 checkButtons.forEach(btn=>{
     btn.addEventListener('click',displayPopup);
