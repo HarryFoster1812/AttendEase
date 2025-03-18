@@ -6,7 +6,7 @@ require_once "../php/db.php";
 
 // run SQL queries to deleate all user data
 
-if(!isset($_SESSION["user"]){
+if(!isset($_SESSION["user"])){
     // change respose header to 400
     http_response_code(400);
     echo json_encode(["error" => "Could not authenticate user"]);

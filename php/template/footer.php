@@ -4,9 +4,6 @@
 <script src="../node_modules/js-cookie/dist/js.cookie.min.js"></script>
 
 
-<!-- Remove this for production --> 
-<script src="../php/debugging-tools/debug.js"></script>
-
 
 <footer style="background-color: #333; color: white; padding: 20px; text-align: center; font-size: 14px; border-top:solid 1px #fff;">
     <div>

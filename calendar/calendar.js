@@ -11,7 +11,7 @@ event_template = document.getElementById("class-ui");
     
 let currUser = null;
 let currTimeSlot = null;
-const popoverInstances = [];
+var popoverInstances = [];
 document.getElementById("date_forward").addEventListener("click", nextDate);
 document.getElementById("date_back").addEventListener("click", previousDate);
 
@@ -88,6 +88,7 @@ function isWeekend(date) {
 end_date = "";
 
 function clearCalendar(period){
+    popoverInstances = [];
     let timetable = null;
     if(period=="Day"){
         timetable = document.getElementById('timetable-day');
@@ -111,11 +112,6 @@ function clearCalendar(period){
 }
 
 function populateDay(json_data, tableElements, dateFilter){
-    const popoverInstances = [];
-
-
-
-
 // Close any open popover when clicking outside
 
     // create a function which maps the time to an index in the table
@@ -191,9 +187,9 @@ function populateDay(json_data, tableElements, dateFilter){
         }
     }   
     document.addEventListener("click", (event) => {
-        popoverInstances.forEach(({ trigger, popover }) => {
+        popoverInstances.forEach(({event_item, popover }) => {
           const isClickInside =
-            trigger.contains(event.target) ||
+            event_item.contains(event.target) ||
             (document.querySelector(".popover") &&
               document.querySelector(".popover").contains(event.target));
       
@@ -315,7 +311,12 @@ function populateCalendar(json_data, period, start_date){
         }
 
         for(let i=0;i<5;i++){
-            populateDay(json_data, days[i], start_date.toString("yyyy-MM-dd"));
+            try{
+                populateDay(json_data, days[i], start_date.toString("yyyy-MM-dd"));
+            }
+            catch(e){
+                console.log(e)
+            }
             start_date.addDays(1);
         }
 
@@ -471,7 +472,7 @@ function dateEvent(event){
             // update the calendar
             try{
                 json_data = JSON.parse(this.responseText);
-                console.log(json_data)
+                // console.log(json_data)
                 clearCalendar(time);
                 json_data = cleanData(json_data);
                 populateCalendar(json_data, time, start_date);
@@ -646,7 +647,7 @@ function popoverActions(event){
         popoverInstances.forEach(instance=>{
             if(instance.popover._element.hasAttribute('aria-describedby')){{
                 const associatedEventItem = instance.popover._element;
-                console.log(parseInt(associatedEventItem.dataset.appeal))
+                // console.log(parseInt(associatedEventItem.dataset.appeal))
                 if(parseInt(associatedEventItem.dataset.appeal)===0 && associatedEventItem.dataset.status==="Missed"){
                     instance.popover.hide();
                     showPopup("appeal-popup");

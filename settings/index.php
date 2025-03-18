@@ -75,7 +75,6 @@ $user = unserialize($_SESSION["user"]);
                     </div>
                 </div>
             </div>
-            <button id="requestAdminChange" class="btn btn-success mt-2 mb-3">Request Changes</button> 
         </div>
         <!-- -------------------------------------PROFILE PAGE---------------------------------------------- -->
         <!-- ----------------------------------------Main Content-------------------------------------------------- -->

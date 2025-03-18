@@ -134,20 +134,14 @@ uploadBtn.addEventListener("click", () => {
 
 const saveProfile = document.getElementById("saveChangesProfile");
 
-const username = document.getElementById("usernameInput");
 const pronouns = document.getElementById("pronounSelect");
 
 saveProfile.addEventListener("click", () => {
-    // add validation to make sure something is selected
     // add ajax to send the new information off
-    // Need modCount
     // modified fields
     // replacement fields
-   if (username.value = ""){
-        console.log("you must enter a username");
-    }
 
-    sendChangeSettingsAJAX(["username", "pronouns"], [usernameInput.value, pronouns.value])
+    sendChangeSettingsAJAX(["pronouns"], [pronouns.value])
     
 });
 
@@ -234,7 +228,7 @@ noButton.addEventListener("click", () => {
 
 yesButton.addEventListener("click", () => {
     // do ajax
-    window.location.replace("../signout/"); 
+    window.location.replace("./deleteAccount.php"); 
 });
 
 deleteButton.addEventListener("click", () => {
