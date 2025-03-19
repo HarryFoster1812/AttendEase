@@ -47,6 +47,11 @@ Database-Page (add new items / delete items)
         <?php include("../php/template/header.php"); ?>
         <link rel="stylesheet" href="../css/admin.css">
         <link rel="stylesheet" href="../css/custom.css">
+        <?php    
+        if(isset($_COOKIE["darkMode"])){
+            echo '<link rel="stylesheet" id="darkstylesheet" href="../css/admin_dark.css">';
+        }
+    ?>
     </head>
     <body>
         <template id="itemTemplate"><a href="" style="text-decoration:none" target="_blank" rel="noopener noreferrer" class="">
@@ -77,14 +82,14 @@ Database-Page (add new items / delete items)
             <a class="btn btn-success " href="../database-edit/">Show Database</a>
         </div>
 
-        <div class="container my-5 courseList overflow-scroll accordion ">
+        <div class="container my-5 courseList overflow-scroll accordion border border-4 border-secondary ">
 
             <?php 
             // NOTE: do not remove the class searchResult from the collapse div. The js needs it
             for($i=0;$i<sizeof($tables);$i++){
             $tableName = $tables[$i]["TABLE_NAME"];
             $content = '
-            <div id="'.$tableName.'Containers" class="my-4 accordion-item">
+            <div id="'.$tableName.'Containers" class="my-4 accordion-item custom-accordion">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#'.$tableName.'Collapse" aria-expanded="false" aria-controls="'.$tableName.'Collapse">
                         '.$tableName.' 

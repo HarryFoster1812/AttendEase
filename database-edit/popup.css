@@ -27,7 +27,12 @@
     text-align: center;
     border-radius: 1.5rem;
 }
-
+.popup h2, .popup h3{
+    color:#660099 !important;
+}
+.popup input{
+    border: solid 1px #660099;
+}
 
 pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .string { color: green; }

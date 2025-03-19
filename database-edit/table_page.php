@@ -1,3 +1,11 @@
+<head>
+    <link rel="stylesheet" href="../css/admin.css">
+    <?php    
+        if(isset($_COOKIE["darkMode"])){
+            echo '<link rel="stylesheet" id="darkstylesheet" href="../css/admin_dark.css">';
+        }
+    ?>
+</head>
 <?php
 $records = $db->query("SELECT * FROM ".$table, []);
 $pdo = $db->getPdo();
@@ -12,14 +20,14 @@ $tableInfo = $db->query("SELECT COLUMN_NAME AS 'Field', COLUMN_KEY AS 'Key', COL
 <div id="overlay" class="overlay hidden">
 
     <div class="popup flex-column h-75" id="insert-popup">
-        <h2>Inert a new record</h2>
+        <h2>Insert a new record</h2>
         <div class ="w-80 overflow-scroll py-2">
             <?php
             for($i=0;$i<sizeof($tableInfo);$i++){
                 $columnName = $tableInfo[$i]["Field"];
                 $content = '
                     <h3>'.$columnName.'</h3>
-                    <input value="'.$tableInfo[$i]["Default"].'" />';
+                    <input class="mb-3 px-2" value="'.$tableInfo[$i]["Default"].'" />';
                 echo $content;
             }
             ?>
@@ -33,11 +41,11 @@ $tableInfo = $db->query("SELECT COLUMN_NAME AS 'Field', COLUMN_KEY AS 'Key', COL
 
 <div class='min-vh-100 vw-100 d-flex flex-column justify-content-center align-items-center'>
 
-    <h1 id="tableHead"><?php echo $table; ?> Table</h1>
+    <h1 id="tableHead" class="mb-5 mt-4"><?php echo $table; ?> Table</h1>
 
 
     <div class="overflow-scroll py-2 d-flex align-items-center" style="max-width:75%;">
-        <table border=1 >
+        <table>
             <tr>
                 <?php
                 for($i=0;$i<sizeof($tableInfo);$i++){
@@ -74,7 +82,7 @@ $tableInfo = $db->query("SELECT COLUMN_NAME AS 'Field', COLUMN_KEY AS 'Key', COL
                 
         </table>
     </div> 
-    <button id="insert" class="btn btn-success">Add new record</button>
+    <button id="insert" class="btn btn-success mt-3">Add new record</button>
 </div>
 
 

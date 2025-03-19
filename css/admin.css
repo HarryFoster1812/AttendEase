@@ -123,18 +123,54 @@
 }
 
 .courseList{
-    background-color: black;
+    background-color: #660099;
     height: 70vh;
     padding-top: 20px;
-    border-radius: 3%;
+    border-radius: 2rem;
+}
+:root{
+    --bs-accordion-bg: #ffcc33 !important;
+}
+.custom-accordion {
+    background-color: #FFCC33 !important; /* Ensure it overrides Bootstrap */
+    border: 1px solid #ddd; /* Optional: adds a subtle border */
 }
 
+.custom-accordion .accordion-button {
+    background-color: #FFCC33 !important;
+    color: #000; /* Ensures text is readable */
+}
+.course-container{
+    color:#ffcc33;
+}
+
+.custom-accordion .accordion-button.collapsed {
+    background-color: #FFCC33 !important;
+}
 
 .form-check-input:focus {
     border-color: #D3D3D3;
     box-shadow: 0 0 0 0 ;
 }
-
+.table-link:hover{
+    transition: all 0.6s;
+    background-color:#ffcc33;
+    color:#660099
+}
+.table-link{
+    transition: all 0.6s;
+}
+th,td,tr{
+    border: solid 1px #ffcc33;
+    color:#000;
+    text-align: center;
+}
+#tableHead{
+    color:#660099 !important;
+}
+.db-text{
+    color:#660099 !important;
+}
 
 
 .search-filter-container {

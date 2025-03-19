@@ -38,7 +38,11 @@ $multifilter = $_GET["multi"];
         <title>Database Edit | AttendEase</title>
         <?php include("../php/template/header.php"); ?>
         <link rel="stylesheet" href="./popup.css">
-
+        <?php    
+        if(isset($_COOKIE["darkMode"])){
+            echo '<link rel="stylesheet" id="darkstylesheet" href="../css/admin_dark.css">';
+        }
+    ?>
     </head>
     <body>
 
