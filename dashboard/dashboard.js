@@ -429,7 +429,7 @@ async function runLeaderboard(){
         const lstatistics = new StatisticsCalculator(json_data);
         lstatistics.processLeaderboardData();
         const userIndex = [...lstatistics.leaderboard_data].findIndex(element=>element[0]==userId);
-        if(lstatistics.leaderboard_data.get(userId).classes===0){
+        if(!lstatistics.leaderboard_data.has(userId)){
             createDoughnutChart(rankChart, [0,100], "100%", chartNames[2]);
         }
         else{
