@@ -209,7 +209,8 @@ function startCodePopup(event){
     countdown = (60 - now.getSeconds());
     updateCountDown();
 
-    countdownTimer = setInterval(updateCountDown, countdown*1000);
+    countdownTimer = setInterval(updateCountDown, 1000);
+
 }
 
 function updateCountDown(){
@@ -218,8 +219,6 @@ function updateCountDown(){
         getNewCode();
     }
     circle.style.strokeDashoffset = `${113*(1-countdown/60)}px`;
-    clearInterval(countdownTimer);
-    countdownTimer = setInterval(updateCountDown, 1000);
     countdownNumberEl.textContent = countdown;
 }
 
