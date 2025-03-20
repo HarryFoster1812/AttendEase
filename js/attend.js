@@ -96,6 +96,7 @@ async function getUserLoc(event){
     try{
         const positionData = await new Promise((resolve,reject)=>{navigator.geolocation.getCurrentPosition(resolve,reject)});
         compareLocData(positionData.coords.latitude,positionData.coords.longitude, loc);
+	    console.log(positionData);
     }
     catch(error){
         console.log("Error getting location",error)
