@@ -5,15 +5,33 @@ UrlHelper::enforceTrailingSlash();
 
 session_start();
 
-if(isset($_SESSION["navbar"])){
-    $nav_path = "../php/template/" . $_SESSION["navbar"];
-}
-
-else{
+if(!isset($_SESSION["navbar"]) || !isset($_SESSION["user"])){
     header("Location:../");
+    exit();
 }
 
 $user = unserialize($_SESSION["user"]);
+
+// Get navigation items from the existing navbar template
+ob_start();
+include("../php/template/" . $_SESSION["navbar"]);
+$navContent = ob_get_clean();
+
+// Extract navigation items using DOMDocument
+$dom = new DOMDocument();
+@$dom->loadHTML(mb_convert_encoding($navContent, 'HTML-ENTITIES', 'UTF-8'));
+$navItems = [];
+$links = $dom->getElementsByTagName('a');
+
+foreach ($links as $link) {
+    if ($link->textContent !== 'AttendEase') {
+        $navItems[] = [
+            'href' => $link->getAttribute('href'),
+            'text' => $link->textContent
+        ];
+    }
+}
+$_SESSION['navItems'] = $navItems;
 
 ?>
 
@@ -54,9 +72,29 @@ $user = unserialize($_SESSION["user"]);
             </div>
         </div>
 
-        <?php include($nav_path); ?>
+        <!-- Single navbar implementation -->
+        <nav class="p-3 navbar navbar-expand-lg navbar-dark bg-primary">
+            <a href="../" class="navbar-brand mb-0 text-secondary">AttendEase</a>
+            <!-- Navbar Toggler Button -->
+            <button class="navbar-toggler" id="nav-toggler" data-bs-toggle="collapse" data-bs-target="#attendnav">
+                <span class="navbar-toggler-icon text-secondary"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="attendnav">
+                <ul class="navbar-nav ms-auto text-secondary">
+                    <?php foreach($_SESSION['navItems'] as $item): ?>
+                        <li class="nav-item px-1">
+                            <a href="<?php echo $item['href']; ?>" class="nav-link"><?php echo $item['text']; ?></a>
+                            <?php if($item['text'] === 'Settings'): ?>
+                                <div class="d-lg-none" id="settings-content"></div>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </nav>
         <!-- Sidebar -->
         <div class="sidebar-container collapse show" id="sidebarCollapse">
+                
             <div class="pills-container">
                 <div class="d-flex align-items-start bg-primary">
                     <div class="nav flex-column nav-pills sidebar-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">

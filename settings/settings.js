@@ -3,33 +3,37 @@ $(document).ready(function () {
 
     function updateSidebarContent() {
         if ($(window).width() < 992) {
+            // Always update the content for small screens, regardless of previous state
             $('#settings-content').html(`
                 <div class="nav flex-column nav-pills mt-2">
-                    <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">
+                    <button class="nav-link ${lastClickedTab === 'v-pills-profile-tab' ? 'active' : ''}" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">
                         <span class="ms-3">Profile</span>
                     </button>
-                    <button class="nav-link" id="v-pills-account-tab" data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account" aria-selected="false">
+                    <button class="nav-link ${lastClickedTab === 'v-pills-account-tab' ? 'active' : ''}" id="v-pills-account-tab" data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account" aria-selected="false">
                         <span class="ms-3">Account</span>
                     </button>
-                    <button class="nav-link" id="v-pills-preferences-tab" data-bs-toggle="pill" data-bs-target="#v-pills-preferences" type="button" role="tab" aria-controls="v-pills-preferences" aria-selected="false">
+                    <button class="nav-link ${lastClickedTab === 'v-pills-preferences-tab' ? 'active' : ''}" id="v-pills-preferences-tab" data-bs-toggle="pill" data-bs-target="#v-pills-preferences" type="button" role="tab" aria-controls="v-pills-preferences" aria-selected="false">
                         <span class="ms-3">Preferences</span>
                     </button>
-                    <button class="nav-link" id="v-pills-privacy-tab" data-bs-toggle="pill" data-bs-target="#v-pills-privacy" type="button" role="tab" aria-controls="v-pills-privacy" aria-selected="false">
+                    <button class="nav-link ${lastClickedTab === 'v-pills-privacy-tab' ? 'active' : ''}" id="v-pills-privacy-tab" data-bs-toggle="pill" data-bs-target="#v-pills-privacy" type="button" role="tab" aria-controls="v-pills-privacy" aria-selected="false">
                         <span class="ms-3">Privacy and Security</span>
                     </button>
                 </div>
             `);
-            $('#settings-content').addClass('show'); // Show with animation
-            $('.main-content').css('margin-left', '0'); // Reset margin for smaller screens
+            $('#settings-content').addClass('show');
+            $('.main-content').css('margin-left', '0');
+            
+            // Force show the content in mobile view if Settings is expanded
+            if ($('#attendnav').hasClass('show')) {
+                $('#settings-content').show();
+            }
         } else {
-            $('#settings-content').removeClass('show'); // Hide with animation
-             setTimeout(() => {
-                 $('#settings-content').html('');
-             }, 500); // Wait for the animation to complete
-            $('.main-content').css('margin-left', '320px'); // Reset margin when sidebar is visible
+            $('#settings-content').removeClass('show');
+            $('#settings-content').html('');
+            $('.main-content').css('margin-left', '320px');
         }
-        addNavLinkEventListeners(); // Add event listeners to the new buttons
-        showContentBasedOnLastClickedTab(); // Show content based on the last clicked tab
+        addNavLinkEventListeners();
+        showContentBasedOnLastClickedTab();
     }
 
     function addNavLinkEventListeners() {
