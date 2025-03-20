@@ -215,7 +215,7 @@ function startCodePopup(event){
 
 function updateCountDown(){
     countdown = --countdown <= 0 ? 60 : countdown;
-    if(countdown == 60){
+    if(countdown == 59){
         getNewCode();
     }
     circle.style.strokeDashoffset = `${113*(1-countdown/60)}px`;
