@@ -14,6 +14,14 @@ session_start();
         include("../php/template/header.php");
         
         ?>
+        <style>
+        *{
+            color:#660099;
+        }
+        a{
+            color:#660099;
+        }
+    </style>
 </head>
 <body>
     <?php 
