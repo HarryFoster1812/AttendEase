@@ -63,10 +63,10 @@ if(isset($_COOKIE["darkMode"])){
                             <canvas id="attendanceChart" class="mb-4"></canvas>
                         </div>
                         <div class="col-lg-4">
-                            <canvas id="timeChart" class="mb-4 w-100"></canvas>
+                            <canvas id="timeChart" class="mb-4"></canvas>
                         </div>
                         <div class="col-lg-4">
-                            <canvas id="rankChart" class="mb-4 w-100"></canvas>
+                            <canvas id="rankChart" class="mb-4"></canvas>
                         </div>
                     </div>
                 </div>
