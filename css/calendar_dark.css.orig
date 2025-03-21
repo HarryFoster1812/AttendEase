@@ -1,0 +1,30 @@
+body{
+    background-color:#333;
+}
+.btn-light{
+    background-color: #333 !important;
+    color:#ffcc33 !important;
+}
+.text-primary{
+    color: #ffcc33 !important;
+}
+.border-primary{
+    background-color: #ffcc33 !important;
+    color: #ffcc33 !important;
+    border-color: #ffcc33 !important;
+}
+.calendar-picker{
+    color:#660099 !important;
+}
+.custom-popover, .list-group-item{
+    background-color: #333 !important;
+    color:#ffcc33 !important;
+}
+.calendar-action:hover{
+    background-color:#219460 !important;
+    color:#fff !important;
+    transition: all 0.6s !important;
+}
+.custom-popover {
+    --bs-popover-bg: #333;
+}

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "cropme": "^1.4.3",
+    "js-cookie": "^3.0.5"
+  }
+}

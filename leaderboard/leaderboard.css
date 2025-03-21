@@ -1,0 +1,14 @@
+.leaderboard-title h4, .leaderboard-content h4{
+    color:#FFF;
+    margin-bottom: 0;
+    text-align: center;
+}
+.first h4{
+    color:#ffcc33;
+}
+.second h4{
+    color:#d9d9d9;
+}
+.third h4{
+    color:#cd7f32;
+}

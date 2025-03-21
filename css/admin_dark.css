@@ -1,0 +1,42 @@
+body{
+    background-color: #333;
+}
+.search-filter-container{
+    background-color: #333;
+    border-color:#ffcc33;
+}
+#searchbar{
+    background-color: #666;
+    color:#fff;
+}
+#searchbar::placeholder {
+    color: #fff;
+    opacity:0.6;
+}
+.search-icon{
+    color:#ffcc33;
+}
+.list-group-item{
+    background-color:#333;
+    color:#ffcc33;
+}
+#tableHead, .db-title, .db-text{
+    color:#ffcc33 !important;
+}
+th{
+    color:#ffcc33;
+}
+td{
+    color:#fff;
+}
+.popup {
+    background-color: #333 !important;
+}
+.popup h2, .popup h3, .popup h4, .popup h5{
+    color:#ffcc33 !important;
+}
+.popup input, #commandInput{
+    border-color:#ffcc33;
+    color:#fff;
+    background-color: #666;
+}

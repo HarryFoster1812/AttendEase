@@ -1,0 +1,27 @@
+body{
+    font-family: "Convergence", sans-serif !important;
+    font-weight: 400;
+    font-style: normal;
+    color:#ffcc33;
+    font-size: 1.5em
+  }
+  .nav-link{
+    color: #ffcc33;
+  }
+  .nav-item:hover{
+    border-bottom: 1px solid #ffee55;
+    transition: all 1s;
+  }
+  .nav-item:hover .nav-link{
+    color: #ffee55;
+  }
+
+  .navbar-brand{
+    font-size:1.25em;
+  }
+
+  @media (max-width:992px){
+    .nav-item:hover{
+        border-bottom: 0px;
+    }
+  }

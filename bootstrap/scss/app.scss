@@ -1,0 +1,13 @@
+// Override theme colors
+$theme-colors: (
+  "primary":       #660099,    // Purple
+  "secondary":     #ffcc33,    // Yellow
+  "success":       #198754,    // Green
+  "info":          #0dcaf0,    // Light Blue
+  "warning":       #ffc107,    // Yellow
+  "danger":        #dc3545,    // Red
+  "light":         #f8f9fa,    // Light Gray
+  "dark":          #212529,    // Dark Gray
+);
+// Import Bootstrap's main SCSS file
+@import "bootstrap";
