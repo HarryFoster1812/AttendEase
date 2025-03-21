@@ -1,4 +1,5 @@
 <?php 
+
 // before you mention it, yes, i know that this is the most unsafe (vulnerable) piece of code ive ever knowingly written
 // My thought process was that if admins can do anything and have unfiltered access to the databse anyway, do i really need to be safe?.
 // my conclusion was no. no i do not. 
