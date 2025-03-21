@@ -10,4 +10,25 @@ body{
 }
 .attendance-delta{
     color: #ffcc33;
-  }
+}
+.attend-popup {
+    background-color: #333 !important;
+}
+.attend-popup h2, .attend-popup h3{
+    color:#ffcc33 !important;
+}
+.attend-popup h4, .attend-popup h5{
+    color:#fff;
+}
+.attend-popup input, #commandInput{
+    border-color:#ffcc33;
+    color:#fff;
+    background-color: #666;
+}
+.attend-popup input::placeholder {
+    color: #fff;
+    opacity:0.6;
+}
+.fa-xmark{
+    color:#ffcc33;
+}
