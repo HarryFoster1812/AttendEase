@@ -52,7 +52,7 @@ $user = unserialize($_SESSION["user"]);
             </div>      
 
             <div class="d-flex justify-content-center attend-image mb-4" id="attend-image">
-                <img src="../images/map.png" alt="">
+                <img src="../images/attendmap.png" alt="">
             </div>
             <div class="row attend-code-block mb-4 d-none" id="code-block">
                 <input type="number" class="form-control form-control-lg attend-code" placeholder="Enter Class Code..." id="attendCode">
