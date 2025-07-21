@@ -1,3 +1,6 @@
+bootstrap/ linguist-vendored
+bootstrap/* linguist-vendored
+bootstrap/**/* linguist-vendored
 bootstrap/** linguist-vendored
 *.min.js linguist-generated
 public/vendor/** linguist-vendored
