@@ -1,6 +1,6 @@
-bootstrap/ linguist-vendored
-bootstrap/* linguist-vendored
-bootstrap/**/* linguist-vendored
+# Ignore all Bootstrap files regardless of depth
 bootstrap/** linguist-vendored
+bootstrap/**/** linguist-vendored
+
 *.min.js linguist-generated
-public/vendor/** linguist-vendored
+*.min.css linguist-generated
